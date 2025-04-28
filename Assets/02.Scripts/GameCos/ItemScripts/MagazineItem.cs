@@ -23,4 +23,15 @@ public class MagazineItem : MonoBehaviour, IHandleObject
     {
        
     }
+
+    public void InputButtonEvent()
+    {
+        StartCoroutine(StartThrowAwayMagazine());
+    }
+
+    public IEnumerator StartThrowAwayMagazine()
+    {
+        yield return new WaitForSeconds(0.5f);
+        Grabbed = false;
+    }
 }

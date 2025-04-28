@@ -20,4 +20,9 @@ public class TestItem : MonoBehaviour, IHandleObject
    {
       
    }
+
+   public void InputButtonEvent()
+   {
+      
+   }
 }

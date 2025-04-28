@@ -8,4 +8,5 @@ public interface IHandleObject
     public void EnterGrabbing();
     public void ExitGrabbing();
     public void ItemUse();
+    public void InputButtonEvent();
 }
