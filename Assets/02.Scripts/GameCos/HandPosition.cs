@@ -47,10 +47,13 @@ public class HandPosition : MonoBehaviour
     {
         if (other.TryGetComponent<IHandleObject>(out var hand))
         {
-            if (grabObject == other.gameObject)
+            if (!other.CompareTag("Enemy"))
             {
-                ThrowAwayObject();
-                hand.ExitGrabbing();
+                if (grabObject == other.gameObject)
+                {
+                    ThrowAwayObject();
+                    hand.ExitGrabbing();
+                } 
             }
         }
     }

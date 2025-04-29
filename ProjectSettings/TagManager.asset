@@ -10,6 +10,7 @@ TagManager:
   - Magazine
   - Right
   - Left
+  - Enemy
   layers:
   - Default
   - TransparentFX
