@@ -12,16 +12,19 @@ public class AttackState : IState<EnemyControllerCore>
 
     public void OperateEnter()
     {
-        throw new System.NotImplementedException();
+    
     }
 
     public void OperateUpdate()
     {
-        throw new System.NotImplementedException();
+        if (Vector3.Distance(_controllerCore.transform.position, _controllerCore.player.transform.position) > _controllerCore.enemyAbility.AttackDistance)
+        {
+            _controllerCore.ChangeState(EnemyControllerCore.EnemyState.Chase);
+        }
     }
 
     public void OperateExit()
     {
-        throw new System.NotImplementedException();
+     
     }
 }

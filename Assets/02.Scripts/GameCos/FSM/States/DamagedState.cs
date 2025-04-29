@@ -12,16 +12,16 @@ public class DamagedState : IState<EnemyControllerCore>
 
     public void OperateEnter()
     {
-        throw new System.NotImplementedException();
+        _controllerCore.ChangeState(EnemyControllerCore.EnemyState.Chase);
     }
 
     public void OperateUpdate()
     {
-        throw new System.NotImplementedException();
+       
     }
 
     public void OperateExit()
     {
-        throw new System.NotImplementedException();
+       
     }
 }

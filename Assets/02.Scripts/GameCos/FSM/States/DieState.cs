@@ -12,16 +12,16 @@ public class DieState : IState<EnemyControllerCore>
 
     public void OperateEnter()
     {
-        throw new System.NotImplementedException();
+       
     }
 
     public void OperateUpdate()
     {
-        throw new System.NotImplementedException();
+       
     }
 
     public void OperateExit()
     {
-        throw new System.NotImplementedException();
+        
     }
 }
