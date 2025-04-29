@@ -10,7 +10,7 @@ public class HandPosition : MonoBehaviour
     [SerializeField] private bool grabbingObject = false;
     [SerializeField] private GameObject grabObject;
 
-    private void Update()
+    private void LateUpdate()
     {
         
         OnClickHand();

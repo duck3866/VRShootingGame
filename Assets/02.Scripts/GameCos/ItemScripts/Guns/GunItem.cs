@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,24 +7,32 @@ public class GunItem : MonoBehaviour, IHandleObject
 {
     protected Animator Animator;
     public GameObject magazinePosition;
-    public GameObject magazine;
+    [HideInInspector] public GameObject magazine;
     public float maxBullet = 10f;
     public float currentBullet;
     public GameObject firePosition;
     public float bulletDistance;
     public ParticleSystem bulletEffect;
     public Transform bulletEffectPosition;
-    protected LineRenderer Line;
+    [HideInInspector] public bool parentObjectIsRight;
+    
+    protected LineRenderer LaserSite;
     public bool Grabbed { get; set; }
 
     private void Start()
     {
         Grabbed = false;
+        LaserSite = GetComponent<LineRenderer>();
+        LaserSite.enabled = false;
         Animator = GetComponent<Animator>();
     }
+
     public void EnterGrabbing()
     {
         Grabbed = true;
+        LaserSite.enabled = true;
+        if (transform.parent.CompareTag("Right")) parentObjectIsRight = true;
+        else parentObjectIsRight = false;
         transform.localPosition = new Vector3(0,0,1);
         transform.localRotation = Quaternion.identity;
     }
@@ -31,6 +40,7 @@ public class GunItem : MonoBehaviour, IHandleObject
     public virtual void ExitGrabbing()
     {
         Grabbed = false;
+        LaserSite.enabled = false;
     }
 
     public virtual void ItemUse()
@@ -67,16 +77,19 @@ public class GunItem : MonoBehaviour, IHandleObject
     {
         if (magazine == null)
         {
-            if (other.TryGetComponent<IHandleObject>(out IHandleObject hand))
+            if (other.CompareTag("Magazine"))
             {
-                Debug.Log("탄창 장착");
-                magazine = other.gameObject;
-                hand.Grabbed = true;
-                magazine.transform.SetParent(magazinePosition.transform);
-                magazine.transform.localPosition = Vector3.zero;
-                magazine.transform.localRotation = Quaternion.identity;
-                magazine.transform.localScale = new Vector3(1, 1, 1);
-                ReloadBullet();
+                if (other.TryGetComponent<IHandleObject>(out IHandleObject hand))
+                {
+                    Debug.Log("탄창 장착");
+                    magazine = other.gameObject;
+                    hand.Grabbed = true;
+                    magazine.transform.SetParent(magazinePosition.transform);
+                    magazine.transform.localPosition = Vector3.zero;
+                    magazine.transform.localRotation = Quaternion.identity;
+                    magazine.transform.localScale = new Vector3(1, 1, 1);
+                    ReloadBullet();
+                } 
             }
         }
     }
@@ -84,5 +97,24 @@ public class GunItem : MonoBehaviour, IHandleObject
     public virtual void ReloadBullet()
     {
         currentBullet = maxBullet;
+    }
+
+    public void DrawLine()
+    {
+        LaserSite.SetPosition(0,firePosition.transform.position);
+        LaserSite.SetPosition(1,DrawRay());
+    }
+
+    public Vector3 DrawRay()
+    {
+        Ray ray = new Ray(firePosition.transform.position, -firePosition.transform.up);
+        if (Physics.Raycast(ray,out RaycastHit hitInfo, bulletDistance))
+        { 
+            return hitInfo.point;
+        }
+        else
+        {
+            return firePosition.transform.position + (-firePosition.transform.up * bulletDistance);
+        }
     }
 }

@@ -6,9 +6,13 @@ using UnityEngine;
 
 public class Pistol : GunItem
 {
-    public void Update()
+    public void FixedUpdate()
     {
-        Debug.DrawRay(firePosition.transform.position,-firePosition.transform.up * bulletDistance,Color.red);
+        // Debug.DrawRay(firePosition.transform.position,-firePosition.transform.up * bulletDistance,Color.red);
+        if (Grabbed)
+        {
+            DrawLine();
+        }
     }
 
     public override void Fire()
@@ -17,6 +21,11 @@ public class Pistol : GunItem
         Ray ray = new Ray(firePosition.transform.position, -firePosition.transform.up);
         if (Physics.Raycast(ray,out RaycastHit hitInfo, bulletDistance))
         {
+            if (hitInfo.collider.gameObject.TryGetComponent<IDamagable>(out IDamagable enemy))
+            {
+                Debug.Log("엥?");
+                enemy.TakeDamage(5f);
+            }
             bulletEffect.Stop();
             bulletEffect.Play();
             bulletEffectPosition.position = hitInfo.point;
