@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5251868319798556720}
   m_Layer: 9
   m_Name: Player_Test
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 83321813538198951}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.64623916, z: -0, w: 0.76313496}
+  m_LocalRotation: {x: 0, y: 0.6462372, z: 0, w: 0.7631366}
   m_LocalPosition: {x: -157.78, y: 4.5, z: -27.19}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -218,9 +218,10 @@ GameObject:
   - component: {fileID: 6104238437832328020}
   - component: {fileID: 2131202591973343206}
   - component: {fileID: 6792719068503309375}
+  - component: {fileID: 5024851866015082894}
   m_Layer: 0
   m_Name: RightHand
-  m_TagString: Untagged
+  m_TagString: Right
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -327,6 +328,33 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 2
   m_Center: {x: 0.00012207031, y: 0, z: 0}
+--- !u!54 &5024851866015082894
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6239777459769339220}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &6940237623236814843
 GameObject:
   m_ObjectHideFlags: 0
@@ -340,9 +368,10 @@ GameObject:
   - component: {fileID: 5843833325859245992}
   - component: {fileID: 5682966374900941673}
   - component: {fileID: 8416553918448064844}
+  - component: {fileID: 5493538054723954189}
   m_Layer: 0
   m_Name: LeftHand
-  m_TagString: Untagged
+  m_TagString: Left
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -449,6 +478,33 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 2
   m_Center: {x: 0.00012207031, y: 0, z: 0}
+--- !u!54 &5493538054723954189
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6940237623236814843}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &7548448550127272967
 GameObject:
   m_ObjectHideFlags: 0
