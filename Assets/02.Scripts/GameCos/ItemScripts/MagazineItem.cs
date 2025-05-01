@@ -9,13 +9,15 @@ public class MagazineItem : MonoBehaviour, IHandleObject
         Grabbed = false;
     }
     public bool Grabbed { get; set; }
-    public void EnterGrabbing()
+    public void EnterGrabbing(GameObject grabbingTransform)
     {
+        transform.SetParent(grabbingTransform.transform);
         Grabbed = true;
     }
 
     public void ExitGrabbing()
     {
+        transform.parent = null;
         Grabbed = false;
     }
 

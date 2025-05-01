@@ -5,7 +5,7 @@ using UnityEngine;
 public interface IHandleObject
 {
     public bool Grabbed { get; set; }
-    public void EnterGrabbing();
+    public void EnterGrabbing(GameObject grabbingTransform);
     public void ExitGrabbing();
     public void ItemUse();
     public void InputButtonEvent();

@@ -12,7 +12,7 @@ public class AttackState : IState<EnemyControllerCore>
 
     public void OperateEnter()
     {
-    
+        _controllerCore.animator.SetTrigger("toIdle");
     }
 
     public void OperateUpdate()

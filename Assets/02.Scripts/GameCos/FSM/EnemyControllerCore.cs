@@ -21,18 +21,20 @@ public class EnemyControllerCore : MonoBehaviour, IDamagable
     public float EnemyHp { get; private set; }
     public IState<EnemyControllerCore> CurrentState { get; private set; }
     public IState<EnemyControllerCore> PreviousState { get; private set; }
-    public FixedJoint fixedJoint;
+    // public FixedJoint fixedJoint;
 
     private Dictionary<EnemyState, IState<EnemyControllerCore>> _states = new Dictionary<EnemyState, IState<EnemyControllerCore>>();
     // public event Action OnInteractable;
     
     Rigidbody[] rigidbodies;
     public NavMeshAgent agent;
+    public Animator animator;
 
     public void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        fixedJoint = GetComponent<FixedJoint>();
+        animator = GetComponent<Animator>();
+        // fixedJoint = GetComponent<FixedJoint>();
         if (enemyAbility != null)
         {
             Debug.Log("무야호~");
@@ -72,6 +74,7 @@ public class EnemyControllerCore : MonoBehaviour, IDamagable
     }
     public void OnCharacterJoint()
     {
+        animator.enabled = false;
         ChangeState(EnemyState.Grabbing);
         Debug.Log("왜 안됨 2");
         agent.enabled = false;
@@ -79,12 +82,13 @@ public class EnemyControllerCore : MonoBehaviour, IDamagable
         {
             joint.isKinematic = false;
         }
-        fixedJoint.connectedBody = transform.parent.GetComponent<Rigidbody>();
-        fixedJoint.breakForce = Mathf.Infinity; // 원하는 힘으로 설정
-        fixedJoint.breakTorque = Mathf.Infinity;
+        // fixedJoint.connectedBody = transform.parent.GetComponent<Rigidbody>();
+        // fixedJoint.breakForce = Mathf.Infinity; // 원하는 힘으로 설정
+        // fixedJoint.breakTorque = Mathf.Infinity;
     }
     public void OffCharacterJoint()
     {
+        animator.enabled = true;
         ChangeState(EnemyState.Chase);
         Debug.Log("왜 안됨");
         agent.enabled = true;
@@ -92,7 +96,7 @@ public class EnemyControllerCore : MonoBehaviour, IDamagable
         {
             joint.isKinematic = true;
         }
-        fixedJoint.connectedBody = null;
+        // fixedJoint.connectedBody = null;
     }
   
     private void Update()

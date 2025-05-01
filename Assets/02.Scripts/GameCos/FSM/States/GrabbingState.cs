@@ -18,7 +18,7 @@
 
     public void OperateExit()
     {
-       
+       _controllerCore.animator.SetTrigger("toIdle");
     }
 }
 

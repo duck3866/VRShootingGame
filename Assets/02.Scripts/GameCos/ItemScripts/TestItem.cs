@@ -6,7 +6,7 @@ public class TestItem : MonoBehaviour, IHandleObject
 {
    public bool Grabbed { get; set; }
 
-   public void EnterGrabbing()
+   public void EnterGrabbing(GameObject grabbingTransform)
    {
       Grabbed = true;
    }

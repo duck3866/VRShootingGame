@@ -27,8 +27,10 @@ public class GunItem : MonoBehaviour, IHandleObject
         Animator = GetComponent<Animator>();
     }
 
-    public void EnterGrabbing()
+    public void EnterGrabbing(GameObject grabbingTransform)
     {
+        transform.SetParent(grabbingTransform.transform);
+        // grabbingTransform.transform.SetParent(this.transform);
         Grabbed = true;
         LaserSite.enabled = true;
         if (transform.parent.CompareTag("Right")) parentObjectIsRight = true;
@@ -39,6 +41,7 @@ public class GunItem : MonoBehaviour, IHandleObject
 
     public virtual void ExitGrabbing()
     {
+        transform.parent = null;
         Grabbed = false;
         LaserSite.enabled = false;
     }

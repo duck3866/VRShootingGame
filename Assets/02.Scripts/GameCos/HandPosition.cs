@@ -34,11 +34,11 @@ public class HandPosition : MonoBehaviour
             {
                 if (!hand.Grabbed)
                 {
-                    // grabObject = other.gameObject.transform.root.gameObject;
-                    grabObject = other.gameObject;
-                    grabObject.transform.SetParent(transform);
+                    grabObject = other.gameObject.transform.root.gameObject;
+                    // grabObject = other.gameObject;
+                    // grabObject.transform.SetParent(transform);
                     grabbingObject = true;
-                    hand.EnterGrabbing();
+                    hand.EnterGrabbing(gameObject);
                 }
             }
         }
@@ -117,8 +117,9 @@ public class HandPosition : MonoBehaviour
     {
         if (grabbingObject)
         {
-            grabObject.transform.parent = null;
-            grabObject.GetComponent<IHandleObject>().ExitGrabbing();
+            // grabObject.transform.parent = null;
+            grabObject.GetComponentInChildren<IHandleObject>().ExitGrabbing();
+            Debug.Log($"{grabObject.GetComponentInParent<IHandleObject>()}뭐야 이건");
             grabbingObject = false;
             grabObject = null;
         }
