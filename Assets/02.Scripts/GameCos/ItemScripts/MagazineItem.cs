@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class MagazineItem : MonoBehaviour, IHandleObject
 {
+    private bool _isEquipped = false;
     private void Start()
     {
+        _isEquipped = false;
         Grabbed = false;
     }
     public bool Grabbed { get; set; }
@@ -17,18 +19,23 @@ public class MagazineItem : MonoBehaviour, IHandleObject
 
     public void ExitGrabbing()
     {
-        transform.parent = null;
-        Grabbed = false;
+        if (!_isEquipped)
+        {
+            transform.parent = null;
+            Grabbed = false; 
+            _isEquipped = false;
+        }
     }
 
     public void ItemUse()
     {
-       
+        StartCoroutine(StartThrowAwayMagazine());
     }
 
     public void InputButtonEvent()
     {
-        StartCoroutine(StartThrowAwayMagazine());
+        _isEquipped = true;
+        // StartCoroutine(StartThrowAwayMagazine());
     }
 
     public IEnumerator StartThrowAwayMagazine()

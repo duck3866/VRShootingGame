@@ -86,6 +86,7 @@ public class GunItem : MonoBehaviour, IHandleObject
                 {
                     Debug.Log("탄창 장착");
                     magazine = other.gameObject;
+                    hand.InputButtonEvent();
                     hand.Grabbed = true;
                     magazine.transform.SetParent(magazinePosition.transform);
                     magazine.transform.localPosition = Vector3.zero;

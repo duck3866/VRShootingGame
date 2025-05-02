@@ -43,7 +43,7 @@ public class Pistol : GunItem
             Debug.Log("그아앙하하ㅏ하");
             if (magazine.TryGetComponent<IHandleObject>(out IHandleObject hand))
             {
-                hand.InputButtonEvent();
+                hand.ItemUse();
             }
             ThrowAwayMagazine();
         }
