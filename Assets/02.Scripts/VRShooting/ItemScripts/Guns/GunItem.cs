@@ -49,10 +49,10 @@ public class GunItem : MonoBehaviour, IHandleObject
     public virtual void ItemUse()
     {
         Animator.SetTrigger("isFire");
-        // if (currentBullet > 0)
-        // {
+        if (currentBullet > 0)
+        {
             Fire();
-        //}
+        }
     }
 
     public virtual void InputButtonEvent()
