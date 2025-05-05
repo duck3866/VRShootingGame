@@ -12,7 +12,7 @@ public class DamagedState : IState<EnemyControllerCore>
 
     public void OperateEnter()
     {
-        _controllerCore.ChangeState(EnemyControllerCore.EnemyState.Chase);
+        _controllerCore.ChangeState(EnemyControllerCore.EnemyState.Attack);
     }
 
     public void OperateUpdate()

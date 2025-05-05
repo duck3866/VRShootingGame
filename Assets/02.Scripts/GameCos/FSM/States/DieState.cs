@@ -12,7 +12,7 @@ public class DieState : IState<EnemyControllerCore>
 
     public void OperateEnter()
     {
-       
+        _controllerCore.DieAction();
     }
 
     public void OperateUpdate()

@@ -57,10 +57,10 @@ public class GunItem : MonoBehaviour, IHandleObject
 
     public virtual void InputButtonEvent()
     {
-        Debug.Log("그아아악 시발!");
+        Debug.Log("총 상태: 탄창 분리 시도");
         if (magazine != null)
         {
-            Debug.Log("그아앙하하ㅏ하");
+            Debug.Log("총 상태: 탄창 분리 성공");
             ThrowAwayMagazine(); 
         }
     }

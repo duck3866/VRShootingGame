@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: AbilityTest
   m_EditorClassIdentifier: 
   MoveSpeed: 5
-  MaxHp: 20
+  MaxHp: 3
   AttackDistance: 5
   Type: 0

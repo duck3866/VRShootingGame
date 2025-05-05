@@ -22,16 +22,19 @@ public class CanInteractablePoint : MonoBehaviour, IHandleObject
     public bool Grabbed { get; set; }
     public void EnterGrabbing(GameObject grabbingTransform)
     {
-        Grabbed = true;
-        _controllerCore.OnCharacterJoint();
-        fixedJoint.connectedBody = grabbingTransform.GetComponent<Rigidbody>();
-        // fixedJoint.connectedBody = _controllerCore.transform.parent.GetComponent<Rigidbody>();
-        fixedJoint.breakForce = Mathf.Infinity; // 원하는 힘으로 설정
-        fixedJoint.breakTorque = Mathf.Infinity;
-        
-        parentJoint.connectedBody = grabbingTransform.GetComponent<Rigidbody>();
-        parentJoint.breakForce = Mathf.Infinity; // 원하는 힘으로 설정
-        parentJoint.breakTorque = Mathf.Infinity;
+        if (!_controllerCore.isDie)
+        {
+            Grabbed = true;
+            _controllerCore.OnCharacterJoint();
+            fixedJoint.connectedBody = grabbingTransform.GetComponent<Rigidbody>();
+            // fixedJoint.connectedBody = _controllerCore.transform.parent.GetComponent<Rigidbody>();
+            fixedJoint.breakForce = Mathf.Infinity; // 원하는 힘으로 설정
+            fixedJoint.breakTorque = Mathf.Infinity;
+
+            parentJoint.connectedBody = grabbingTransform.GetComponent<Rigidbody>();
+            parentJoint.breakForce = Mathf.Infinity; // 원하는 힘으로 설정
+            parentJoint.breakTorque = Mathf.Infinity;
+        }
     }
 
     public void ExitGrabbing()

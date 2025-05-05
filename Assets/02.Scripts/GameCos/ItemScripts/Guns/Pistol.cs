@@ -21,11 +21,17 @@ public class Pistol : GunItem
         Ray ray = new Ray(firePosition.transform.position, -firePosition.transform.up);
         if (Physics.Raycast(ray,out RaycastHit hitInfo, bulletDistance))
         {
-            if (hitInfo.collider.gameObject.TryGetComponent<IDamagable>(out IDamagable enemy))
+            IDamagable damagable = hitInfo.collider.GetComponentInParent<IDamagable>();
+            if (damagable != null)
             {
-                Debug.Log("엥?");
-                enemy.TakeDamage(5f);
+                Debug.Log($"플레이어 공격 적중: {hitInfo.collider.gameObject.name}");
+                damagable.TakeDamage(5f);
             }
+            // if (hitInfo.collider.gameObject.TryGetComponent<IDamagable>(out IDamagable enemy))
+            // {
+            //     Debug.Log($"플레이어 공격 적중: {hitInfo.collider.gameObject.name}");
+            //     enemy.TakeDamage(5f);
+            // }
             bulletEffect.Stop();
             bulletEffect.Play();
             bulletEffectPosition.position = hitInfo.point;
@@ -33,19 +39,23 @@ public class Pistol : GunItem
             Debug.Log(hitInfo.collider.gameObject.name);
         }
         currentBullet--;
-        Debug.Log("탕!");
+        Debug.Log("총 상태: 총알발사");
     }
     public override void InputButtonEvent()
     {
-        Debug.Log("따흐흑 따흐흑");
+        Debug.Log("총 상태: 탄창 분리 시도");
         if (magazine != null)
         {
-            Debug.Log("그아앙하하ㅏ하");
+            Debug.Log("총 상태: 탄창 분리 성공");
             if (magazine.TryGetComponent<IHandleObject>(out IHandleObject hand))
             {
                 hand.ItemUse();
             }
             ThrowAwayMagazine();
+        }
+        else
+        {
+            Debug.Log("총 상태: 탄창 분리 실패(탄창 없음)");
         }
     }
 }

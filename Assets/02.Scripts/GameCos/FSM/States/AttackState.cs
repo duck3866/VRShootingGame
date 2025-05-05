@@ -22,40 +22,71 @@ public class AttackState : IState<EnemyControllerCore>
 
     public void OperateEnter()
     {
-        _controllerCore.animator.SetTrigger("toIdle");
+        _controllerCore.agent.isStopped = true;
+        if (!_controllerCore.iHaveGun)
+        {
+            _controllerCore.AttackDistance = 2f;
+            _controllerCore.animator.SetTrigger("toIdle");
+        }
+        else
+        {
+            _controllerCore.animator.SetTrigger("toShootingIdle");
+        }
     }
 
     public void OperateUpdate()
     {
         Debug.Log($"장탄 수:{currentBollet}");
-        _controllerCore.transform.forward  = -_controllerCore.player.transform.forward;
-        if (isReloading || isAttacking)
-        {
-            Debug.Log("장탄 이게 뭐지");
-            return;
-        }
-        if (Vector3.Distance(_controllerCore.transform.position, _controllerCore.player.transform.position) > _controllerCore.enemyAbility.AttackDistance)
+        Vector3 targetPosition = _controllerCore.transform.position;
+        targetPosition.y = _controllerCore.transform.position.y;
+        _controllerCore.transform.LookAt(targetPosition);
+        if (isReloading || isAttacking) return;
+        if (Vector3.Distance(_controllerCore.transform.position, _controllerCore.player.transform.position) > _controllerCore.AttackDistance)
         {
             _controllerCore.ChangeState(EnemyControllerCore.EnemyState.Chase);
         }
         else if (Vector3.Distance(_controllerCore.transform.position, _controllerCore.player.transform.position) <
-                 _controllerCore.enemyAbility.AttackDistance)
+                 _controllerCore.AttackDistance)
         {
-            if (currentBollet > 0)
+            if (_controllerCore.iHaveGun)
             {
-                if (_attackTime <= _currentTime)
+                if (currentBollet > 0)
                 {
-                    _controllerCore.StartCoroutine(AttackAction());
-                    _currentTime = 0;
+                    if (_attackTime <= _currentTime)
+                    {
+                        if (_controllerCore.iHaveGun)
+                        {
+                            _controllerCore.StartCoroutine(ShootAction());
+                            _currentTime = 0; 
+                        }
+                    }
+                    else
+                    {
+                        _currentTime += Time.deltaTime;
+                    }
                 }
                 else
                 {
-                    _currentTime += Time.deltaTime;
-                }
+                    if (_controllerCore.iHaveGun)
+                    {
+                        _controllerCore.StartCoroutine(Reloading());
+                    }
+                }   
             }
             else
             {
-                _controllerCore.StartCoroutine(Reloading());
+                if (currentBollet > 0)
+                {
+                    if (_attackTime <= _currentTime)
+                    {
+                        _controllerCore.StartCoroutine(AttackAction());
+                        _currentTime = 0;
+                    }
+                    else
+                    {
+                        _currentTime += Time.deltaTime;
+                    }
+                }
             }
         }
     }
@@ -67,12 +98,22 @@ public class AttackState : IState<EnemyControllerCore>
 
     private IEnumerator AttackAction()
     {
+        Debug.Log("공격 액션 실행");
         _controllerCore.animator.SetTrigger("toAttack");
         isAttacking = true;
+        yield return new WaitForSeconds(1.2f);
+        _controllerCore.animator.SetTrigger("toIdle");
+        isAttacking = false;
+    }
+    private IEnumerator ShootAction()
+    {
+        _controllerCore.animator.SetTrigger("toShoot");
+        isAttacking = true;
+        _controllerCore.InstancePrefab();
         currentBollet -= 1;
         Debug.Log("적 공격!");
         yield return new WaitForSeconds(1.2f);
-        _controllerCore.animator.SetTrigger("toIdle");
+        _controllerCore.animator.SetTrigger("toShootingIdle");
         isAttacking = false;
     }
 

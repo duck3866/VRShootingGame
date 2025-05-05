@@ -71,7 +71,7 @@ public class HandPosition : MonoBehaviour
 
         if (ARAVRInput.GetDown(ARAVRInput.Button.Two, ARAVRInput.Controller.LTouch))
         {
-            Debug.Log("tlqkf!" + $" {gameObject.name}");
+            Debug.Log("오브젝트 InputButtonEvent 호출" + $" {gameObject.name}");
             if (grabObject != null)
             {
                 if (grabObject.TryGetComponent<IHandleObject>(out var hand))
@@ -119,7 +119,7 @@ public class HandPosition : MonoBehaviour
         {
             // grabObject.transform.parent = null;
             grabObject.GetComponentInChildren<IHandleObject>().ExitGrabbing();
-            Debug.Log($"{grabObject.GetComponentInParent<IHandleObject>()}뭐야 이건");
+            Debug.Log($"오브젝트 IHandleObject 보유 여부 : {grabObject.GetComponentInParent<IHandleObject>()}");
             grabbingObject = false;
             grabObject = null;
         }

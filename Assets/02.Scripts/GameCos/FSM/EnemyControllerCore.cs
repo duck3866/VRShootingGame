@@ -18,6 +18,7 @@ public class EnemyControllerCore : MonoBehaviour, IDamagable
     public EnemyAbility enemyAbility;
     
     public GameObject player;
+    public float AttackDistance { get; set; }
     public float EnemyHp { get; private set; }
     public IState<EnemyControllerCore> CurrentState { get; private set; }
     public IState<EnemyControllerCore> PreviousState { get; private set; }
@@ -30,14 +31,23 @@ public class EnemyControllerCore : MonoBehaviour, IDamagable
     public NavMeshAgent agent;
     public Animator animator;
 
+    public bool iHaveGun;
+    public GameObject haveGunPosition;
+
+    public bool isDie = false;
+    public GameObject bulletPrefab;
+    public GameObject firePosition;
+    private CanInteractablePoint _canInteractablePoint;
     public void Start()
     {
+        _canInteractablePoint = GetComponentInChildren<CanInteractablePoint>();
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+        
         // fixedJoint = GetComponent<FixedJoint>();
         if (enemyAbility != null)
         {
-            Debug.Log("무야호~");
+            Debug.Log("적 Ability 초기화");
             Initialized(enemyAbility);
         }
         rigidbodies = GetComponentsInChildren<Rigidbody>();
@@ -53,6 +63,7 @@ public class EnemyControllerCore : MonoBehaviour, IDamagable
         enemyAbility = ability;
         EnemyHp = ability.MaxHp;
         agent.speed = ability.MoveSpeed;
+        this.AttackDistance = ability.AttackDistance;
         player = GameObject.FindWithTag("Player");
         
         IState<EnemyControllerCore> chase = new ChaseState();
@@ -75,34 +86,44 @@ public class EnemyControllerCore : MonoBehaviour, IDamagable
     public void OnCharacterJoint()
     {
         animator.enabled = false;
-        ChangeState(EnemyState.Grabbing);
-        Debug.Log("왜 안됨 2");
         agent.enabled = false;
+        if (!isDie)
+        {
+            ChangeState(EnemyState.Grabbing);
+        }
         foreach (var joint in rigidbodies)
         {
             joint.isKinematic = false;
         }
-        // fixedJoint.connectedBody = transform.parent.GetComponent<Rigidbody>();
-        // fixedJoint.breakForce = Mathf.Infinity; // 원하는 힘으로 설정
-        // fixedJoint.breakTorque = Mathf.Infinity;
     }
     public void OffCharacterJoint()
     {
-        animator.enabled = true;
-        ChangeState(EnemyState.Chase);
-        Debug.Log("왜 안됨");
-        agent.enabled = true;
-        foreach (var joint in rigidbodies)
+        if (!isDie)
         {
-            joint.isKinematic = true;
+            animator.enabled = true;
+            ChangeState(EnemyState.Chase);
+            agent.enabled = true;
+            foreach (var joint in rigidbodies)
+            {
+                joint.isKinematic = true;
+            }
+            // fixedJoint.connectedBody = null;
         }
-        // fixedJoint.connectedBody = null;
     }
   
     private void Update()
     {
-        Debug.Log($"현재 상태:{CurrentState} 이전 상태:{PreviousState}");
-        CurrentState?.OperateUpdate();
+        if (Input.GetMouseButtonDown(0))
+        {
+            TakeDamage(1);
+        }
+
+        if (!isDie)
+        {
+            iHaveGun = haveGunPosition.transform.childCount != 0;
+            // Debug.Log($"현재 상태:{CurrentState} 이전 상태:{PreviousState}");
+            CurrentState?.OperateUpdate();  
+        }
     }
     public void ChangeState(EnemyState newState)
     {
@@ -117,7 +138,7 @@ public class EnemyControllerCore : MonoBehaviour, IDamagable
         if (EnemyHp > 0)
         {
             EnemyHp -= damage;
-            ChangeState(EnemyState.Damaged);
+            StartCoroutine(WaitForDamaged());
         }
         else
         {
@@ -128,5 +149,46 @@ public class EnemyControllerCore : MonoBehaviour, IDamagable
     public void HitPoint(Vector3 hitPoint)
     {
         
+    }
+
+    private IEnumerator WaitForDamaged()
+    {
+        animator.SetTrigger("toDamaged");
+        yield return new WaitForSeconds(1f);
+        ChangeState(EnemyState.Damaged);
+    }
+
+    public void InstancePrefab()
+    {
+        Debug.Log("총알 생성");
+        GameObject bullet =  Instantiate(bulletPrefab);
+        bullet.SetActive(false);
+        bullet.transform.position = firePosition.transform.position;
+        bullet.transform.forward = -firePosition.transform.up;
+        bullet.SetActive(true);
+    }
+
+    public void DieAction()
+    {
+        _canInteractablePoint.ExitGrabbing();
+        _canInteractablePoint.Grabbed = true;
+        isDie = true;
+
+        agent.isStopped = true;
+        agent.enabled = false;
+        animator.applyRootMotion = false;
+        animator.enabled = false;
+        
+        FixedJoint[] fixedJoints = GetComponentsInChildren<FixedJoint>();
+        foreach (var fixedJoint in fixedJoints)
+        {
+            Destroy(fixedJoint);
+        }
+        
+        foreach (var rb in rigidbodies)
+        {
+            rb.isKinematic = false;
+        }
+
     }
 }
