@@ -45,6 +45,13 @@ public class MagazineItem : MonoBehaviour, IHandleObject
     }
     public bool IsCanGrab()
     {
-        return true;
+        if (Grabbed)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
 }

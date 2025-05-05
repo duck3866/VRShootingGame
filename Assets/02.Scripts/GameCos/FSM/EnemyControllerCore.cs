@@ -33,6 +33,7 @@ public class EnemyControllerCore : MonoBehaviour, IDamagable
 
     public bool iHaveGun;
     public GameObject haveGunPosition;
+    public EnemyAnimationEventHandler enemyAnimationEventHandler;
 
     public bool isDie = false;
     public GameObject bulletPrefab;
@@ -40,6 +41,7 @@ public class EnemyControllerCore : MonoBehaviour, IDamagable
     private CanInteractablePoint _canInteractablePoint;
     public void Start()
     {
+        enemyAnimationEventHandler = GetComponent<EnemyAnimationEventHandler>();
         _canInteractablePoint = GetComponentInChildren<CanInteractablePoint>();
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
@@ -127,6 +129,7 @@ public class EnemyControllerCore : MonoBehaviour, IDamagable
     }
     public void ChangeState(EnemyState newState)
     {
+        Debug.Log($"상태 전환 이전:{CurrentState} 이후:{newState}");
         CurrentState?.OperateExit();
         PreviousState = CurrentState;
         CurrentState = _states[newState];

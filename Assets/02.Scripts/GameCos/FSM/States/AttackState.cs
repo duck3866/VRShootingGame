@@ -25,7 +25,7 @@ public class AttackState : IState<EnemyControllerCore>
         _controllerCore.agent.isStopped = true;
         if (!_controllerCore.iHaveGun)
         {
-            _controllerCore.AttackDistance = 2f;
+            _controllerCore.AttackDistance = 2.5f;
             _controllerCore.animator.SetTrigger("toIdle");
         }
         else
@@ -36,11 +36,10 @@ public class AttackState : IState<EnemyControllerCore>
 
     public void OperateUpdate()
     {
-        Debug.Log($"장탄 수:{currentBollet}");
-        Vector3 targetPosition = _controllerCore.transform.position;
-        targetPosition.y = _controllerCore.transform.position.y;
-        _controllerCore.transform.LookAt(targetPosition);
+        isAttacking = _controllerCore.enemyAnimationEventHandler.isAttacking;
+        isReloading = _controllerCore.enemyAnimationEventHandler.isReloading;
         if (isReloading || isAttacking) return;
+        Aiming();
         if (Vector3.Distance(_controllerCore.transform.position, _controllerCore.player.transform.position) > _controllerCore.AttackDistance)
         {
             _controllerCore.ChangeState(EnemyControllerCore.EnemyState.Chase);
@@ -93,36 +92,42 @@ public class AttackState : IState<EnemyControllerCore>
 
     public void OperateExit()
     {
-     
+        _controllerCore.enemyAnimationEventHandler.InitParameter();
     }
 
+    private void Aiming()
+    {
+        Vector3 targetPosition = _controllerCore.player.transform.position - _controllerCore.transform.position;
+        Quaternion rotation = Quaternion.LookRotation(targetPosition);
+        _controllerCore.transform.rotation = Quaternion.Slerp(_controllerCore.transform.rotation, rotation, Time.deltaTime * 5f);
+    }
     private IEnumerator AttackAction()
     {
         Debug.Log("공격 액션 실행");
         _controllerCore.animator.SetTrigger("toAttack");
-        isAttacking = true;
-        yield return new WaitForSeconds(1.2f);
-        _controllerCore.animator.SetTrigger("toIdle");
-        isAttacking = false;
+        // isAttacking = true;
+        yield return null;
+        // _controllerCore.animator.SetTrigger("toIdle");
+        // isAttacking = false;
     }
     private IEnumerator ShootAction()
     {
         _controllerCore.animator.SetTrigger("toShoot");
-        isAttacking = true;
+        // isAttacking = true;
         _controllerCore.InstancePrefab();
         currentBollet -= 1;
         Debug.Log("적 공격!");
-        yield return new WaitForSeconds(1.2f);
-        _controllerCore.animator.SetTrigger("toShootingIdle");
-        isAttacking = false;
+        yield return null;
+        // _controllerCore.animator.SetTrigger("toShootingIdle");
+        // isAttacking = false;
     }
 
     private IEnumerator Reloading()
     {
         _controllerCore.animator.SetTrigger("toReload");
-        isReloading = true;
-        yield return new WaitForSeconds(3f);
-        isReloading = false;
+        // isReloading = true;
+        yield return null;
+        // isReloading = false;
         currentBollet = maxBollet;
     }
 }

@@ -12,7 +12,6 @@ public class HandPosition : MonoBehaviour
 
     private void LateUpdate()
     {
-        
         OnClickHand();
         if (isRightHand)
         {
@@ -32,16 +31,13 @@ public class HandPosition : MonoBehaviour
         {
             if (other.TryGetComponent<IHandleObject>(out var hand))
             {
-                if (!hand.Grabbed)
+                if (hand.IsCanGrab())
                 {
-                    if (hand.IsCanGrab())
-                    {
-                        // grabObject = other.gameObject.transform.root.gameObject;
-                        grabObject = other.gameObject;
-                        // grabObject.transform.SetParent(transform);
-                        grabbingObject = true;
-                        hand.EnterGrabbing(gameObject);
-                    }
+                    // grabObject = other.gameObject.transform.root.gameObject;
+                    grabObject = other.gameObject;
+                    // grabObject.transform.SetParent(transform);
+                    grabbingObject = true;
+                    hand.EnterGrabbing(gameObject);
                 }
             }
         }
@@ -57,7 +53,7 @@ public class HandPosition : MonoBehaviour
                 {
                     ThrowAwayObject();
                     hand.ExitGrabbing();
-                } 
+                }
             }
         }
     }

@@ -67,7 +67,14 @@ public class GunItem : MonoBehaviour, IHandleObject
 
     public bool IsCanGrab()
     {
-        return true;
+        if (Grabbed)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
 
     public virtual void Fire()
