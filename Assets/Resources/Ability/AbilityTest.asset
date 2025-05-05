@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eee12eca9ddfb6d448635dbc9d14231c, type: 3}
   m_Name: AbilityTest
   m_EditorClassIdentifier: 
-  MoveSpeed: 20
+  MoveSpeed: 5
   MaxHp: 3
   AttackDistance: 5
   Type: 0

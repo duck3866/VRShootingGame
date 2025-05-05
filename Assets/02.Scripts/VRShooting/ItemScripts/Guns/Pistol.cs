@@ -40,6 +40,8 @@ public class Pistol : GunItem
             Debug.Log(hitInfo.collider.gameObject.name);
         }
         currentBullet--;
+        if (parentObjectIsRight) UIManager.Instance.RightHandInfoUpdate(gameObject.name,$"BUlLET: {currentBullet}/{maxBullet}");
+        else UIManager.Instance.LeftHandInfoUpdate(gameObject.name,$"BUlLET: {currentBullet}/{maxBullet}");
         Debug.Log("총 상태: 총알발사");
     }
     public override void InputButtonEvent()

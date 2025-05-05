@@ -105,6 +105,8 @@ public class GunItem : MonoBehaviour, IHandleObject
                     magazine.transform.localRotation = Quaternion.identity;
                     magazine.transform.localScale = new Vector3(1, 1, 1);
                     ReloadBullet();
+                    if (parentObjectIsRight) UIManager.Instance.RightHandInfoUpdate(gameObject.name,$"BUlLET: {currentBullet}/{maxBullet}");
+                    else UIManager.Instance.LeftHandInfoUpdate(gameObject.name,$"BUlLET: {currentBullet}/{maxBullet}");
                 } 
             }
         }

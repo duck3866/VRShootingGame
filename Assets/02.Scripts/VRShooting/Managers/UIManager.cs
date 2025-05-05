@@ -7,10 +7,10 @@ using UnityEngine.UIElements;
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
-    public Image RightHand;
+    public GameObject rightHand;
     public TextMeshProUGUI  rightHandText;
     public TextMeshProUGUI  rightHandInfoText;
-    public Image LeftHand;
+    public GameObject leftHand;
     public TextMeshProUGUI  leftHandText;
     public TextMeshProUGUI  leftHandInfoText;
     public GameObject playerStats;
@@ -24,6 +24,16 @@ public class UIManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        transform.localPosition = Vector3.zero;
+        Init();
+    }
+
+    public void Init()
+    {
+        rightHand.transform.localPosition = new Vector3(0.23f, 0, 0.5f);
+        rightHandInfoText.transform.localPosition = new Vector3(0, -0.3f, 0);
+        leftHand.transform.localPosition = new Vector3(-0.23f, 0, 0.5f);
+        leftHandInfoText.transform.localPosition = new Vector3(0, -0.3f, 0);
     }
 
     public void RightHandInfoUpdate(string text,string textInfo)

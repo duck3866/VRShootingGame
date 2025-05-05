@@ -38,6 +38,8 @@ public class HandPosition : MonoBehaviour
                     // grabObject.transform.SetParent(transform);
                     grabbingObject = true;
                     hand.EnterGrabbing(gameObject);
+                    if(isRightHand) UIManager.Instance.RightHandInfoUpdate(other.gameObject.name,"");
+                    else UIManager.Instance.LeftHandInfoUpdate(other.gameObject.name,"");
                 }
             }
         }

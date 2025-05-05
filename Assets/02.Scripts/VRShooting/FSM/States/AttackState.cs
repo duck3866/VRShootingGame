@@ -114,7 +114,6 @@ public class AttackState : IState<EnemyControllerCore>
     {
         _controllerCore.animator.SetTrigger("toShoot");
         // isAttacking = true;
-        _controllerCore.InstancePrefab();
         currentBollet -= 1;
         Debug.Log("적 공격!");
         yield return null;
