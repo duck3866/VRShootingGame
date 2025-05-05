@@ -3311,6 +3311,25 @@ MonoBehaviour:
   iHaveGun: 0
   haveGunPosition: {fileID: 8456012136353221207}
   enemyAnimationEventHandler: {fileID: 0}
+  _colliderInfos:
+  - collider: {fileID: 4055376045426640654}
+    weightDamage: 0.7
+  - collider: {fileID: 3081265005478243449}
+    weightDamage: 0.5
+  - collider: {fileID: 7140326921988524833}
+    weightDamage: 0.5
+  - collider: {fileID: 6535606988640098889}
+    weightDamage: 1
+  - collider: {fileID: 7359139276327808789}
+    weightDamage: 0.5
+  - collider: {fileID: 3225169481203126542}
+    weightDamage: 0.5
+  - collider: {fileID: 7800393884632373767}
+    weightDamage: 0.3
+  - collider: {fileID: 4605947159720653863}
+    weightDamage: 0.3
+  - collider: {fileID: 5012433629300900574}
+    weightDamage: 2
   isDie: 0
   bulletPrefab: {fileID: 5021900734193956963, guid: cefc1892f1ee6754c8996575bbf0019f, type: 3}
   firePosition: {fileID: 2044582954244453443}

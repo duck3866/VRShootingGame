@@ -33,12 +33,15 @@ public class EnemyControllerCore : MonoBehaviour, IDamagable
 
     public bool iHaveGun;
     public GameObject haveGunPosition;
+    [HideInInspector]
     public EnemyAnimationEventHandler enemyAnimationEventHandler;
-
+    [SerializeField]
+    private EnemyColliderInfo[] _colliderInfos = new EnemyColliderInfo[10];
     public bool isDie = false;
     public GameObject bulletPrefab;
     public GameObject firePosition;
     private CanInteractablePoint _canInteractablePoint;
+    private float _hitDamage;
     public void Start()
     {
         enemyAnimationEventHandler = GetComponent<EnemyAnimationEventHandler>();
@@ -129,7 +132,7 @@ public class EnemyControllerCore : MonoBehaviour, IDamagable
     }
     public void ChangeState(EnemyState newState)
     {
-        Debug.Log($"상태 전환 이전:{CurrentState} 이후:{newState}");
+        // Debug.Log($"상태 전환 이전:{CurrentState} 이후:{newState}");
         CurrentState?.OperateExit();
         PreviousState = CurrentState;
         CurrentState = _states[newState];
@@ -140,7 +143,7 @@ public class EnemyControllerCore : MonoBehaviour, IDamagable
     {
         if (EnemyHp > 0)
         {
-            EnemyHp -= damage;
+            _hitDamage = damage;
             StartCoroutine(WaitForDamaged());
         }
         else
@@ -151,7 +154,16 @@ public class EnemyControllerCore : MonoBehaviour, IDamagable
 
     public void HitPoint(Vector3 hitPoint)
     {
-        
+        foreach (var colliderInfo in _colliderInfos)
+        {
+            if (colliderInfo.collider.bounds.Contains(hitPoint))
+            {
+                Debug.Log($"맞은 부위: {colliderInfo.collider.name}, {_hitDamage * colliderInfo.weightDamage}");
+                _hitDamage *= colliderInfo.weightDamage;
+                EnemyHp -= _hitDamage;
+                _hitDamage = 0;
+            }
+        }
     }
 
     private IEnumerator WaitForDamaged()
