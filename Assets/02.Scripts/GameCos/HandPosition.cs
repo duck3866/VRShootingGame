@@ -34,11 +34,14 @@ public class HandPosition : MonoBehaviour
             {
                 if (!hand.Grabbed)
                 {
-                    // grabObject = other.gameObject.transform.root.gameObject;
-                    grabObject = other.gameObject;
-                    // grabObject.transform.SetParent(transform);
-                    grabbingObject = true;
-                    hand.EnterGrabbing(gameObject);
+                    if (hand.IsCanGrab())
+                    {
+                        // grabObject = other.gameObject.transform.root.gameObject;
+                        grabObject = other.gameObject;
+                        // grabObject.transform.SetParent(transform);
+                        grabbingObject = true;
+                        hand.EnterGrabbing(gameObject);
+                    }
                 }
             }
         }

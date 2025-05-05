@@ -25,4 +25,8 @@ public class TestItem : MonoBehaviour, IHandleObject
    {
       
    }
+   public bool IsCanGrab()
+   {
+      return false;
+   }
 }

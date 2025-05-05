@@ -43,4 +43,8 @@ public class MagazineItem : MonoBehaviour, IHandleObject
         yield return new WaitForSeconds(0.5f);
         Grabbed = false;
     }
+    public bool IsCanGrab()
+    {
+        return true;
+    }
 }

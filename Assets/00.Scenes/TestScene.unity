@@ -202,11 +202,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400002, guid: 54dd9cb5740188a488b8baebbf19207c, type: 3}
   m_PrefabInstance: {fileID: 411635325}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &521381648 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2044582954244453443, guid: 1fb843aefa2e8694b8ddf29f0eb4d437, type: 3}
-  m_PrefabInstance: {fileID: 635425918}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &635425918
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -215,10 +210,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2872106867656771759, guid: 1fb843aefa2e8694b8ddf29f0eb4d437, type: 3}
-      propertyPath: m_AngularSpeed
-      value: 720
-      objectReference: {fileID: 0}
     - target: {fileID: 3910173170297658912, guid: 1fb843aefa2e8694b8ddf29f0eb4d437, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.6334562
@@ -259,14 +250,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4362625550566233936, guid: 1fb843aefa2e8694b8ddf29f0eb4d437, type: 3}
-      propertyPath: bulletPrefab
-      value: 
-      objectReference: {fileID: 5021900734193956963, guid: cefc1892f1ee6754c8996575bbf0019f, type: 3}
-    - target: {fileID: 4362625550566233936, guid: 1fb843aefa2e8694b8ddf29f0eb4d437, type: 3}
-      propertyPath: firePosition
-      value: 
-      objectReference: {fileID: 521381648}
     - target: {fileID: 5908039312857469038, guid: 1fb843aefa2e8694b8ddf29f0eb4d437, type: 3}
       propertyPath: m_Name
       value: Enemy

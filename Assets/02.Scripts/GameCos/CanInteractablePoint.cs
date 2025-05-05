@@ -40,8 +40,11 @@ public class CanInteractablePoint : MonoBehaviour, IHandleObject
     public void ExitGrabbing()
     {
         Grabbed = false;
-        fixedJoint.connectedBody = null;
-        parentJoint.connectedBody = null;
+        if (fixedJoint != null && parentJoint != null)
+        {
+            fixedJoint.connectedBody = null;
+            parentJoint.connectedBody = null;
+        }
         _controllerCore.OffCharacterJoint();
     }
 
@@ -53,5 +56,17 @@ public class CanInteractablePoint : MonoBehaviour, IHandleObject
     public void InputButtonEvent()
     {
         
+    }
+    public bool IsCanGrab()
+    {
+        if (_controllerCore.isDie)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+       
     }
 }
