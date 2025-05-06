@@ -25,9 +25,9 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.TryGetComponent(out IDamagable damagable))
         {
-            Debug.Log("맞았다.");
+            damagable.TakeDamage(5f);
         }
     }
 }

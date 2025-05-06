@@ -10,10 +10,13 @@ public class PlayerStats : MonoBehaviour, IDamagable
     private void Start()
     {
         PlayerHp = maxHp;
+        UIManager.Instance.PlayerHPUpdate(PlayerHp, maxHp);
     }
     public void TakeDamage(float damage)
     {
+        Debug.Log("TakeDamage");
         PlayerHp -= damage;
+        UIManager.Instance.PlayerHPUpdate(PlayerHp, maxHp);
     }
 
     public void HitPoint(Vector3 hitPoint)

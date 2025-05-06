@@ -123,6 +123,8 @@ public class HandPosition : MonoBehaviour
             Debug.Log($"오브젝트 IHandleObject 보유 여부 : {grabObject.GetComponentInParent<IHandleObject>()}");
             grabbingObject = false;
             grabObject = null;
+            if(isRightHand) UIManager.Instance.RightHandInfoUpdate("Null","");
+            else UIManager.Instance.LeftHandInfoUpdate("Null","");
         }
     }
 }

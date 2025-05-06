@@ -28,11 +28,6 @@ public class Pistol : GunItem
                 damagable.TakeDamage(5f);
                 damagable.HitPoint(hitInfo.point);
             }
-            // if (hitInfo.collider.gameObject.TryGetComponent<IDamagable>(out IDamagable enemy))
-            // {
-            //     Debug.Log($"플레이어 공격 적중: {hitInfo.collider.gameObject.name}");
-            //     enemy.TakeDamage(5f);
-            // }
             bulletEffect.Stop();
             bulletEffect.Play();
             bulletEffectPosition.position = hitInfo.point;
