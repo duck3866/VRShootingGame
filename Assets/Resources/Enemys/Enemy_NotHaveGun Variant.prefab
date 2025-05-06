@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3910173170297658912, guid: 1fb843aefa2e8694b8ddf29f0eb4d437, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.6334562
+      value: 6.456335
       objectReference: {fileID: 0}
     - target: {fileID: 3910173170297658912, guid: 1fb843aefa2e8694b8ddf29f0eb4d437, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1
+      value: 0.082
       objectReference: {fileID: 0}
     - target: {fileID: 3910173170297658912, guid: 1fb843aefa2e8694b8ddf29f0eb4d437, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -10.017569
+      value: 0.3647499
       objectReference: {fileID: 0}
     - target: {fileID: 3910173170297658912, guid: 1fb843aefa2e8694b8ddf29f0eb4d437, type: 3}
       propertyPath: m_LocalRotation.w
@@ -48,6 +48,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4362625550566233936, guid: 1fb843aefa2e8694b8ddf29f0eb4d437, type: 3}
+      propertyPath: enemyAbility
+      value: 
+      objectReference: {fileID: 11400000, guid: 9e4e5df8c8e56044eaac98158c385ac9, type: 2}
     - target: {fileID: 4362625550566233936, guid: 1fb843aefa2e8694b8ddf29f0eb4d437, type: 3}
       propertyPath: firePosition
       value: 

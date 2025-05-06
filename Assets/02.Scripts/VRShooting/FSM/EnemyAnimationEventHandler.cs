@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class EnemyAnimationEventHandler : MonoBehaviour
 {
+    public bool isDamaged = false;
     public bool isAttacking = false;
     public bool isReloading = false;
     private Collider[] _colliders = new Collider[10];
@@ -36,8 +37,18 @@ public class EnemyAnimationEventHandler : MonoBehaviour
         isReloading = false;
     }
 
+    public void StartDamaged()
+    {
+        isDamaged = true;
+    }
+
+    public void EndDamaged()
+    {
+        isDamaged = false;
+    }
     public void InitParameter()
     {
+        isDamaged = false;
         isAttacking = false;
         isReloading = false;
     }

@@ -42,8 +42,13 @@ public class EnemyControllerCore : MonoBehaviour, IDamagable
     public GameObject firePosition;
     private CanInteractablePoint _canInteractablePoint;
     private float _hitDamage;
+    
+    public SkinnedMeshRenderer skinnedMeshRenderer;
+    public Material hitMaterial; // 빨간색 머티리얼
+    private Material[] originalMaterials;
     public void Start()
     {
+        originalMaterials = skinnedMeshRenderer.materials;
         enemyAnimationEventHandler = GetComponent<EnemyAnimationEventHandler>();
         _canInteractablePoint = GetComponentInChildren<CanInteractablePoint>();
         agent = GetComponent<NavMeshAgent>();
@@ -118,11 +123,11 @@ public class EnemyControllerCore : MonoBehaviour, IDamagable
   
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (enemyAnimationEventHandler.isDamaged)
         {
-            TakeDamage(1);
+            agent.isStopped = true;
+            return;
         }
-
         if (!isDie)
         {
             iHaveGun = haveGunPosition.transform.childCount != 0;
@@ -168,9 +173,16 @@ public class EnemyControllerCore : MonoBehaviour, IDamagable
 
     private IEnumerator WaitForDamaged()
     {
+        Material[] hitMaterials = new Material[originalMaterials.Length];
+        for (int i = 0; i < hitMaterials.Length; i++)
+        {
+            hitMaterials[i] = hitMaterial;
+        }
+        skinnedMeshRenderer.materials = hitMaterials;
         animator.SetTrigger("toDamaged");
         yield return new WaitForSeconds(1f);
         ChangeState(EnemyState.Damaged);
+        skinnedMeshRenderer.materials = originalMaterials;
     }
 
     public void InstancePrefab()
@@ -204,6 +216,11 @@ public class EnemyControllerCore : MonoBehaviour, IDamagable
         {
             rb.isKinematic = false;
         }
-
+        Material[] hitMaterials = new Material[originalMaterials.Length];
+        for (int i = 0; i < hitMaterials.Length; i++)
+        {
+            hitMaterials[i] = hitMaterial;
+        }
+        skinnedMeshRenderer.materials = hitMaterials;
     }
 }
