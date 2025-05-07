@@ -32,13 +32,25 @@ public class GameManager : MonoBehaviour
    {
       if (currentTime >= createTime)
       {
-         GameObject SpawnPoint = SpawnPoints[Random.Range(0, SpawnPoints.Length)];
-         EnemyManager.SpawnEnemy(SpawnPoint);
-         currentTime = 0f;
+         if (turn < 5)
+         {
+            GameObject SpawnPoint = SpawnPoints[Random.Range(0, SpawnPoints.Length)];
+            EnemyManager.SpawnEnemy(SpawnPoint);
+            turn += 1;
+            currentTime = 0f;
+         }
+         else
+         {
+            EnemyManager.SpawnBoss();
+            currentTime = 0f;
+         }
+         
       }
       else
       {
          currentTime += Time.deltaTime;
       }
+      
+      
    }
 }

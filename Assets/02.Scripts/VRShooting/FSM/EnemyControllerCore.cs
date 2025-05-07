@@ -42,7 +42,7 @@ public class EnemyControllerCore : MonoBehaviour, IDamagable
     public GameObject firePosition;
     private CanInteractablePoint _canInteractablePoint;
     private float _hitDamage;
-    
+    public Rigidbody hips;
     public SkinnedMeshRenderer skinnedMeshRenderer;
     public Material hitMaterial; // 빨간색 머티리얼
     private Material[] originalMaterials;
@@ -120,20 +120,36 @@ public class EnemyControllerCore : MonoBehaviour, IDamagable
             // fixedJoint.connectedBody = null;
         }
     }
-  
+
+    // private bool isTest = false;
     private void Update()
     {
-        if (enemyAnimationEventHandler.isDamaged)
-        {
-            agent.isStopped = true;
-            return;
-        }
-        if (!isDie)
-        {
-            iHaveGun = haveGunPosition.transform.childCount != 0;
-            // Debug.Log($"현재 상태:{CurrentState} 이전 상태:{PreviousState}");
-            CurrentState?.OperateUpdate();  
-        }
+
+        // if (Input.GetMouseButtonDown(0))
+        // {
+        //     if (!isTest)
+        //     {
+        //         isTest = true;
+        //         OnCharacterJoint(); 
+        //     }
+        //     else
+        //     {
+        //         Debug.Log("????????");
+        //         hips.AddForce(transform.forward * 500f, ForceMode.Impulse);
+        //     }
+        //    
+        // }
+        // if (!isTest)
+        // {
+            agent.stoppingDistance = AttackDistance;
+            if (!isDie)
+            {
+                iHaveGun = haveGunPosition.transform.childCount != 0;
+                // Debug.Log($"현재 상태:{CurrentState} 이전 상태:{PreviousState}");
+                CurrentState?.OperateUpdate();  
+            } 
+        // }
+        
     }
     public void ChangeState(EnemyState newState)
     {
@@ -171,6 +187,13 @@ public class EnemyControllerCore : MonoBehaviour, IDamagable
         }
     }
 
+    public Rigidbody OnThrowObject()
+    {
+        OnCharacterJoint(); 
+        hips.useGravity = true;
+        hips.isKinematic = false;
+        return hips;
+    }
     private IEnumerator WaitForDamaged()
     {
         Material[] hitMaterials = new Material[originalMaterials.Length];

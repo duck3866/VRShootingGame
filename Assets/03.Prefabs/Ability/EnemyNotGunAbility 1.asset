@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: EnemyNotGunAbility 1
   m_EditorClassIdentifier: 
   MoveSpeed: 8
-  MaxHp: 30
+  MaxHp: 15
   AttackDistance: 2.5
   Type: 0

@@ -38,7 +38,7 @@ public class UIManager : MonoBehaviour
         rightHandInfoText.transform.localPosition = new Vector3(0, -0.3f, 0);
         leftHand.transform.localPosition = new Vector3(-0.23f, 0, 0.5f);
         leftHandInfoText.transform.localPosition = new Vector3(0, -0.3f, 0);
-        playerStats.transform.localPosition = new Vector3(0, 0, 0.6f);
+        playerStats.transform.localPosition = new Vector3(0, -0.33f, 0.6f);
     }
 
     public void PlayerHPUpdate(float hp, float maxHp)

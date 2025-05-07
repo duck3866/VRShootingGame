@@ -56,13 +56,16 @@ public class EnemyAnimationEventHandler : MonoBehaviour
     public void AttackChecking()
     {
         Vector3 startPosition = transform.forward + new Vector3(0f, 0f, 1f);
-        Physics.OverlapSphereNonAlloc(startPosition, 1f, _colliders,layerMask);
+        _colliders = Physics.OverlapSphere(startPosition, 1f,layerMask);
         if (_colliders.Length > 0)
         {
             foreach (var collider in _colliders)
             {
-                if (collider.TryGetComponent<IDamagable>(out IDamagable damagable))
+                Debug.Log(collider.name);
+                IDamagable damagable = collider.GetComponentInParent<IDamagable>();
+                if (damagable != null)
                 {
+                    Debug.Log("주먹 공격 실행");
                     damagable.TakeDamage(5f);
                 }
             }

@@ -19,6 +19,6 @@ public class EnemyUI : MonoBehaviour
     {
         Vector3 targetPosition = enemyControllerCore.player.transform.position - enemyControllerCore.transform.position;
         Quaternion rotation = Quaternion.LookRotation(targetPosition);
-        enemyControllerCore.transform.rotation = Quaternion.Slerp(enemyControllerCore.transform.rotation, rotation, Time.deltaTime * 5f);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 5f);
     }
 }
