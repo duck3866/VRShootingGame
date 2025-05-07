@@ -1,12 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CanInteractablePoint : MonoBehaviour, IHandleObject
 {
     private EnemyControllerCore  _controllerCore;
-
+    public GameObject parentObject;
     public FixedJoint fixedJoint;
 
     public FixedJoint parentJoint;
@@ -30,6 +31,21 @@ public class CanInteractablePoint : MonoBehaviour, IHandleObject
     {
         if (!_controllerCore.isDie)
         {
+            _controllerCore.ChangeState(EnemyControllerCore.EnemyState.Grabbing);
+            // if (!parentObject.TryGetComponent(out FixedJoint pJoint))
+            // {
+            //     parentObject.AddComponent<FixedJoint>();
+            //     parentJoint = pJoint;
+            //     parentJoint.connectedBody = transform.GetComponent<Rigidbody>();
+            //     fixedJoint.breakForce = Mathf.Infinity; // 원하는 힘으로 설정
+            //     fixedJoint.breakTorque = Mathf.Infinity;
+            // }
+            //
+            if (!transform.TryGetComponent(out FixedJoint fJoint))
+            {
+                fixedJoint = transform.AddComponent<FixedJoint>();
+            }
+            
             Grabbed = true;
             _controllerCore.OnCharacterJoint();
             fixedJoint.connectedBody = grabbingTransform.GetComponent<Rigidbody>();
@@ -37,9 +53,10 @@ public class CanInteractablePoint : MonoBehaviour, IHandleObject
             fixedJoint.breakForce = Mathf.Infinity; // 원하는 힘으로 설정
             fixedJoint.breakTorque = Mathf.Infinity;
 
-            parentJoint.connectedBody = grabbingTransform.GetComponent<Rigidbody>();
-            parentJoint.breakForce = Mathf.Infinity; // 원하는 힘으로 설정
-            parentJoint.breakTorque = Mathf.Infinity;
+            // parentJoint.connectedBody = grabbingTransform.GetComponent<Rigidbody>();
+            // // parentJoint.connectedBody = transform.GetComponent<Rigidbody>();
+            // parentJoint.breakForce = Mathf.Infinity; // 원하는 힘으로 설정
+            // parentJoint.breakTorque = Mathf.Infinity;
             
             prevPos = ARAVRInput.RHandPosition;
             prevRot = ARAVRInput.RHand.rotation;
@@ -49,8 +66,8 @@ public class CanInteractablePoint : MonoBehaviour, IHandleObject
     public void ExitGrabbing()
     {
         if (fixedJoint != null) fixedJoint.connectedBody = null;
-        if (parentJoint != null) parentJoint.connectedBody = null;
-
+        // if (parentJoint != null) parentJoint.connectedBody = null;
+        
         StartCoroutine(ExitGrabbingAction());
     }
     
@@ -58,8 +75,14 @@ public class CanInteractablePoint : MonoBehaviour, IHandleObject
     {
         // 1. Joint 해제
         if (fixedJoint != null) fixedJoint.connectedBody = null;
-        if (parentJoint != null) parentJoint.connectedBody = null;
-
+        // if (parentJoint != null) parentJoint.connectedBody = null;
+        
+        _controllerCore.OnCharacterJoint();
+        FixedJoint[] fixedJoints = GetComponentsInChildren<FixedJoint>();
+        foreach (var fixedJoint in fixedJoints)
+        {
+            Destroy(fixedJoint);
+        }
         // 2. 물리 프레임까지 기다림
         yield return new WaitForFixedUpdate();
 
@@ -83,7 +106,10 @@ public class CanInteractablePoint : MonoBehaviour, IHandleObject
 
         // 5. 후처리
         yield return new WaitForSeconds(3f); // 필요시 약간의 시간 대기
+        _controllerCore.ChangeState(EnemyControllerCore.EnemyState.Chase);
+        parentObject.transform.position = transform.position;
         _controllerCore.OffCharacterJoint();
+        rigidbody.useGravity = false;
         Grabbed = false;
     }
     

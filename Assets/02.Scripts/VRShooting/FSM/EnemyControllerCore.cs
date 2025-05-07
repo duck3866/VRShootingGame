@@ -97,10 +97,10 @@ public class EnemyControllerCore : MonoBehaviour, IDamagable
     {
         animator.enabled = false;
         agent.enabled = false;
-        if (!isDie)
-        {
-            ChangeState(EnemyState.Grabbing);
-        }
+        // if (!isDie)
+        // {
+        //     ChangeState(EnemyState.Grabbing);
+        // }
         foreach (var joint in rigidbodies)
         {
             joint.isKinematic = false;
@@ -111,7 +111,7 @@ public class EnemyControllerCore : MonoBehaviour, IDamagable
         if (!isDie)
         {
             animator.enabled = true;
-            ChangeState(EnemyState.Chase);
+            // ChangeState(EnemyState.Chase);
             agent.enabled = true;
             foreach (var joint in rigidbodies)
             {

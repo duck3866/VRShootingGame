@@ -2528,6 +2528,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbfdc15eb93d1174da9b6d0c69de307f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parentObject: {fileID: 5908039312857469038}
   fixedJoint: {fileID: 0}
   parentJoint: {fileID: 9092681017142388929}
   throwPower: 2000
@@ -3621,7 +3622,7 @@ FixedJoint:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5908039312857469038}
-  m_ConnectedBody: {fileID: 0}
+  m_ConnectedBody: {fileID: 6495704018822626750}
   m_ConnectedArticulationBody: {fileID: 0}
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
