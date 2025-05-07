@@ -2531,7 +2531,7 @@ MonoBehaviour:
   parentObject: {fileID: 5908039312857469038}
   fixedJoint: {fileID: 0}
   parentJoint: {fileID: 9092681017142388929}
-  throwPower: 2000
+  throwPower: 1000
 --- !u!138 &656009292864216763
 FixedJoint:
   m_ObjectHideFlags: 0
@@ -3475,9 +3475,10 @@ GameObject:
   - component: {fileID: 7516046907787110169}
   - component: {fileID: 9092681017142388929}
   - component: {fileID: 5797171612023913649}
+  - component: {fileID: 7146534210835405546}
   m_Layer: 6
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3491,7 +3492,7 @@ Transform:
   m_GameObject: {fileID: 5908039312857469038}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.8836646, y: 0.082, z: 4.83475}
+  m_LocalPosition: {x: 6.3663354, y: 0.082, z: 8.7647505}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3566,6 +3567,7 @@ MonoBehaviour:
   firePosition: {fileID: 2044582954244453443}
   hips: {fileID: 6495704018822626750}
   skinnedMeshRenderer: {fileID: 453993798623703575}
+  IsTharwing: 0
   hitMaterial: {fileID: 2100000, guid: 825ddab9828665d4aa096168bdff2cbf, type: 2}
 --- !u!54 &902663924542224385
 Rigidbody:
@@ -3648,6 +3650,29 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 128
+--- !u!136 &7146534210835405546
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5908039312857469038}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &5991267708542224403
 GameObject:
   m_ObjectHideFlags: 0

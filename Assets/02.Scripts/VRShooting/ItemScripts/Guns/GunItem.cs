@@ -9,6 +9,7 @@ public class GunItem : MonoBehaviour, IHandleObject
     public GameObject magazinePosition;
     [HideInInspector] public GameObject magazine;
     public float maxBullet = 10f;
+    public float magazineBullet = 30f;
     public float currentBullet;
     public GameObject firePosition;
     public float bulletDistance;
@@ -33,7 +34,8 @@ public class GunItem : MonoBehaviour, IHandleObject
         // grabbingTransform.transform.SetParent(this.transform);
         Grabbed = true;
         LaserSite.enabled = true;
-        if (transform.parent.CompareTag("Right")) parentObjectIsRight = true;
+        // if (transform.parent.CompareTag("Right")) parentObjectIsRight = true;
+        if (grabbingTransform.gameObject.CompareTag("Right")) parentObjectIsRight = true;
         else parentObjectIsRight = false;
         transform.localPosition = new Vector3(0,0,1);
         transform.localRotation = Quaternion.identity;

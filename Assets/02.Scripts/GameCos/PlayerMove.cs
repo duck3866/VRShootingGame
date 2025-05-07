@@ -46,10 +46,10 @@ public class PlayerMove : MonoBehaviour
             yVelocity = 0;
         }
 
-        if (ARAVRInput.GetDown(ARAVRInput.Button.Two, ARAVRInput.Controller.RTouch))
-        {
-            yVelocity = jumpPower;
-        }
+        // if (ARAVRInput.GetDown(ARAVRInput.Button.Two, ARAVRInput.Controller.RTouch))
+        // {
+        //     yVelocity = jumpPower;
+        // }
         
         dir.y = yVelocity;
         

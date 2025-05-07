@@ -53,7 +53,11 @@ public class HandPosition : MonoBehaviour
             {
                 if (grabObject == other.gameObject)
                 {
-                    ThrowAwayObject();
+                    // ThrowAwayObject(isRightHand);
+                    grabbingObject = false;
+                    grabObject = null;
+                    if (isRightHand) UIManager.Instance.RightHandInfoUpdate("Null", "");
+                    else UIManager.Instance.LeftHandInfoUpdate("Null", "");
                     hand.ExitGrabbing();
                 }
             }
@@ -62,14 +66,22 @@ public class HandPosition : MonoBehaviour
 
     private void OnClickHand()
     {
+        // 물건 던지는 키
         if (ARAVRInput.GetDown(ARAVRInput.Button.One, ARAVRInput.Controller.LTouch))
         {
             if (grabObject != null)
             {
-                ThrowAwayObject();
+                ThrowAwayObject(false);
             }
         }
-
+        if (ARAVRInput.GetDown(ARAVRInput.Button.One, ARAVRInput.Controller.RTouch))
+        {
+            if (grabObject != null)
+            {
+                ThrowAwayObject(true);
+            }
+        }
+        
         if (ARAVRInput.GetDown(ARAVRInput.Button.Two, ARAVRInput.Controller.LTouch))
         {
             Debug.Log("오브젝트 InputButtonEvent 호출" + $" {gameObject.name}");
@@ -81,7 +93,7 @@ public class HandPosition : MonoBehaviour
                 }
             }
         }
-
+        // 물건 사용함
         if (isRightHand)
         {
             if (ARAVRInput.GetDown(ARAVRInput.Button.IndexTrigger, ARAVRInput.Controller.RTouch))
@@ -114,17 +126,20 @@ public class HandPosition : MonoBehaviour
         }
     }
 
-    private void ThrowAwayObject()
+    private void ThrowAwayObject(bool isRight)
     {
-        if (grabbingObject)
+        if (isRight == isRightHand)
         {
-            // grabObject.transform.parent = null;
-            grabObject.GetComponentInChildren<IHandleObject>().ExitGrabbing();
-            Debug.Log($"오브젝트 IHandleObject 보유 여부 : {grabObject.GetComponentInParent<IHandleObject>()}");
-            grabbingObject = false;
-            grabObject = null;
-            if(isRightHand) UIManager.Instance.RightHandInfoUpdate("Null","");
-            else UIManager.Instance.LeftHandInfoUpdate("Null","");
+            if (grabbingObject)
+            {
+                // grabObject.transform.parent = null;
+                grabObject.GetComponentInChildren<IHandleObject>().ExitGrabbing();
+                Debug.Log($"오브젝트 IHandleObject 보유 여부 : {grabObject.GetComponentInParent<IHandleObject>()}");
+                grabbingObject = false;
+                grabObject = null;
+                if (isRightHand) UIManager.Instance.RightHandInfoUpdate("Null", "");
+                else UIManager.Instance.LeftHandInfoUpdate("Null", "");
+            }
         }
     }
 }

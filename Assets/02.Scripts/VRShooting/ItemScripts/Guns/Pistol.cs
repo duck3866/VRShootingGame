@@ -25,8 +25,8 @@ public class Pistol : GunItem
             if (damagable != null)
             {
                 Debug.Log($"플레이어 공격 적중: {hitInfo.collider.gameObject.name}");
-                damagable.TakeDamage(5f);
                 damagable.HitPoint(hitInfo.point);
+                damagable.TakeDamage(5f);
             }
             bulletEffect.Stop();
             bulletEffect.Play();

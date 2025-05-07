@@ -8,7 +8,7 @@
 
     public void OperateEnter()
     {
-      
+       
     }
 
     public void OperateUpdate()
@@ -18,7 +18,8 @@
 
     public void OperateExit()
     {
-       _controllerCore.animator.SetTrigger("toShootingIdle");
+        // _controllerCore.IsAttacking = false;
+       // _controllerCore.animator.SetTrigger("toShootingIdle");
     }
 }
 
