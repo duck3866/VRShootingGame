@@ -9,6 +9,12 @@ public class HandPosition : MonoBehaviour
     // [SerializeField] private Vector3 offset; 
     [SerializeField] private bool grabbingObject = false; // 잡고 있는지 여부
     [SerializeField] private GameObject grabObject; // 잡은 오브젝트
+    private Animator animator;
+
+    private void Start()
+    {
+        animator  = GetComponent<Animator>();
+    }
 
     private void LateUpdate()
     {
@@ -33,6 +39,7 @@ public class HandPosition : MonoBehaviour
             {
                 if (hand.IsCanGrab())
                 {
+                    animator.SetTrigger("toUse");
                     // grabObject = other.gameObject.transform.root.gameObject;
                     grabObject = other.gameObject;
                     // grabObject.transform.SetParent(transform);
@@ -49,6 +56,7 @@ public class HandPosition : MonoBehaviour
     {
         if (other.TryGetComponent<IHandleObject>(out var hand))
         {
+            animator.SetTrigger("toIdle");
             if (!other.CompareTag("Enemy"))
             {
                 if (grabObject == other.gameObject)
