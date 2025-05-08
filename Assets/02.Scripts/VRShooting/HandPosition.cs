@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class HandPosition : MonoBehaviour
 {
-    [SerializeField] private bool isRightHand = true;
-    [SerializeField] private Vector3 offset;
-    [SerializeField] private bool grabbingObject = false;
-    [SerializeField] private GameObject grabObject;
+    [SerializeField] private bool isRightHand = true; // 오른쪽 손인지 여부
+    // [SerializeField] private Vector3 offset; 
+    [SerializeField] private bool grabbingObject = false; // 잡고 있는지 여부
+    [SerializeField] private GameObject grabObject; // 잡은 오브젝트
 
     private void LateUpdate()
     {
@@ -24,7 +24,7 @@ public class HandPosition : MonoBehaviour
             transform.rotation = ARAVRInput.GetLHandRotation();
         }
     }
-
+    
     private void OnTriggerEnter(Collider other)
     {
         if (!grabbingObject)

@@ -11,23 +11,30 @@ public class EnemyManager : IManagable
         Champion
     }
     // public EnemyAbility[] EnemyAbilities = new EnemyAbility[10];
-    public GameObject[] EnemyObjects = new GameObject[5];
+    private GameObject[] _enemyObjects = new GameObject[5]; // 적 프리팹 리스트
+    private GameObject[] _bossObjects = new GameObject[5]; // 보스 프리팹 리스트
     
+    /// <summary>
+    /// 
+    /// </summary>
     public void Init()
     {
-        EnemyObjects = Resources.LoadAll<GameObject>("Enemys");
+        _enemyObjects = Resources.LoadAll<GameObject>("Enemy");
+        _bossObjects = Resources.LoadAll<GameObject>("Boss");
         // EnemyAbilities = Resources.LoadAll<EnemyAbility>("Ability");
     }
 
     public void SpawnEnemy(GameObject spawnPoint)
     {
-        GameObject enemy = EnemyObjects[Random.Range(0, EnemyObjects.Length)];
+        GameObject enemy = _enemyObjects[Random.Range(0, _enemyObjects.Length)];
         GameObject.Instantiate(enemy);
         enemy.transform.position = spawnPoint.transform.position;
     }
 
-    public void SpawnBoss()
+    public void SpawnBoss(GameObject spawnPoint)
     {
-        
+        GameObject boss = _bossObjects[Random.Range(0, _bossObjects.Length)];
+        GameObject.Instantiate(boss);
+        boss.transform.position = spawnPoint.transform.position;
     }
 }

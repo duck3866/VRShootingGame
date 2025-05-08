@@ -33,8 +33,8 @@ public class PlayerMove : MonoBehaviour
 
         // 2. 방향이 필요하다.
         // 이동 공식에 대입하여 각 속성별로 회전 값을 누적 시킨다.
-        angle.x += x * sensitivity * Time.deltaTime;
-        angle.y += y * sensitivity * Time.deltaTime;
+        angle.x += x * sensitivity * Time.unscaledDeltaTime;
+        angle.y += y * sensitivity * Time.unscaledDeltaTime;
 
         angle.y = Mathf.Clamp(angle.y, -90, 90);
         // 3. 회전 시키고 싶다.
@@ -53,6 +53,6 @@ public class PlayerMove : MonoBehaviour
         
         dir.y = yVelocity;
         
-        _cc.Move(dir * (speed * Time.deltaTime));
+        _cc.Move(dir * (speed * Time.unscaledDeltaTime));
     }
 }

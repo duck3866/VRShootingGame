@@ -5,20 +5,27 @@ using UnityEngine;
 
 public class GunItem : MonoBehaviour, IHandleObject
 {
-    protected Animator Animator;
-    public GameObject magazinePosition;
-    [HideInInspector] public GameObject magazine;
-    public float maxBullet = 10f;
-    public float magazineBullet = 30f;
-    public float currentBullet;
-    public GameObject firePosition;
-    public float bulletDistance;
-    public ParticleSystem bulletEffect;
-    public Transform bulletEffectPosition;
-    [HideInInspector] public bool parentObjectIsRight;
+   [Header("탄창 장착 위치")]
+    public GameObject magazinePosition; // 탄창 장착 위치
+    [HideInInspector] public GameObject magazine; // 탄창 오브젝트
+    [Header("최대 탄약 개수")]
+    public float maxBullet = 10f; // 최대 탄약 개수
+    [Header("탄창 탄약 개수")]
+    public float magazineBullet = 30f; // 탄창 탄약 개수
+    [Header("현재 탄약 개수")]
+    public float currentBullet; // 현재 탄약 개수
+    [Header("총구")]
+    public GameObject firePosition; // 총알이 나갈 위치 
+    [Header("총 사거리")]
+    public float bulletDistance; // Ray의 길이
     
-    protected LineRenderer LaserSite;
-    public bool Grabbed { get; set; }
+    public ParticleSystem bulletEffect; // Ray가 적중했을때 이펙트
+    public Transform bulletEffectPosition; // 파티클 시스템 위치
+    [HideInInspector] public bool parentObjectIsRight; // 부모가 오른손인지 여부
+    
+    protected Animator Animator; // animator
+    protected LineRenderer LaserSite; // lineRenderer
+    public bool Grabbed { get; set; } // 잡혔는지 여부
 
     private void Start()
     {
@@ -27,7 +34,7 @@ public class GunItem : MonoBehaviour, IHandleObject
         LaserSite.enabled = false;
         Animator = GetComponent<Animator>();
     }
-
+    
     public void EnterGrabbing(GameObject grabbingTransform)
     {
         transform.SetParent(grabbingTransform.transform);
@@ -113,7 +120,7 @@ public class GunItem : MonoBehaviour, IHandleObject
             }
         }
     }
-
+    
     public virtual void ReloadBullet()
     {
         currentBullet = maxBullet;

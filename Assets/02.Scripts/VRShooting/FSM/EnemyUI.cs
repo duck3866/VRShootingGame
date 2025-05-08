@@ -7,9 +7,10 @@ using Slider = UnityEngine.UI.Slider;
 
 public class EnemyUI : MonoBehaviour
 {
-    [SerializeField] private EnemyControllerCore enemyControllerCore;
-    public Slider healthBar;
-    private void Update()
+ 
+    [SerializeField] private Slider healthBar; // 적의 체력 Slider
+    [SerializeField] private EnemyControllerCore enemyControllerCore; // 적의 콘트롤러 클래스
+    private void LateUpdate()
     {
         if (enemyControllerCore == null) return;
         healthBar.value = enemyControllerCore.EnemyHp / enemyControllerCore.enemyAbility.MaxHp;

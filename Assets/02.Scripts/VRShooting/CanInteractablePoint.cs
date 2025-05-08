@@ -6,31 +6,37 @@ using UnityEngine;
 
 public class CanInteractablePoint : MonoBehaviour, IHandleObject
 {
-    private EnemyControllerCore _controllerCore;
-    public GameObject parentObject;
-    public FixedJoint fixedJoint;
-
-    public FixedJoint parentJoint;
-
-    private Vector3 prevPos;
-    private Quaternion prevRot;
-    
-    [HideInInspector] public bool parentObjectIsRight;
-
+   
+    [Header("던져질 힘")]
     public float throwPower = 2000f;
+    // public GameObject parentObject;
+    [Header("위치 고정용 FixedJoint")]
+    public FixedJoint fixedJoint;
+    // public FixedJoint parentJoint;
+    [HideInInspector] public bool parentObjectIsRight; // 부모가 어느 손인지 확인하기 위함
+    private EnemyControllerCore _controllerCore; // 적의 콘트롤러 클래스
+    
+    private Vector3 prevPos; // 처음 잡혔을때 위치
+    private Quaternion prevRot; // 처음 잡혔을때 각도
+    
+    public bool Grabbed { get; set; }
 
     // public event Action OnInteractableStart;
     // public event Action OnInteractableEnd;
-
+    /// <summary>
+    /// 초기화 함수
+    /// </summary>
+    /// <param name="controllerCore">할당할 콘트롤러 클래스</param>
     public void Init(EnemyControllerCore controllerCore)
     {
         // parentJoint = GetComponentInParent<FixedJoint>();
         fixedJoint = GetComponent<FixedJoint>();
         _controllerCore = controllerCore;
     }
-
-    public bool Grabbed { get; set; }
-
+    /// <summary>
+    /// 잡혔을때 발동하는 함수
+    /// </summary>
+    /// <param name="grabbingTransform">잡은 손 오브젝트의 트랜스폼</param>
     public void EnterGrabbing(GameObject grabbingTransform)
     {
         if (!_controllerCore.isDie)
@@ -76,7 +82,9 @@ public class CanInteractablePoint : MonoBehaviour, IHandleObject
             
         }
     }
-
+    /// <summary>
+    /// 놓았을때 호출되는 함수
+    /// </summary>
     public void ExitGrabbing()
     {
         if (fixedJoint != null) fixedJoint.connectedBody = null;
@@ -87,7 +95,6 @@ public class CanInteractablePoint : MonoBehaviour, IHandleObject
 
     private IEnumerator ExitGrabbingAction()
     {
-        // 1. Joint 해제
         if (!_controllerCore.isDie)
         {
             _controllerCore.IsTharwing = true;
@@ -100,17 +107,14 @@ public class CanInteractablePoint : MonoBehaviour, IHandleObject
             {
                 Destroy(fixedJoint);
             }
-
-            // 2. 물리 프레임까지 기다림
+            
             yield return new WaitForFixedUpdate();
-
-            // 3. Rigidbody 설정
+            
             // Rigidbody rigidbody = _controllerCore.OnThrowObject();
             Rigidbody rigidbody = _controllerCore.hips;
             rigidbody.isKinematic = false;
             rigidbody.useGravity = true;
-
-            // 4. 던지기 Force 적용
+            
             Vector3 throwDirection = (ARAVRInput.RHandPosition - prevPos);
             Quaternion deltaRotation = ARAVRInput.RHand.rotation * Quaternion.Inverse(prevRot);
 
@@ -121,9 +125,8 @@ public class CanInteractablePoint : MonoBehaviour, IHandleObject
             deltaRotation.ToAngleAxis(out angle, out axis);
             Vector3 angularVelocity = (1.0f / Time.deltaTime) * angle * axis;
             rigidbody.angularVelocity = angularVelocity;
-
-            // 5. 후처리
-            yield return new WaitForSeconds(3f); // 필요시 약간의 시간 대기
+            
+            yield return new WaitForSeconds(3f); 
             
             rigidbody.velocity = Vector3.zero;
             _controllerCore.IsTharwing = false;
@@ -134,15 +137,22 @@ public class CanInteractablePoint : MonoBehaviour, IHandleObject
             Grabbed = false;
         }
     }
-
+    /// <summary>
+    /// IndexTrigger가 눌렸을때 호출되는 함수
+    /// </summary>
     public void ItemUse()
     {
     }
-
+    /// <summary>
+    /// Two가 눌렸을때 호출되는 함수
+    /// </summary>
     public void InputButtonEvent()
     {
     }
-
+    /// <summary>
+    /// 잡을 수 있는지 여부
+    /// </summary>
+    /// <returns>현재 잡혀있으면 false 아니면 true</returns>
     public bool IsCanGrab()
     {
         if (_controllerCore.isDie || Grabbed)

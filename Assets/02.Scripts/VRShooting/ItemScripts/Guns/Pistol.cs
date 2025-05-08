@@ -32,7 +32,7 @@ public class Pistol : GunItem
             bulletEffect.Play();
             bulletEffectPosition.position = hitInfo.point;
             bulletEffectPosition.forward = hitInfo.normal;
-            Debug.Log(hitInfo.collider.gameObject.name);
+            // Debug.Log(hitInfo.collider.gameObject.name);
         }
         currentBullet--;
         if (parentObjectIsRight) UIManager.Instance.RightHandInfoUpdate(gameObject.name,$"BUlLET: {currentBullet}/{maxBullet}");
