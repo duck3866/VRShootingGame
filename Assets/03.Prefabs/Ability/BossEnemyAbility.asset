@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eee12eca9ddfb6d448635dbc9d14231c, type: 3}
   m_Name: BossEnemyAbility
   m_EditorClassIdentifier: 
-  MoveSpeed: 8
+  MoveSpeed: 4
   MaxHp: 30
   AttackDistance: 2.5
-  Type: 0
+  Type: 2
