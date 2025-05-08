@@ -96,6 +96,7 @@ public class HandPosition : MonoBehaviour
         // 물건 사용함
         if (isRightHand)
         {
+            if (grabObject == null) return;
             if (ARAVRInput.GetDown(ARAVRInput.Button.IndexTrigger, ARAVRInput.Controller.RTouch))
             {
                 if (grabObject.TryGetComponent<IHandleObject>(out IHandleObject hand))
@@ -111,6 +112,7 @@ public class HandPosition : MonoBehaviour
         }
         else if (!isRightHand)
         {
+            if (grabObject == null) return;
             if (ARAVRInput.GetDown(ARAVRInput.Button.IndexTrigger, ARAVRInput.Controller.LTouch))
             {
                 if (grabObject.TryGetComponent<IHandleObject>(out IHandleObject hand))

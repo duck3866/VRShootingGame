@@ -33,6 +33,12 @@ public class GunItem : MonoBehaviour, IHandleObject
         LaserSite = GetComponent<LineRenderer>();
         LaserSite.enabled = false;
         Animator = GetComponent<Animator>();
+        if (bulletEffect == null)
+        {
+            GameObject gameObject = GameObject.FindGameObjectWithTag("BulletImpact");
+            bulletEffect = gameObject.GetComponent<ParticleSystem>();
+            bulletEffectPosition = gameObject.GetComponent<Transform>();
+        }
     }
     
     public void EnterGrabbing(GameObject grabbingTransform)

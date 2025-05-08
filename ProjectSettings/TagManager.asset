@@ -12,6 +12,7 @@ TagManager:
   - Left
   - Enemy
   - Ground
+  - BulletImpact
   layers:
   - Default
   - TransparentFX

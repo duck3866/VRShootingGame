@@ -212,6 +212,11 @@ public class EnemyControllerCore : MonoBehaviour, IDamagable
             }
         }
     }
+
+    public void AddForceMethod(Vector3 direction)
+    {
+        StartCoroutine(CanInteractablePoint.ExitGrabbingAction(direction));
+    }
     protected IEnumerator WaitForDamaged()
     {
         Material[] hitMaterials = new Material[OriginalMaterials.Length];
@@ -246,7 +251,7 @@ public class EnemyControllerCore : MonoBehaviour, IDamagable
         // Debug.Log($"뭔가 닿았는데 이거 뭐임: {other.gameObject.name}");
         if (IsTharwing)
         {
-            Debug.Log("바닥");
+            // Debug.Log("바닥");
             if (other.CompareTag("Ground") || other.CompareTag("Enemy"))
             {
                 IDamagable damagable = other.GetComponentInChildren<IDamagable>();
@@ -269,7 +274,7 @@ public class EnemyControllerCore : MonoBehaviour, IDamagable
         CanInteractablePoint.Grabbed = true;
         
 
-        agent.isStopped = true;
+        // agent.isStopped = true;
         agent.enabled = false;
         animator.applyRootMotion = false;
         animator.enabled = false;

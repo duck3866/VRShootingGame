@@ -2529,11 +2529,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbfdc15eb93d1174da9b6d0c69de307f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parentObject: {fileID: 5908039312857469038}
+  throwPower: 40000
   fixedJoint: {fileID: 0}
-  parentJoint: {fileID: 9092681017142388929}
   parentObjectIsRight: 0
-  throwPower: 1000
 --- !u!138 &656009292864216763
 FixedJoint:
   m_ObjectHideFlags: 0
@@ -2664,8 +2662,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd59b6c9b761ca445bea075ac2bd09b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyControllerCore: {fileID: 4362625550566233936}
   healthBar: {fileID: 4759924649820265086}
+  enemyControllerCore: {fileID: 4362625550566233936}
 --- !u!1 &4239663687894032566
 GameObject:
   m_ObjectHideFlags: 0
@@ -3494,7 +3492,7 @@ Transform:
   m_GameObject: {fileID: 5908039312857469038}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.3663354, y: 0.082, z: 8.7647505}
+  m_LocalPosition: {x: 6.456335, y: 0.082, z: 0.3647499}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3539,11 +3537,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyAbility: {fileID: 11400000, guid: 60d5e37846df0c6458f72dbe47f5827f, type: 2}
+  isDie: 0
+  IsTharwing: 0
+  haveGunPosition: {fileID: 8456012136353221207}
+  bulletPrefab: {fileID: 5021900734193956963, guid: cefc1892f1ee6754c8996575bbf0019f, type: 3}
+  firePosition: {fileID: 2044582954244453443}
+  hips: {fileID: 6495704018822626750}
+  skinnedMeshRenderer: {fileID: 453993798623703575}
+  hitMaterial: {fileID: 2100000, guid: 825ddab9828665d4aa096168bdff2cbf, type: 2}
   player: {fileID: 0}
   agent: {fileID: 0}
   animator: {fileID: 0}
   iHaveGun: 0
-  haveGunPosition: {fileID: 8456012136353221207}
   enemyAnimationEventHandler: {fileID: 0}
   _colliderInfos:
   - collider: {fileID: 4055376045426640654}
@@ -3564,13 +3569,6 @@ MonoBehaviour:
     weightDamage: 0.5
   - collider: {fileID: 5012433629300900574}
     weightDamage: 2
-  isDie: 0
-  bulletPrefab: {fileID: 5021900734193956963, guid: cefc1892f1ee6754c8996575bbf0019f, type: 3}
-  firePosition: {fileID: 2044582954244453443}
-  hips: {fileID: 6495704018822626750}
-  skinnedMeshRenderer: {fileID: 453993798623703575}
-  IsTharwing: 0
-  hitMaterial: {fileID: 2100000, guid: 825ddab9828665d4aa096168bdff2cbf, type: 2}
 --- !u!54 &902663924542224385
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4186,8 +4184,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 0}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
