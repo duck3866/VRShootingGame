@@ -269,6 +269,7 @@ MonoBehaviour:
   magazinePosition: {fileID: 6811586397930178699}
   magazine: {fileID: 0}
   maxBullet: 10
+  magazineBullet: 30
   currentBullet: 0
   firePosition: {fileID: 2044582954244453443}
   bulletDistance: 5
@@ -2033,7 +2034,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1335860007460034996}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2531,6 +2532,7 @@ MonoBehaviour:
   parentObject: {fileID: 5908039312857469038}
   fixedJoint: {fileID: 0}
   parentJoint: {fileID: 9092681017142388929}
+  parentObjectIsRight: 0
   throwPower: 1000
 --- !u!138 &656009292864216763
 FixedJoint:
@@ -2560,7 +2562,7 @@ GameObject:
   - component: {fileID: 1425440646856059547}
   - component: {fileID: 6902214904213636053}
   - component: {fileID: 1972772166351673040}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: EnemyUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3248,7 +3250,7 @@ GameObject:
   - component: {fileID: 3724593743385265789}
   - component: {fileID: 5107124971897512210}
   - component: {fileID: 6748877830557474183}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3914,7 +3916,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9122732596749086755}
   - component: {fileID: 4759924649820265086}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: EnemyHP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4130,7 +4132,7 @@ GameObject:
   - component: {fileID: 6273718274380276593}
   - component: {fileID: 9049242824273068620}
   - component: {fileID: 649314581287871953}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
