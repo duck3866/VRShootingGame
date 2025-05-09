@@ -14,6 +14,9 @@ public class GameManager : MonoBehaviour
    public float turn = 0f; // 현재 턴 수
    [Header("보스 등장 턴 수")]
    public float bossTurn = 5f; // 보스가 등장 할 턴 수
+
+   public float GamePoint { get; private set; }
+
    [Header("적 생성 시간")]
    public float createTime = 10f; // 적 생성할 시간
    [Header("보스")]
@@ -33,6 +36,8 @@ public class GameManager : MonoBehaviour
    /// </summary>
    public void InitializeManagers()
    {
+      turn = 0f;
+      GamePoint = 0f;
       EnemyManager.Init();
    }
    /// <summary>
@@ -41,8 +46,14 @@ public class GameManager : MonoBehaviour
    public void BossClear()
    {
       Debug.Log("BossClear");
+      StartCoroutine(UIManager.Instance.BossUIAppears(false,3f));
       bossSpawned = false;
       bossTurn += 5;
+   }
+
+   public void AddPoint(float addPoint)
+   {
+      GamePoint += addPoint;
    }
    public void Update()
    {
@@ -60,7 +71,7 @@ public class GameManager : MonoBehaviour
             else
             {
                EnemyManager.SpawnBoss(bossSpawnPoint);
-               UIManager.Instance.BossUIAppears();
+               StartCoroutine(UIManager.Instance.BossUIAppears(true,0f));
                bossSpawned = true;
                _currentTime = 0f;
             }

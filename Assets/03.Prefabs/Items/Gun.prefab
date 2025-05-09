@@ -643,11 +643,16 @@ MonoBehaviour:
   magazinePosition: {fileID: 5726970863640067974}
   magazine: {fileID: 0}
   maxBullet: 10
+  magazineBullet: 30
   currentBullet: 0
   firePosition: {fileID: 7947388150229826771}
   bulletDistance: 5
   bulletEffect: {fileID: 0}
   bulletEffectPosition: {fileID: 0}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  attackPower: 5
   parentObjectIsRight: 0
 --- !u!135 &5963557140198099140
 SphereCollider:

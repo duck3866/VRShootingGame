@@ -6,9 +6,9 @@ public class EnemyManager : IManagable
 {
     public enum EnemyType
     {
-        Light,
-        Heavy,
-        Champion
+        Light = 1,
+        Heavy = 2,
+        Champion = 3
     }
     // public EnemyAbility[] EnemyAbilities = new EnemyAbility[10];
     private GameObject[] _enemyObjects = new GameObject[5]; // 적 프리팹 리스트
@@ -34,6 +34,7 @@ public class EnemyManager : IManagable
     public void SpawnBoss(GameObject spawnPoint)
     {
         GameObject boss = _bossObjects[Random.Range(0, _bossObjects.Length)];
+        UIManager.Instance.BossNameUpdate(boss.name);
         GameObject.Instantiate(boss);
         boss.transform.position = spawnPoint.transform.position;
     }

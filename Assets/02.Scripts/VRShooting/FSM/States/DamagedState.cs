@@ -12,7 +12,10 @@ public class DamagedState : IState<EnemyControllerCore>
 
     public void OperateEnter()
     {
-        _controllerCore.agent.isStopped = true;
+        if (!_controllerCore.agent.isStopped)
+        {
+            _controllerCore.agent.isStopped = true;
+        }
         _controllerCore.ChangeState(EnemyControllerCore.EnemyState.Attack);
     }
 

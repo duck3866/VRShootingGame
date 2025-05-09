@@ -22,7 +22,10 @@ public class AttackState : IState<EnemyControllerCore>
 
     public void OperateEnter()
     {
-        _controllerCore.agent.isStopped = true;
+        if (!_controllerCore.agent.isStopped)
+        {
+            _controllerCore.agent.isStopped = true;
+        }
         if (!_controllerCore.iHaveGun)
         {
             _controllerCore.AttackDistance = 2.5f;

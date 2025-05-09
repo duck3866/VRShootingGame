@@ -19,14 +19,14 @@ public class Pistol : GunItem
     {
         // int layerMask = 1 << LayerMask.NameToLayer("Default");
         Ray ray = new Ray(firePosition.transform.position, -firePosition.transform.up);
-        if (Physics.Raycast(ray,out RaycastHit hitInfo, bulletDistance))
+        if (Physics.Raycast(ray,out RaycastHit hitInfo, bulletDistance,layerMask,QueryTriggerInteraction.Ignore))
         {
             IDamagable damagable = hitInfo.collider.GetComponentInParent<IDamagable>();
             if (damagable != null)
             {
                 Debug.Log($"플레이어 공격 적중: {hitInfo.collider.gameObject.name}");
                 damagable.HitPoint(hitInfo.point);
-                damagable.TakeDamage(5f);
+                damagable.TakeDamage(attackPower);
             }
             bulletEffect.Stop();
             bulletEffect.Play();

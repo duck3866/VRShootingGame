@@ -25,9 +25,11 @@ public class UIManager : MonoBehaviour
     public GameObject bossStats;
     public Slider bossHpSlider;
     public Slider bossHpEffectSlider;
+    public TextMeshProUGUI  bossNameText;
     [Header("점수 정보 UI")] 
     public GameObject UIGameObject;
     public GameObject pointText;
+    // public GameObject gamePointText;
     public Queue<GameObject> pointQueue = new Queue<GameObject>();
     // private Animator animator;
     public void Awake()
@@ -55,6 +57,8 @@ public class UIManager : MonoBehaviour
         playerStats.transform.localPosition = new Vector3(0, -0.33f, 0.6f);
         bossStats.transform.localPosition = new Vector3(0, 0.1f, 0.3f);
         UIGameObject.transform.localPosition = new Vector3(0, 0, 0.3f); // -0.3f
+        bossNameText.transform.localPosition = new Vector3(0, 1.6f, 0.3f);
+        // gamePointText.transform.localPosition = new Vector3(0, 0.17f, 0.3f);
         pointQueue.Clear();
         bossStats.SetActive(false);
     }
@@ -105,11 +109,20 @@ public class UIManager : MonoBehaviour
         }
     }
     /// <summary>
-    /// 보스 UI를 활성화하는 함수
+    /// 보스 UI를 활성화/비활성화하는 함수
     /// </summary>
-    public void BossUIAppears()
+    public IEnumerator BossUIAppears(bool active, float duration)
     {
-        bossStats.SetActive(true);
+        yield return new WaitForSeconds(duration);
+        bossStats.SetActive(active);
+    }
+    /// <summary>
+    /// 보스 이름 UI를 업데이트 하는 함수
+    /// </summary>
+    /// <param name="text">변경할 이름</param>
+    public void BossNameUpdate(string text)
+    {
+        bossNameText.text = text;
     }
     /// <summary>
     /// 보스 체력 UI를 변경하는 함수

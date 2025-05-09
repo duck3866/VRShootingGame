@@ -275,6 +275,10 @@ MonoBehaviour:
   bulletDistance: 5
   bulletEffect: {fileID: 0}
   bulletEffectPosition: {fileID: 0}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  attackPower: 5
   parentObjectIsRight: 0
 --- !u!135 &7455899974004292001
 SphereCollider:
@@ -3492,7 +3496,7 @@ Transform:
   m_GameObject: {fileID: 5908039312857469038}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.3663354, y: 0.082, z: 8.7647505}
+  m_LocalPosition: {x: -6.8836646, y: 0.082, z: 4.83475}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3551,23 +3555,32 @@ MonoBehaviour:
   iHaveGun: 0
   enemyAnimationEventHandler: {fileID: 0}
   _colliderInfos:
-  - collider: {fileID: 4055376045426640654}
+  - name: Hip
+    collider: {fileID: 4055376045426640654}
     weightDamage: 1
-  - collider: {fileID: 3081265005478243449}
+  - name: Leg
+    collider: {fileID: 3081265005478243449}
     weightDamage: 0.7
-  - collider: {fileID: 7140326921988524833}
+  - name: Leg
+    collider: {fileID: 7140326921988524833}
     weightDamage: 0.7
-  - collider: {fileID: 6535606988640098889}
+  - name: Spine
+    collider: {fileID: 6535606988640098889}
     weightDamage: 1
-  - collider: {fileID: 7359139276327808789}
+  - name: Arm
+    collider: {fileID: 7359139276327808789}
     weightDamage: 0.7
-  - collider: {fileID: 3225169481203126542}
+  - name: Arm
+    collider: {fileID: 3225169481203126542}
     weightDamage: 0.7
-  - collider: {fileID: 7800393884632373767}
+  - name: ForeArm
+    collider: {fileID: 7800393884632373767}
     weightDamage: 0.5
-  - collider: {fileID: 4605947159720653863}
+  - name: ForeArm
+    collider: {fileID: 4605947159720653863}
     weightDamage: 0.5
-  - collider: {fileID: 5012433629300900574}
+  - name: Head
+    collider: {fileID: 5012433629300900574}
     weightDamage: 2
 --- !u!54 &902663924542224385
 Rigidbody:

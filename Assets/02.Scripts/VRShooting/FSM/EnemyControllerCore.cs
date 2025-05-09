@@ -155,11 +155,14 @@ public class EnemyControllerCore : MonoBehaviour, IDamagable
 
     // private float bossHp = 20;
     // private float bossMaxHp = 20;
+    // private float test = 1f;
     private void Update()
     {
         // if (Input.GetMouseButtonDown(0))
         // {
-        //    TakeDamage(5f);
+        //    // TakeDamage(5f);
+        //    UIManager.Instance.AddPointText("+"+test.ToString());
+        //    test += 1;
         // }
         agent.stoppingDistance = AttackDistance;
         if (!isDie)
@@ -187,14 +190,17 @@ public class EnemyControllerCore : MonoBehaviour, IDamagable
     /// <param name="damage">받은 데미지</param>
     public virtual void TakeDamage(float damage)
     {
-        EnemyHp -= (damage * PowerDamage);
-        if (EnemyHp > 0)
+        if (!isDie)
         {
-            StartCoroutine(WaitForDamaged());
-        }
-        else
-        {
-            ChangeState(EnemyState.Die);
+            EnemyHp -= (damage * PowerDamage);
+            if (EnemyHp > 0)
+            {
+                StartCoroutine(WaitForDamaged());
+            }
+            else
+            {
+                ChangeState(EnemyState.Die);
+            } 
         }
     }
     /// <summary>
@@ -203,12 +209,16 @@ public class EnemyControllerCore : MonoBehaviour, IDamagable
     /// <param name="hitPoint">위치 좌표</param>
     public void HitPoint(Vector3 hitPoint)
     {
+        Debug.Log("에ㅔㅔ");
         foreach (var colliderInfo in _colliderInfos)
         {
             if (colliderInfo.collider.bounds.Contains(hitPoint))
             {
                 Debug.Log($"맞은 부위: {colliderInfo.collider.name}, {PowerDamage * colliderInfo.weightDamage}");
                 PowerDamage *= colliderInfo.weightDamage;
+                // int point = (int)enemyAbility.Type;
+                UIManager.Instance.AddPointText($"+적 {colliderInfo.name} 공격 "+ 50f* colliderInfo.weightDamage);
+                GameManager.Instance.AddPoint(50f* colliderInfo.weightDamage);
             }
         }
     }
@@ -257,8 +267,12 @@ public class EnemyControllerCore : MonoBehaviour, IDamagable
                 IDamagable damagable = other.GetComponentInChildren<IDamagable>();
                 if (damagable != null)
                 {
+                    UIManager.Instance.AddPointText($"+적 충돌 {50f}");
+                    GameManager.Instance.AddPoint(50f);
                     damagable.TakeDamage(5f);
                 }
+                UIManager.Instance.AddPointText($"+적 던져짐 {50f}");
+                GameManager.Instance.AddPoint(50f);
                 TakeDamage(5f);
             }
         }
@@ -269,6 +283,8 @@ public class EnemyControllerCore : MonoBehaviour, IDamagable
     public void DieAction()
     {
         isDie = true;
+        UIManager.Instance.AddPointText($"+적 처치 {(int)enemyAbility.Type * 100f}");
+        GameManager.Instance.AddPoint((int)enemyAbility.Type * 100f);
         if (CanInteractablePoint.fixedJoint != null) CanInteractablePoint.fixedJoint.connectedBody = null;
         // CanInteractablePoint.ExitGrabbing();
         CanInteractablePoint.Grabbed = true;

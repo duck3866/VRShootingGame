@@ -14,7 +14,10 @@ public class ChaseState : IState<EnemyControllerCore>
     {
         _controllerCore.enemyAnimationEventHandler.InitParameter();
         _controllerCore.animator.SetTrigger("toRunning");
-        _controllerCore.agent.isStopped = false;
+        if (_controllerCore.agent.isStopped)
+        {
+            _controllerCore.agent.isStopped = false;
+        }
     }
 
     public void OperateUpdate()
@@ -38,6 +41,9 @@ public class ChaseState : IState<EnemyControllerCore>
 
     public void OperateExit()
     {
-        _controllerCore.agent.isStopped = true;
+        if (!_controllerCore.agent.isStopped)
+        {
+            _controllerCore.agent.isStopped = true;
+        }
     }
 }

@@ -21,6 +21,9 @@ public class GunItem : MonoBehaviour, IHandleObject
     
     public ParticleSystem bulletEffect; // Ray가 적중했을때 이펙트
     public Transform bulletEffectPosition; // 파티클 시스템 위치
+    
+    public LayerMask layerMask;
+    public float attackPower;
     [HideInInspector] public bool parentObjectIsRight; // 부모가 오른손인지 여부
     
     protected Animator Animator; // animator

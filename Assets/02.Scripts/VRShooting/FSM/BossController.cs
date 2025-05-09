@@ -32,18 +32,20 @@ public class BossController : EnemyControllerCore
    public override void TakeDamage(float damage)
    {
       // Debug.Log("Boss TakeDamage");
-      
-      UIManager.Instance.BossHpUpdate(EnemyHp - (damage * PowerDamage),EnemyHp,enemyAbility.MaxHp);
-      EnemyHp -= (damage * PowerDamage);
-      
-      if (EnemyHp > 0)
+      if (!isDie)
       {
-         StartCoroutine(WaitForDamaged());
-      }
-      else
-      {
-         GameManager.Instance.BossClear();
-         ChangeState(EnemyState.Die);
+         UIManager.Instance.BossHpUpdate(EnemyHp - (damage * PowerDamage),EnemyHp,enemyAbility.MaxHp);
+         EnemyHp -= (damage * PowerDamage);
+      
+         if (EnemyHp > 0)
+         {
+            StartCoroutine(WaitForDamaged());
+         }
+         else
+         {
+            GameManager.Instance.BossClear();
+            ChangeState(EnemyState.Die);
+         }  
       }
    }
 }
