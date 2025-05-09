@@ -25,6 +25,11 @@ public class UIManager : MonoBehaviour
     public GameObject bossStats;
     public Slider bossHpSlider;
     public Slider bossHpEffectSlider;
+    [Header("점수 정보 UI")] 
+    public GameObject UIGameObject;
+    public GameObject pointText;
+    public Queue<GameObject> pointQueue = new Queue<GameObject>();
+    // private Animator animator;
     public void Awake()
     {
         if (Instance == null)
@@ -49,6 +54,8 @@ public class UIManager : MonoBehaviour
         leftHandInfoText.transform.localPosition = new Vector3(0, -0.3f, 0);
         playerStats.transform.localPosition = new Vector3(0, -0.33f, 0.6f);
         bossStats.transform.localPosition = new Vector3(0, 0.1f, 0.3f);
+        UIGameObject.transform.localPosition = new Vector3(0, 0, 0.3f); // -0.3f
+        pointQueue.Clear();
         bossStats.SetActive(false);
     }
     /// <summary>
@@ -79,6 +86,23 @@ public class UIManager : MonoBehaviour
     {
         leftHandText.text = text;
         leftHandInfoText.text = textInfo;
+    }
+    /// <summary>
+    /// 점수 텍스트를 추가하는 함수
+    /// </summary>
+    /// <param name="text">추가할 텍스트 내용</param>
+    public void AddPointText(string text)
+    {
+        GameObject pointMeshText = Instantiate(pointText.gameObject,UIGameObject.transform);
+        pointMeshText.GetComponentInChildren<TextMeshProUGUI>().text = text;
+        
+        pointQueue.Enqueue(pointMeshText);
+        if (pointQueue.Count > 6)
+        {
+            GameObject temp = pointQueue.Dequeue();
+            // temp.GetComponentInChildren<Animator>().SetTrigger("toDelete");
+            Destroy(temp);
+        }
     }
     /// <summary>
     /// 보스 UI를 활성화하는 함수

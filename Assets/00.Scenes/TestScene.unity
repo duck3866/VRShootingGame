@@ -1030,8 +1030,8 @@ MonoBehaviour:
   - {fileID: 143036884}
   - {fileID: 593364247}
   turn: 0
-  bossTurn: 5
-  createTime: 10
+  bossTurn: 2
+  createTime: 1
   bossSpawned: 0
   bossSpawnPoint: {fileID: 1487345539}
 --- !u!1001 &1772945225
@@ -1086,10 +1086,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5229695221804939793, guid: b0d1f0a0ab9ffc0458bcefe1aac34f69, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 03c572c597d0073438ccba04d6e2a00d, type: 2}
+    - target: {fileID: 5308544276803907270, guid: b0d1f0a0ab9ffc0458bcefe1aac34f69, type: 3}
+      propertyPath: m_Spacing.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5405188683693087924, guid: b0d1f0a0ab9ffc0458bcefe1aac34f69, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
