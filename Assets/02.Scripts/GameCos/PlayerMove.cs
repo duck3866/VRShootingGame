@@ -26,7 +26,7 @@ public class PlayerMove : MonoBehaviour
         
         dir = Camera.main.transform.TransformDirection(dir);
         
-        yVelocity += gravity * Time.deltaTime;
+        yVelocity += gravity * Time.unscaledDeltaTime;
         
         float x = ARAVRInput.GetAxisRight("Horizontal");
         float y = ARAVRInput.GetAxisRight("Vertical");
