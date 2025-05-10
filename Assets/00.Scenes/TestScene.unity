@@ -1030,8 +1030,8 @@ MonoBehaviour:
   - {fileID: 143036884}
   - {fileID: 593364247}
   turn: 0
-  bossTurn: 2
-  createTime: 1
+  bossTurn: 5
+  createTime: 10
   bossSpawned: 0
   bossSpawnPoint: {fileID: 1487345539}
 --- !u!1001 &1772945225
@@ -1045,6 +1045,18 @@ PrefabInstance:
     - target: {fileID: 83321813538198951, guid: b0d1f0a0ab9ffc0458bcefe1aac34f69, type: 3}
       propertyPath: m_Name
       value: Player_Test
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760569054011601132, guid: b0d1f0a0ab9ffc0458bcefe1aac34f69, type: 3}
+      propertyPath: m_text
+      value: BOSS-NAME
+      objectReference: {fileID: 0}
+    - target: {fileID: 3468579931037856394, guid: b0d1f0a0ab9ffc0458bcefe1aac34f69, type: 3}
+      propertyPath: m_fontStyle
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4357566422388518099, guid: b0d1f0a0ab9ffc0458bcefe1aac34f69, type: 3}
+      propertyPath: m_fontStyle
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4442759549745768716, guid: b0d1f0a0ab9ffc0458bcefe1aac34f69, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1101,6 +1113,10 @@ PrefabInstance:
     - target: {fileID: 6616712728711362341, guid: b0d1f0a0ab9ffc0458bcefe1aac34f69, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8308710139745459479, guid: b0d1f0a0ab9ffc0458bcefe1aac34f69, type: 3}
+      propertyPath: m_fontStyle
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

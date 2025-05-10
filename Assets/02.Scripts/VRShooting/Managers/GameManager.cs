@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 {
    public static GameManager Instance; // 싱글톤 객체
    public static readonly EnemyManager EnemyManager = new(); // EnemyManager 클래스
+   public static readonly AudioManager AudioManager = new();
    [Header("적 스폰포인트 리스트")]
    public GameObject[] SpawnPoints = new GameObject[4]; // EnemyManager에 전달할 스폰 포인트 리스트
    [Header("현재 턴 수")]
@@ -39,6 +40,7 @@ public class GameManager : MonoBehaviour
       turn = 0f;
       GamePoint = 0f;
       EnemyManager.Init();
+      AudioManager.Init();
    }
    /// <summary>
    /// 보스 클리어 시 호출되는 함수
