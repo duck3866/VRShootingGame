@@ -60,7 +60,8 @@ public class EnemyControllerCore : MonoBehaviour, IDamagable
     // public event Action OnInteractable;
     private Dictionary<EnemyState, IState<EnemyControllerCore>> _states =
         new Dictionary<EnemyState, IState<EnemyControllerCore>>(); // 적의 상태를 담을 딕셔너리
-   
+
+    protected EnemyAnimationSoundEventHandler _enemyAnimationSoundEventHandler;
   
     // private float _hitDamage;
   
@@ -69,6 +70,7 @@ public class EnemyControllerCore : MonoBehaviour, IDamagable
     {
         IsTharwing = false;
         OriginalMaterials = skinnedMeshRenderer.materials;
+        _enemyAnimationSoundEventHandler = GetComponent<EnemyAnimationSoundEventHandler>();
         enemyAnimationEventHandler = GetComponent<EnemyAnimationEventHandler>();
         CanInteractablePoint = GetComponentInChildren<CanInteractablePoint>();
         agent = GetComponent<NavMeshAgent>();
@@ -209,11 +211,23 @@ public class EnemyControllerCore : MonoBehaviour, IDamagable
     /// <param name="hitPoint">위치 좌표</param>
     public void HitPoint(Vector3 hitPoint)
     {
-        Debug.Log("에ㅔㅔ");
+        // Debug.Log("에ㅔㅔ");
         foreach (var colliderInfo in _colliderInfos)
         {
             if (colliderInfo.collider.bounds.Contains(hitPoint))
             {
+                if (colliderInfo.collider.bounds.Contains(hitPoint) == _colliderInfos[8].collider)
+                {
+                    _enemyAnimationSoundEventHandler.DamageSoundPlay(0);
+                }
+                else if (colliderInfo.collider.bounds.Contains(hitPoint) == _colliderInfos[0].collider)
+                {
+                    _enemyAnimationSoundEventHandler.DamageSoundPlay(1);
+                }
+                else
+                {
+                    _enemyAnimationSoundEventHandler.DamageSoundPlay(2);
+                }
                 Debug.Log($"맞은 부위: {colliderInfo.collider.name}, {PowerDamage * colliderInfo.weightDamage}");
                 PowerDamage *= colliderInfo.weightDamage;
                 // int point = (int)enemyAbility.Type;
@@ -273,6 +287,7 @@ public class EnemyControllerCore : MonoBehaviour, IDamagable
                 }
                 UIManager.Instance.AddPointText($"+적 던져짐 {50f}");
                 GameManager.Instance.AddPoint(50f);
+                _enemyAnimationSoundEventHandler.ThrowingSoundPlay();
                 TakeDamage(5f);
             }
         }
@@ -283,6 +298,7 @@ public class EnemyControllerCore : MonoBehaviour, IDamagable
     public void DieAction()
     {
         isDie = true;
+        _enemyAnimationSoundEventHandler.DieSoundPlay();
         UIManager.Instance.AddPointText($"+적 처치 {(int)enemyAbility.Type * 100f}");
         GameManager.Instance.AddPoint((int)enemyAbility.Type * 100f);
         if (CanInteractablePoint.fixedJoint != null) CanInteractablePoint.fixedJoint.connectedBody = null;

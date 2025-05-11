@@ -178,23 +178,32 @@ MonoBehaviour:
   iHaveGun: 0
   enemyAnimationEventHandler: {fileID: 0}
   _colliderInfos:
-  - collider: {fileID: 4011858109192764150}
+  - name: Hip
+    collider: {fileID: 4011858109192764150}
     weightDamage: 1
-  - collider: {fileID: 2677872137332822401}
+  - name: Leg
+    collider: {fileID: 2677872137332822401}
     weightDamage: 0.7
-  - collider: {fileID: 7853403870330107609}
+  - name: Leg
+    collider: {fileID: 7853403870330107609}
     weightDamage: 0.7
-  - collider: {fileID: 6149752543175567281}
+  - name: Spine
+    collider: {fileID: 6149752543175567281}
     weightDamage: 1
-  - collider: {fileID: 7623334787416593133}
+  - name: Arm
+    collider: {fileID: 7623334787416593133}
     weightDamage: 0.7
-  - collider: {fileID: 2533686252934786294}
+  - name: Arm
+    collider: {fileID: 2533686252934786294}
     weightDamage: 0.7
-  - collider: {fileID: 7182111519152842751}
+  - name: ForeArm
+    collider: {fileID: 7182111519152842751}
     weightDamage: 0.5
-  - collider: {fileID: 3459028666936363487}
+  - name: ForeArm
+    collider: {fileID: 3459028666936363487}
     weightDamage: 0.5
-  - collider: {fileID: 5360639679799443238}
+  - name: Head
+    collider: {fileID: 5360639679799443238}
     weightDamage: 2
 --- !u!136 &7182111519152842751 stripped
 CapsuleCollider:

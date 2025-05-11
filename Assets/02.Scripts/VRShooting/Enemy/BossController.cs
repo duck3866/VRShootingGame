@@ -7,11 +7,13 @@ public class BossController : EnemyControllerCore
    public override void Start()
    {
       IsTharwing = false;
+      _enemyAnimationSoundEventHandler = GetComponent<EnemyAnimationSoundEventHandler>();
       OriginalMaterials = skinnedMeshRenderer.materials;
       enemyAnimationEventHandler = GetComponent<EnemyAnimationEventHandler>();
       CanInteractablePoint = GetComponentInChildren<CanInteractablePoint>();
       agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
       animator = GetComponent<Animator>();
+      
 
       // fixedJoint = GetComponent<FixedJoint>();
       if (enemyAbility != null)

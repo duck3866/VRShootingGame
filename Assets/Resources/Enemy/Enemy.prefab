@@ -280,6 +280,13 @@ MonoBehaviour:
     m_Bits: 64
   attackPower: 5
   parentObjectIsRight: 0
+  fireSound: {fileID: 8300000, guid: cee1c2e016d9e904dbad3746bd22928f, type: 3}
+  misFireSound: {fileID: 8300000, guid: 2f88185fe58c1a147bda009839415637, type: 3}
+  reloadSound: {fileID: 8300000, guid: cbbfc5618cd4eb041901536bd70beae8, type: 3}
+  fireSoundVolume: 0
+  misFireSoundVolume: 0
+  reloadSoundVolume: 0
+  isReloading: 0
 --- !u!135 &7455899974004292001
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -3480,6 +3487,7 @@ GameObject:
   - component: {fileID: 9092681017142388929}
   - component: {fileID: 5797171612023913649}
   - component: {fileID: 7146534210835405546}
+  - component: {fileID: 1879007350804779075}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Enemy
@@ -3496,7 +3504,7 @@ Transform:
   m_GameObject: {fileID: 5908039312857469038}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.3663354, y: 0.082, z: 8.7647505}
+  m_LocalPosition: {x: 6.456335, y: 0.082, z: 0.3647499}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3686,6 +3694,35 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &1879007350804779075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5908039312857469038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a78e50fd0f5db3d488366ff203a03fe8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shootingSound: {fileID: 8300000, guid: cee1c2e016d9e904dbad3746bd22928f, type: 3}
+  shootingVolume: 0.5
+  attackSound: {fileID: 8300000, guid: 216f976c3f4b9774f9cecd43af5a382c, type: 3}
+  attackVolume: 0
+  footstepSound: {fileID: 8300000, guid: 40bed6e30acd5c0429360f337b0f0aba, type: 3}
+  footstepVolume: 0.3
+  throwingSound: {fileID: 8300000, guid: 3cd407511859f8847a8411eee507440f, type: 3}
+  throwingVolume: 1
+  dieSound: {fileID: 8300000, guid: 741dd58e61b238741b585283ca2d0ae4, type: 3}
+  dieSoundVolume: 0.5
+  damageSound:
+  - {fileID: 8300000, guid: 8fd5b029d32edae4c9d1b51fd2f6c1c4, type: 3}
+  - {fileID: 8300000, guid: 32ef29a1fabf04c47861386c2dbf978d, type: 3}
+  - {fileID: 8300000, guid: 917df85aa8c10274db1bec9b0ddc4293, type: 3}
+  damageSoundVolume: 1
+  damageVoiceSound: {fileID: 0}
+  damageVoiceSoundVolume: 0.5
 --- !u!1 &5991267708542224403
 GameObject:
   m_ObjectHideFlags: 0

@@ -24,6 +24,10 @@ public class GameManager : MonoBehaviour
    public bool bossSpawned = false; // 보스가 소환됐는지 여부 
    public GameObject bossSpawnPoint;
    private float _currentTime = 0f; // 현재 생성 누적 시간
+   [SerializeField,Header("BGM")]
+   private AudioClip bgmClip;
+   private AudioSource _bgmSource;
+   [SerializeField] private float audioVolume;
    public void Awake()
    {
       if (Instance == null)
@@ -37,10 +41,15 @@ public class GameManager : MonoBehaviour
    /// </summary>
    public void InitializeManagers()
    {
+      _bgmSource = GetComponent<AudioSource>();
+      
       turn = 0f;
       GamePoint = 0f;
       EnemyManager.Init();
       AudioManager.Init();
+      AudioManager.SetBGMSource(_bgmSource);
+      AudioManager.SetBGMVolumeRatio(audioVolume);
+      AudioManager.PlayBackgroundMusic(bgmClip);
    }
    /// <summary>
    /// 보스 클리어 시 호출되는 함수
