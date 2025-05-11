@@ -163,10 +163,13 @@ public class GunItem : MonoBehaviour, IHandleObject
                     magazine.transform.localScale = new Vector3(1, 1, 1);
                     magazineBullet = 30f;
                     currentBullet = maxBullet; // 최대탄창 초기화
-                    GameManager.AudioManager.PlaySoundEffect(reloadSound,transform.position, reloadSoundVolume);
-                    if (parentObjectIsRight) UIManager.Instance.RightHandInfoUpdate(gameObject.name,$"BUlLET: {currentBullet}/{magazineBullet}");
-                    else UIManager.Instance.LeftHandInfoUpdate(gameObject.name,$"BUlLET: {currentBullet}/{magazineBullet}");
-                } 
+                    GameManager.AudioManager.PlaySoundEffect(reloadSound, transform.position, reloadSoundVolume);
+                    if (gameObject.transform.root.CompareTag("Player"))
+                    {
+                        if (parentObjectIsRight) UIManager.Instance.RightHandInfoUpdate(gameObject.name, $"BUlLET: {currentBullet}/{magazineBullet}");
+                        else UIManager.Instance.LeftHandInfoUpdate(gameObject.name, $"BUlLET: {currentBullet}/{magazineBullet}");
+                    }
+                }
             }
         }
     }
