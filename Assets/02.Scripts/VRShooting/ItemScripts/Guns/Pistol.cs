@@ -34,9 +34,10 @@ public class Pistol : GunItem
             bulletEffectPosition.forward = hitInfo.normal;
             // Debug.Log(hitInfo.collider.gameObject.name);
         }
+        GameManager.AudioManager.PlaySoundEffect(fireSound, firePosition.transform.position, fireSoundVolume);
         currentBullet--;
-        if (parentObjectIsRight) UIManager.Instance.RightHandInfoUpdate(gameObject.name,$"BUlLET: {currentBullet}/{maxBullet}");
-        else UIManager.Instance.LeftHandInfoUpdate(gameObject.name,$"BUlLET: {currentBullet}/{maxBullet}");
+        if (parentObjectIsRight) UIManager.Instance.RightHandInfoUpdate(gameObject.name,$"BUlLET: {currentBullet}/{magazineBullet}");
+        else UIManager.Instance.LeftHandInfoUpdate(gameObject.name,$"BUlLET: {currentBullet}/{magazineBullet}");
         Debug.Log("총 상태: 총알발사");
     }
     public override void InputButtonEvent()

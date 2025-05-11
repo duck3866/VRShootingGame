@@ -25,7 +25,16 @@ public class GunItem : MonoBehaviour, IHandleObject
     public LayerMask layerMask;
     public float attackPower;
     [HideInInspector] public bool parentObjectIsRight; // 부모가 오른손인지 여부
-    
+    [Header("총기 사운드")]
+    [SerializeField] protected AudioClip fireSound;
+    [SerializeField] protected AudioClip misFireSound;
+    [SerializeField] protected AudioClip reloadSound;
+    [Header("총기 사운드 볼륨")]
+    [SerializeField] [Range(0, 1)] protected float fireSoundVolume;
+    [SerializeField] [Range(0, 1)] protected float misFireSoundVolume;
+    [SerializeField] [Range(0, 1)] protected float reloadSoundVolume;
+    // [SerializeField] protected bool isShooting = false;
+    [SerializeField] protected bool isReloading = false;
     protected Animator Animator; // animator
     protected LineRenderer LaserSite; // lineRenderer
     public bool Grabbed { get; set; } // 잡혔는지 여부
@@ -46,6 +55,9 @@ public class GunItem : MonoBehaviour, IHandleObject
     
     public void EnterGrabbing(GameObject grabbingTransform)
     {
+        Debug.Log("잡힘 초기화");
+        // isShooting = false;
+        isReloading = false;
         transform.SetParent(grabbingTransform.transform);
         // grabbingTransform.transform.SetParent(this.transform);
         Grabbed = true;
@@ -67,9 +79,21 @@ public class GunItem : MonoBehaviour, IHandleObject
     public virtual void ItemUse()
     {
         Animator.SetTrigger("isFire");
-        if (currentBullet > 0)
+        if (currentBullet > 0 && !isReloading)
         {
             Fire();
+        }
+        else if(currentBullet < 1)
+        {
+            if (magazine != null && !isReloading)
+            {
+                if (magazineBullet >= maxBullet)
+                {
+                    StartCoroutine(Reload());
+                    return;
+                }
+            }
+            GameManager.AudioManager.PlaySoundEffect(misFireSound, firePosition.transform.position, misFireSoundVolume);
         }
     }
 
@@ -99,6 +123,21 @@ public class GunItem : MonoBehaviour, IHandleObject
     {
       
     }
+    public virtual IEnumerator Reload()
+    {
+        isReloading = true;
+        Animator.SetTrigger("isReload");
+        GameManager.AudioManager.PlaySoundEffect(reloadSound,transform.position, reloadSoundVolume);
+        yield return new WaitForSecondsRealtime(2f);
+        currentBullet = maxBullet;
+        magazineBullet -= maxBullet;
+        if (Grabbed)
+        {
+            if (parentObjectIsRight) UIManager.Instance.RightHandInfoUpdate(gameObject.name,$"BUlLET: {currentBullet}/{magazineBullet}");
+            else UIManager.Instance.LeftHandInfoUpdate(gameObject.name,$"BUlLET: {currentBullet}/{magazineBullet}");
+        }
+        isReloading = false;
+    }
 
     public virtual void ThrowAwayMagazine()
     {
@@ -122,19 +161,14 @@ public class GunItem : MonoBehaviour, IHandleObject
                     magazine.transform.localPosition = Vector3.zero;
                     magazine.transform.localRotation = Quaternion.identity;
                     magazine.transform.localScale = new Vector3(1, 1, 1);
-                    ReloadBullet();
-                    if (parentObjectIsRight) UIManager.Instance.RightHandInfoUpdate(gameObject.name,$"BUlLET: {currentBullet}/{maxBullet}");
-                    else UIManager.Instance.LeftHandInfoUpdate(gameObject.name,$"BUlLET: {currentBullet}/{maxBullet}");
+                    currentBullet = maxBullet; // 최대탄창 초기화
+                    GameManager.AudioManager.PlaySoundEffect(reloadSound,transform.position, reloadSoundVolume);
+                    if (parentObjectIsRight) UIManager.Instance.RightHandInfoUpdate(gameObject.name,$"BUlLET: {currentBullet}/{magazineBullet}");
+                    else UIManager.Instance.LeftHandInfoUpdate(gameObject.name,$"BUlLET: {currentBullet}/{magazineBullet}");
                 } 
             }
         }
     }
-    
-    public virtual void ReloadBullet()
-    {
-        currentBullet = maxBullet;
-    }
-
     public void DrawLine()
     {
         LaserSite.SetPosition(0,firePosition.transform.position);
@@ -153,4 +187,24 @@ public class GunItem : MonoBehaviour, IHandleObject
             return firePosition.transform.position + (-firePosition.transform.up * bulletDistance);
         }
     }
+
+    // public void StartShooting()
+    // {
+    //     isShooting = true;
+    // }
+    //
+    // public void EndShooting()
+    // {
+    //     isShooting = false;
+    // }
+    //
+    // public void StartReloading()
+    // {
+    //     isReloading = true;
+    // }
+    //
+    // public void EndReloading()
+    // {
+    //     isReloading = false;
+    // }
 }
