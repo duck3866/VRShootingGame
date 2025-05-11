@@ -50,4 +50,26 @@ public class BossController : EnemyControllerCore
          }  
       }
    }
+   public override void OnTriggerEnter(Collider other)
+       {
+           // Debug.Log($"뭔가 닿았는데 이거 뭐임: {other.gameObject.name}");
+           if (IsTharwing)
+           {
+               // Debug.Log("바닥");
+               if (other.CompareTag("Ground") || other.CompareTag("Enemy"))
+               {
+                   IDamagable damagable = other.GetComponentInChildren<IDamagable>();
+                   if (damagable != null)
+                   {
+                       UIManager.Instance.AddPointText($"+적 충돌 {50f}");
+                       GameManager.Instance.AddPoint(50f);
+                       damagable.TakeDamage(10f);
+                   }
+                   UIManager.Instance.AddPointText($"+적 던져짐 {50f}");
+                   GameManager.Instance.AddPoint(50f);
+                   _enemyAnimationSoundEventHandler.ThrowingSoundPlay();
+                   TakeDamage(5f);
+               }
+           }
+       }
 }

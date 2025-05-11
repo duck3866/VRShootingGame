@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class EnemyAnimationEventHandler : MonoBehaviour
 {
-    public bool isDamaged = false;
-    public bool isAttacking = false;
-    public bool isReloading = false;
+    [HideInInspector] public bool isDamaged = false;
+    [HideInInspector] public bool isAttacking = false;
+    [HideInInspector] public bool isReloading = false;
     private Collider[] _colliders = new Collider[10];
     [SerializeField] private LayerMask layerMask;
     private EnemyControllerCore _enemyControllerCore;

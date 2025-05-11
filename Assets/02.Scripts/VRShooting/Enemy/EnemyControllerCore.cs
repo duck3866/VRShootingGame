@@ -61,6 +61,7 @@ public class EnemyControllerCore : MonoBehaviour, IDamagable
     private Dictionary<EnemyState, IState<EnemyControllerCore>> _states =
         new Dictionary<EnemyState, IState<EnemyControllerCore>>(); // 적의 상태를 담을 딕셔너리
 
+    private EnemyUI _enemyUI;
     protected EnemyAnimationSoundEventHandler _enemyAnimationSoundEventHandler;
   
     // private float _hitDamage;
@@ -70,6 +71,7 @@ public class EnemyControllerCore : MonoBehaviour, IDamagable
     {
         IsTharwing = false;
         OriginalMaterials = skinnedMeshRenderer.materials;
+        _enemyUI = GetComponentInChildren<EnemyUI>();
         _enemyAnimationSoundEventHandler = GetComponent<EnemyAnimationSoundEventHandler>();
         enemyAnimationEventHandler = GetComponent<EnemyAnimationEventHandler>();
         CanInteractablePoint = GetComponentInChildren<CanInteractablePoint>();
@@ -194,6 +196,7 @@ public class EnemyControllerCore : MonoBehaviour, IDamagable
     {
         if (!isDie)
         {
+            StartCoroutine(_enemyUI.EnemyHpEffect( EnemyHp - (damage * PowerDamage),EnemyHp,enemyAbility.MaxHp));
             EnemyHp -= (damage * PowerDamage);
             if (EnemyHp > 0)
             {
@@ -216,11 +219,11 @@ public class EnemyControllerCore : MonoBehaviour, IDamagable
         {
             if (colliderInfo.collider.bounds.Contains(hitPoint))
             {
-                if (colliderInfo.collider.bounds.Contains(hitPoint) == _colliderInfos[8].collider)
+                if (colliderInfo.name == "Head")
                 {
                     _enemyAnimationSoundEventHandler.DamageSoundPlay(0);
                 }
-                else if (colliderInfo.collider.bounds.Contains(hitPoint) == _colliderInfos[0].collider)
+                else if (colliderInfo.name == "Spine")
                 {
                     _enemyAnimationSoundEventHandler.DamageSoundPlay(1);
                 }
@@ -270,7 +273,7 @@ public class EnemyControllerCore : MonoBehaviour, IDamagable
         bullet.SetActive(true);
     }
     
-    public void OnTriggerEnter(Collider other)
+    public virtual void OnTriggerEnter(Collider other)
     {
         // Debug.Log($"뭔가 닿았는데 이거 뭐임: {other.gameObject.name}");
         if (IsTharwing)

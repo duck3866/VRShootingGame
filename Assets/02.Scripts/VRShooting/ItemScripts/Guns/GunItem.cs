@@ -161,6 +161,7 @@ public class GunItem : MonoBehaviour, IHandleObject
                     magazine.transform.localPosition = Vector3.zero;
                     magazine.transform.localRotation = Quaternion.identity;
                     magazine.transform.localScale = new Vector3(1, 1, 1);
+                    magazineBullet = 30f;
                     currentBullet = maxBullet; // 최대탄창 초기화
                     GameManager.AudioManager.PlaySoundEffect(reloadSound,transform.position, reloadSoundVolume);
                     if (parentObjectIsRight) UIManager.Instance.RightHandInfoUpdate(gameObject.name,$"BUlLET: {currentBullet}/{magazineBullet}");

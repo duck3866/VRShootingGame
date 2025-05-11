@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6562778334551815917}
   - component: {fileID: 1302491886069687020}
   - component: {fileID: 8554028560277660610}
+  - component: {fileID: 3423441940893955500}
   m_Layer: 0
   m_Name: Grenade
   m_TagString: Item
@@ -154,3 +155,29 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 192
+  bombCountSound: {fileID: 8300000, guid: afbcab54470656a47b38c344a04d74e1, type: 3}
+  bombCountSoundVolume: 1
+  bombEffectSound: {fileID: 8300000, guid: f6a7ce765736c88488f22add304690e5, type: 3}
+  bombEffectSoundSoundVolume: 1
+  bombEffect: {fileID: 100002, guid: 6ecf76dc4f268d340b2666896a954bcc, type: 3}
+--- !u!95 &3423441940893955500
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3272065676067048717}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3c954cd6204e0e54f9143543ff2c339c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

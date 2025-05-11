@@ -14,6 +14,11 @@ public class Grenade : MonoBehaviour, IHandleObject
     [SerializeField] private float detonationTime;
     [SerializeField] private float detonationRadius;
     [SerializeField] private LayerMask layerMask;
+    [SerializeField] private AudioClip bombCountSound;
+    [SerializeField][Range(0,1)] private float bombCountSoundVolume;
+    [SerializeField] private AudioClip bombEffectSound;
+    [SerializeField][Range(0,1)] private float bombEffectSoundSoundVolume;
+    [SerializeField] private GameObject bombEffect;
     private bool _isBomb;
     private bool isDetonated;
     private Material _material;
@@ -21,9 +26,11 @@ public class Grenade : MonoBehaviour, IHandleObject
     private Rigidbody _rigidbody;
     private Vector3 prevPos;
     private Quaternion prevRot;
+    private Animator _animator;
 
     private void Start()
     {
+        _animator = GetComponent<Animator>();
         _isBomb = false;
         isDetonated = false;
         _material = GetComponent<Renderer>().material;
@@ -97,9 +104,12 @@ public class Grenade : MonoBehaviour, IHandleObject
 
     private IEnumerator Detonation()
     {
+        _animator.SetTrigger("isBomb");
+        GameManager.AudioManager.PlaySoundEffect(bombCountSound,transform.position, bombCountSoundVolume);
         isDetonated = true;
         yield return new WaitForSeconds(detonationTime);
         isDetonated = false;
+        GameManager.AudioManager.PlaySoundEffect(bombEffectSound,transform.position,bombEffectSoundSoundVolume);
         Collider[] colliders = Physics.OverlapSphere(transform.position, detonationRadius, layerMask);
         foreach (Collider collider in colliders)
         {
@@ -118,10 +128,18 @@ public class Grenade : MonoBehaviour, IHandleObject
             }
         }
         _isBomb = true;
+        GameObject effect = Instantiate(bombEffect);
+        effect.transform.position = transform.position;
         ExitGrabbing();
         Debug.Log("펑! 대소고 터지는 소리");
+        StartCoroutine(DestroyObject());
     }
 
+    private IEnumerator DestroyObject()
+    {
+        yield return new WaitForSecondsRealtime(2f);
+        Destroy(gameObject);
+    }
     public void OnDrawGizmos()
     {
         Gizmos.color = Color.red;

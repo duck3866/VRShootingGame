@@ -635,6 +635,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 8167852718788612603, guid: 1fb843aefa2e8694b8ddf29f0eb4d437, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8167852718788612603, guid: 1fb843aefa2e8694b8ddf29f0eb4d437, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -691,10 +699,6 @@ PrefabInstance:
     - target: {fileID: 1010602246803687200, guid: 91080e4b100d7f949936249facb9d6a6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5774681114931241425, guid: 91080e4b100d7f949936249facb9d6a6, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1031,8 +1035,8 @@ MonoBehaviour:
   - {fileID: 143036884}
   - {fileID: 593364247}
   turn: 0
-  bossTurn: 1
-  createTime: 1
+  bossTurn: 10
+  createTime: 10
   bossSpawned: 0
   bossSpawnPoint: {fileID: 1487345539}
   bgmClip: {fileID: 8300000, guid: 5698f1d04efa4410c9ad2d42fbaa4725, type: 3}
@@ -1145,18 +1149,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player_Test
       objectReference: {fileID: 0}
-    - target: {fileID: 2760569054011601132, guid: b0d1f0a0ab9ffc0458bcefe1aac34f69, type: 3}
-      propertyPath: m_text
-      value: BOSS-NAME
-      objectReference: {fileID: 0}
-    - target: {fileID: 3468579931037856394, guid: b0d1f0a0ab9ffc0458bcefe1aac34f69, type: 3}
-      propertyPath: m_fontStyle
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4357566422388518099, guid: b0d1f0a0ab9ffc0458bcefe1aac34f69, type: 3}
-      propertyPath: m_fontStyle
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 4442759549745768716, guid: b0d1f0a0ab9ffc0458bcefe1aac34f69, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1212,10 +1204,6 @@ PrefabInstance:
     - target: {fileID: 6616712728711362341, guid: b0d1f0a0ab9ffc0458bcefe1aac34f69, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8308710139745459479, guid: b0d1f0a0ab9ffc0458bcefe1aac34f69, type: 3}
-      propertyPath: m_fontStyle
-      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
