@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
    public float turn = 0f; // 현재 턴 수
    [Header("보스 등장 턴 수")]
    public float bossTurn = 5f; // 보스가 등장 할 턴 수
-
+   // public bool timeStop = false;
    public float GamePoint { get; private set; }
 
    [Header("적 생성 시간")]
@@ -92,6 +92,18 @@ public class GameManager : MonoBehaviour
          {
             _currentTime += Time.deltaTime;
          }
+      }
+   }
+
+   public void TimeStop(bool timeStop)
+   {
+      if (timeStop)
+      {
+         Time.timeScale = 0.1f;
+      }
+      else
+      {
+         Time.timeScale = 1f;
       }
    }
 }

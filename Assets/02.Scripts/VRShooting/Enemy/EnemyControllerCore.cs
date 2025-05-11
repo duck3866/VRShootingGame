@@ -332,5 +332,6 @@ public class EnemyControllerCore : MonoBehaviour, IDamagable
         }
 
         skinnedMeshRenderer.materials = hitMaterials;
+        StartCoroutine(_enemyUI.DieUIAction());
     }
 }

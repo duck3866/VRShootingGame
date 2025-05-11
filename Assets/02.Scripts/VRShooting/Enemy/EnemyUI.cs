@@ -31,6 +31,12 @@ public class EnemyUI : MonoBehaviour
     {
         Aiming();
     }
+
+    public IEnumerator DieUIAction()
+    {
+        yield return new WaitForSecondsRealtime(3f);
+        gameObject.SetActive(false);
+    }
     private void Aiming()
     {
         Vector3 targetPosition = (enemyControllerCore.player.transform.position - enemyControllerCore.transform.position);

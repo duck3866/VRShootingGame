@@ -10,9 +10,10 @@ public class HandPosition : MonoBehaviour
     [SerializeField] private bool grabbingObject = false; // 잡고 있는지 여부
     [SerializeField] private GameObject grabObject; // 잡은 오브젝트
     private Animator animator;
-
+    private bool _timeStop = false;
     private void Start()
     {
+        _timeStop = false;
         animator  = GetComponent<Animator>();
     }
 
@@ -99,6 +100,15 @@ public class HandPosition : MonoBehaviour
                 {
                     hand.InputButtonEvent();
                 }
+            }
+        }
+        if (ARAVRInput.GetDown(ARAVRInput.Button.Two, ARAVRInput.Controller.RTouch))
+        {
+            if (isRightHand)
+            {
+                Debug.Log("시간 멈춤");
+                GameManager.Instance.TimeStop(_timeStop);
+                _timeStop = !_timeStop;
             }
         }
         // 물건 사용함

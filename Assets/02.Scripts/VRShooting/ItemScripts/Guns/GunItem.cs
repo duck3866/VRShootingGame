@@ -188,24 +188,5 @@ public class GunItem : MonoBehaviour, IHandleObject
             return firePosition.transform.position + (-firePosition.transform.up * bulletDistance);
         }
     }
-
-    // public void StartShooting()
-    // {
-    //     isShooting = true;
-    // }
-    //
-    // public void EndShooting()
-    // {
-    //     isShooting = false;
-    // }
-    //
-    // public void StartReloading()
-    // {
-    //     isReloading = true;
-    // }
-    //
-    // public void EndReloading()
-    // {
-    //     isReloading = false;
-    // }
+    
 }
