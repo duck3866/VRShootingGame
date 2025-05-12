@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5791288741613333676}
   - component: {fileID: 5251868319798556720}
   - component: {fileID: 4318670667711357606}
+  - component: {fileID: 1798176490020944214}
   m_Layer: 7
   m_Name: Player_Test
   m_TagString: Player
@@ -93,6 +94,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHp: 20
+--- !u!114 &1798176490020944214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 83321813538198951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10cd681e0644a274f88fba9db26f80f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VRIKObject: {fileID: 9177084141238089495, guid: 3bec542f00927444fbab7bf1795e00d8, type: 3}
+  RightHand: {fileID: 6239777459769339220}
+  LeftHand: {fileID: 6940237623236814843}
+  trailDuration: 2
+  trailActive: 1
+  meshRefreshRate: 0.1
+  meshDestroyDelay: 1
+  mat: {fileID: 2100000, guid: c9a021a5f5ced244eaf8f86b457c204a, type: 2}
 --- !u!1 &762621451619174937
 GameObject:
   m_ObjectHideFlags: 0
@@ -2999,6 +3020,10 @@ PrefabInstance:
     - target: {fileID: 400004, guid: 126d619cf4daa52469682f85c1378b4a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2037080, guid: 126d619cf4daa52469682f85c1378b4a, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 247
       objectReference: {fileID: 0}
     - target: {fileID: 1054112583220142, guid: 126d619cf4daa52469682f85c1378b4a, type: 3}
       propertyPath: m_Layer

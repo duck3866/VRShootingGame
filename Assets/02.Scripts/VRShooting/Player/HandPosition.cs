@@ -15,6 +15,8 @@ public class HandPosition : MonoBehaviour
     {
         _timeStop = false;
         animator  = GetComponent<Animator>();
+        // UIManager.Instance.LeftHandInfoUpdate("Null","");
+        // UIManager.Instance.RightHandInfoUpdate("Null","");
     }
 
     private void LateUpdate()
@@ -40,6 +42,7 @@ public class HandPosition : MonoBehaviour
             {
                 if (hand.IsCanGrab())
                 {
+                    Debug.Log($"물건 집었음 {other.gameObject.name}");
                     animator.SetTrigger("toUse");
                     // grabObject = other.gameObject.transform.root.gameObject;
                     grabObject = other.gameObject;

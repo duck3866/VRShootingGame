@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
    public float turn = 0f; // 현재 턴 수
    [Header("보스 등장 턴 수")]
    public float bossTurn = 5f; // 보스가 등장 할 턴 수
-   // public bool timeStop = false;
+   public bool timeStop = false;
    public float GamePoint { get; private set; }
 
    [Header("적 생성 시간")]
@@ -28,6 +28,9 @@ public class GameManager : MonoBehaviour
    private AudioClip bgmClip;
    private AudioSource _bgmSource;
    [SerializeField] private float audioVolume;
+   
+   public event Action TimeStopStartEvent;
+   public event Action TimeStopEndEvent;
    public void Awake()
    {
       if (Instance == null)
@@ -95,15 +98,32 @@ public class GameManager : MonoBehaviour
       }
    }
 
-   public void TimeStop(bool timeStop)
+   public void TimeStop(bool timeValue)
    {
-      if (timeStop)
+      if (timeValue)
       {
          Time.timeScale = 0.1f;
+         timeStop = true;
+         TimeStopStartEvent?.Invoke();
       }
       else
       {
          Time.timeScale = 1f;
+         timeStop = false;
+         TimeStopEndEvent?.Invoke();
       }
+   }
+
+   public void AddEvent(Action eventArgs,bool timeValue)
+   {
+      if (timeValue)
+      {
+         TimeStopStartEvent += eventArgs;
+      }
+      else
+      {
+         TimeStopEndEvent += eventArgs;
+      }
+      
    }
 }
