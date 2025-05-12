@@ -16,6 +16,10 @@ public class AudioManager : IManagable
         
     }
 
+    public void SetBGMPitch(float pitch)
+    {
+        _bgmSource.pitch = pitch;
+    }
     public void SetBGMVolumeRatio(float volume)
     {
         if (volume < 0 || volume > 100f)

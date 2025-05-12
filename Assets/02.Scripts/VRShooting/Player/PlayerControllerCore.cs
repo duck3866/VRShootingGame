@@ -54,14 +54,14 @@ public class PlayerControllerCore : MonoBehaviour
             }   
         }
 
-        // if (Input.GetMouseButtonDown(0))
-        // {
-        //     GameManager.Instance.TimeStop(true);
-        // }
-        // if (Input.GetMouseButtonDown(1))
-        // {
-        //     GameManager.Instance.TimeStop(false);
-        // }
+        if (Input.GetMouseButtonDown(0))
+        {
+            GameManager.Instance.TimeStop(true);
+        }
+        if (Input.GetMouseButtonDown(1))
+        {
+            GameManager.Instance.TimeStop(false);
+        }
     }
 
     private IEnumerator SpawnVRIK()
@@ -75,6 +75,8 @@ public class PlayerControllerCore : MonoBehaviour
         
         SkinnedMeshRenderer[] skinnedMeshRenderers = _spawnedVRIK.GetComponentsInChildren<SkinnedMeshRenderer>();
         _skinnedRenderer = skinnedMeshRenderers[1];
+        Renderer[] materials = _spawnedVRIK.GetComponentsInChildren<Renderer>();
+        mat = materials[1].material;
         GameManager.Instance.AddEvent(StartTimeStop,true);
         GameManager.Instance.AddEvent(EndTimeStop,false);
         //
@@ -148,7 +150,13 @@ public class PlayerControllerCore : MonoBehaviour
             // 렌더러 및 머티리얼 적용
             MeshRenderer mr = ghost.AddComponent<MeshRenderer>();
             Material ghostMat = new Material(mat);
+            ghostMat.color = GetNextGhostColor();
+            ghostColorStep = (ghostColorStep + 1) % 300;
+            // Renderer[] materials = _spawnedVRIK.GetComponentsInChildren<Renderer>();
+            // mat = materials[1].material;
             mr.material = ghostMat;
+            // mat = _skinnedRenderer.material;
+            // mr.material = new Material(mat);
             ghostGameObjects.Enqueue(ghost);
             // 페이드 아웃 및 제거 코루틴 시작
             // StartCoroutine(FadeAndDestroy(ghost, ghostMat));
@@ -167,7 +175,25 @@ public class PlayerControllerCore : MonoBehaviour
             yield return null;
             // yield return new WaitForSecondsRealtime(0.001f);
         }
-        
+    }
+
+    private int ghostColorStep = 0;
+
+    private Color GetNextGhostColor()
+    {
+        float t = (ghostColorStep % 100) / 100f;
+        if (ghostColorStep < 100)
+        {
+            return Color.Lerp(Color.green, Color.cyan, t);
+        }
+        else if (ghostColorStep < 200)
+        {
+            return Color.Lerp(Color.blue, Color.red, t);
+        }
+        else
+        {
+            return Color.Lerp(Color.red, Color.green, t);
+        }
     }
     private IEnumerator FadeAndDestroy(GameObject obj, Material mat)
     {

@@ -17,8 +17,15 @@ public class PlayerStats : MonoBehaviour, IDamagable
         Debug.Log("TakeDamage");
         PlayerHp -= damage;
         UIManager.Instance.PlayerHPUpdate(PlayerHp, maxHp);
+        UIManager.Instance.EffectUIUpdate(true,true);
+        StartCoroutine(WaitForDamage());
     }
 
+    private IEnumerator WaitForDamage()
+    {
+        yield return new WaitForSecondsRealtime(1f);
+        UIManager.Instance.EffectUIUpdate(false,true);
+    }
     public void HitPoint(Vector3 hitPoint)
     {
         

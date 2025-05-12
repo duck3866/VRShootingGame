@@ -31,6 +31,13 @@ public class UIManager : MonoBehaviour
     public GameObject pointText;
     // public GameObject gamePointText;
     public Queue<GameObject> pointQueue = new Queue<GameObject>();
+    
+    [Header("이펙트UI")]
+    public Image effectUI;
+
+    public Color timeStopColor;
+
+    public Color hitColor;
     // private Animator animator;
     public void Awake()
     {
@@ -58,10 +65,19 @@ public class UIManager : MonoBehaviour
         bossStats.transform.localPosition = new Vector3(0, 0.1f, 0.3f);
         UIGameObject.transform.localPosition = new Vector3(0, 0, 0.3f); // -0.3f
         bossNameText.transform.localPosition = new Vector3(0, 1.6f, 0.3f);
+        effectUI.transform.localPosition = new Vector3(0, 0, 0.3f);
+        effectUI.gameObject.SetActive(false);
         // gamePointText.transform.localPosition = new Vector3(0, 0.17f, 0.3f);
         pointQueue.Clear();
         bossStats.SetActive(false);
     }
+
+    public void EffectUIUpdate(bool active,bool isHit)
+    {
+        effectUI.color = isHit ? hitColor : timeStopColor;
+        effectUI.gameObject.SetActive(active);
+    }
+    
     /// <summary>
     /// 플레이어 체력 UI 변경 함수
     /// </summary>

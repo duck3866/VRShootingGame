@@ -4722,7 +4722,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 1b309223ac4ff1047abbac6457f6981e, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4789,7 +4788,7 @@ GameObject:
   - component: {fileID: 8259830}
   m_Layer: 13
   m_Name: Stone_BulletImpact
-  m_TagString: Untagged
+  m_TagString: BulletImpact
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4802,7 +4801,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 100002}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.22219582, y: 0.7366625, z: 0.5706977, w: -0.28681266}
+  m_LocalRotation: {x: -0.222195, y: -0.7366645, z: -0.57069504, w: 0.2868137}
   m_LocalPosition: {x: 10.085015, y: 2.7567456, z: 40.374813}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
@@ -4810,7 +4809,7 @@ Transform:
   - {fileID: 400004}
   - {fileID: 400000}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -75.53, y: -137.454, z: 0}
 --- !u!198 &19800002
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -9527,7 +9526,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 79dcc0eb893b3d04bab22896772cc5b9, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -14425,7 +14423,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: e889572110a25764ebd51c6a6308e624, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

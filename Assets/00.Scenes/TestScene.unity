@@ -240,10 +240,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stone_BulletImpact
       objectReference: {fileID: 0}
-    - target: {fileID: 100002, guid: 54dd9cb5740188a488b8baebbf19207c, type: 3}
-      propertyPath: m_TagString
-      value: BulletImpact
-      objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 54dd9cb5740188a488b8baebbf19207c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10.085015
@@ -283,18 +279,6 @@ PrefabInstance:
     - target: {fileID: 400002, guid: 54dd9cb5740188a488b8baebbf19207c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 19900000, guid: 54dd9cb5740188a488b8baebbf19207c, type: 3}
-      propertyPath: m_Materials.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 19900002, guid: 54dd9cb5740188a488b8baebbf19207c, type: 3}
-      propertyPath: m_Materials.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 19900004, guid: 54dd9cb5740188a488b8baebbf19207c, type: 3}
-      propertyPath: m_Materials.Array.size
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1149,10 +1133,6 @@ PrefabInstance:
     - target: {fileID: 83321813538198951, guid: b0d1f0a0ab9ffc0458bcefe1aac34f69, type: 3}
       propertyPath: m_Name
       value: Player_Test
-      objectReference: {fileID: 0}
-    - target: {fileID: 1798176490020944214, guid: b0d1f0a0ab9ffc0458bcefe1aac34f69, type: 3}
-      propertyPath: meshRefreshRate
-      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4442759549745768716, guid: b0d1f0a0ab9ffc0458bcefe1aac34f69, type: 3}
       propertyPath: m_LocalPosition.x
