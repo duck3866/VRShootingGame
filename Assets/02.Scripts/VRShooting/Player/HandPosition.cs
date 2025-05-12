@@ -6,34 +6,65 @@ using UnityEngine;
 public class HandPosition : MonoBehaviour
 {
     [SerializeField] private bool isRightHand = true; // 오른쪽 손인지 여부
+
     // [SerializeField] private Vector3 offset; 
     [SerializeField] private bool grabbingObject = false; // 잡고 있는지 여부
     [SerializeField] private GameObject grabObject; // 잡은 오브젝트
+
+    private float maxTimeStopValue = 3f;
+    private float TimeStopValue = 0f;
     private Animator animator;
     private bool _timeStop = false;
+    private bool isReloading = false;
     private void Start()
     {
+        TimeStopValue = maxTimeStopValue;
         _timeStop = false;
-        animator  = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
         // UIManager.Instance.LeftHandInfoUpdate("Null","");
         // UIManager.Instance.RightHandInfoUpdate("Null","");
+        if (isRightHand)
+        {
+            GameManager.Instance.TimeStopStartEvent += TimeStopStart;
+            GameManager.Instance.TimeStopEndEvent += TimeStopEnd;
+        }
+        
     }
-
+    
     private void LateUpdate()
     {
+        SliderBarUpdate();
         OnClickHand();
         if (isRightHand)
         {
             transform.position = ARAVRInput.RHandPosition;
             transform.rotation = ARAVRInput.GetRHandRotation();
         }
-        else
+        else 
         {
             transform.position = ARAVRInput.LHandPosition;
             transform.rotation = ARAVRInput.GetLHandRotation();
         }
     }
-    
+
+    private void SliderBarUpdate()
+    {
+        if (TimeStopValue < 0 && !isReloading)
+        {
+            _timeStop = !_timeStop;
+            GameManager.Instance.TimeStop(_timeStop);
+            isReloading = true;
+        }
+        else if (_timeStop)
+        {
+            TimeStopValue -= Time.unscaledDeltaTime;
+        }
+        else if (TimeStopValue <= maxTimeStopValue)
+        {
+            TimeStopValue += Time.deltaTime;
+        }
+        UIManager.Instance.EffectSliderUpdate(TimeStopValue,maxTimeStopValue);
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (!grabbingObject)
@@ -49,8 +80,8 @@ public class HandPosition : MonoBehaviour
                     // grabObject.transform.SetParent(transform);
                     grabbingObject = true;
                     hand.EnterGrabbing(gameObject);
-                    if(isRightHand) UIManager.Instance.RightHandInfoUpdate(other.gameObject.name,"");
-                    else UIManager.Instance.LeftHandInfoUpdate(other.gameObject.name,"");
+                    if (isRightHand) UIManager.Instance.RightHandInfoUpdate(other.gameObject.name, "");
+                    else UIManager.Instance.LeftHandInfoUpdate(other.gameObject.name, "");
                 }
             }
         }
@@ -86,6 +117,7 @@ public class HandPosition : MonoBehaviour
                 ThrowAwayObject(false);
             }
         }
+
         if (ARAVRInput.GetDown(ARAVRInput.Button.One, ARAVRInput.Controller.RTouch))
         {
             if (grabObject != null)
@@ -93,7 +125,7 @@ public class HandPosition : MonoBehaviour
                 ThrowAwayObject(true);
             }
         }
-        
+
         if (ARAVRInput.GetDown(ARAVRInput.Button.Two, ARAVRInput.Controller.LTouch))
         {
             Debug.Log("오브젝트 InputButtonEvent 호출" + $" {gameObject.name}");
@@ -105,15 +137,20 @@ public class HandPosition : MonoBehaviour
                 }
             }
         }
+
         if (ARAVRInput.GetDown(ARAVRInput.Button.Two, ARAVRInput.Controller.RTouch))
         {
             if (isRightHand)
             {
-                Debug.Log("시간 멈춤");
-                GameManager.Instance.TimeStop(_timeStop);
-                _timeStop = !_timeStop;
+                if (TimeStopValue > 0)
+                {
+                    _timeStop = !_timeStop;
+                    GameManager.Instance.TimeStop(_timeStop);
+                    isReloading = false;  
+                }
             }
         }
+
         // 물건 사용함
         if (isRightHand)
         {
@@ -164,5 +201,15 @@ public class HandPosition : MonoBehaviour
                 else UIManager.Instance.LeftHandInfoUpdate("Null", "");
             }
         }
+    }
+
+    private void TimeStopStart()
+    {
+       
+    }
+
+    private void TimeStopEnd()
+    {
+        
     }
 }

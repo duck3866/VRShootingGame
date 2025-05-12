@@ -29,15 +29,20 @@ public class UIManager : MonoBehaviour
     [Header("점수 정보 UI")] 
     public GameObject UIGameObject;
     public GameObject pointText;
-    // public GameObject gamePointText;
+   
     public Queue<GameObject> pointQueue = new Queue<GameObject>();
     
     [Header("이펙트UI")]
+    // public GameObject EffectSlider;
+    // public Slider EffectSliderBar;
     public Image effectUI;
-
     public Color timeStopColor;
-
     public Color hitColor;
+
+    [Header("GameOver UI")] 
+    public GameObject gameOverUI;
+    public TextMeshProUGUI  gameOverText;
+    public Slider timeValueSlider;
     // private Animator animator;
     public void Awake()
     {
@@ -50,6 +55,10 @@ public class UIManager : MonoBehaviour
             Destroy(gameObject);
         }
         transform.localPosition = Vector3.zero;
+    }
+
+    public void Start()
+    {
         Init();
     }
     /// <summary>
@@ -66,16 +75,34 @@ public class UIManager : MonoBehaviour
         UIGameObject.transform.localPosition = new Vector3(0, 0, 0.3f); // -0.3f
         bossNameText.transform.localPosition = new Vector3(0, 1.6f, 0.3f);
         effectUI.transform.localPosition = new Vector3(0, 0, 0.3f);
+        
         effectUI.gameObject.SetActive(false);
-        // gamePointText.transform.localPosition = new Vector3(0, 0.17f, 0.3f);
+        gameOverUI.gameObject.SetActive(false);
+       
         pointQueue.Clear();
         bossStats.SetActive(false);
+        timeValueSlider.transform.localPosition = new Vector3(-0.05f, -0.2f, 0.3f);
+        
+        GameManager.Instance.GameOverEvent += GameOverUIUpdate;
     }
 
+    public void EffectSliderUpdate(float value, float maxValue)
+    {
+        timeValueSlider.value = value/maxValue;
+    }
     public void EffectUIUpdate(bool active,bool isHit)
     {
         effectUI.color = isHit ? hitColor : timeStopColor;
         effectUI.gameObject.SetActive(active);
+    }
+    
+    public void GameOverUIUpdate()
+    {
+        gameOverUI.gameObject.SetActive(true);
+        Transform player = GameObject.FindGameObjectWithTag("Player").transform;
+        gameOverUI.transform.position = new Vector3(player.position.x,3f, player.position.z);
+        GameInfo gameInfo = GameManager.Instance.ReturnGamePoint();
+        gameOverText.text = $"Game Over \n게임 점수: {gameInfo.GamePoint}\n처치한 적의 수: {gameInfo.EnemyCount}\n 처치한 보스의 수: {gameInfo.BossCount}"; 
     }
     
     /// <summary>

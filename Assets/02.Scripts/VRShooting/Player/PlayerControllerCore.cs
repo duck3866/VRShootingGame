@@ -56,12 +56,13 @@ public class PlayerControllerCore : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            GameManager.Instance.TimeStop(true);
+            GameManager.Instance.PlayerGameOver();
+            // GameManager.Instance.TimeStop(true);
         }
-        if (Input.GetMouseButtonDown(1))
-        {
-            GameManager.Instance.TimeStop(false);
-        }
+        // if (Input.GetMouseButtonDown(1))
+        // {
+        //     GameManager.Instance.TimeStop(false);
+        // }
     }
 
     private IEnumerator SpawnVRIK()
@@ -135,7 +136,7 @@ public class PlayerControllerCore : MonoBehaviour
         {
             // 고스트 메시 생성
             GameObject ghost = new GameObject("GhostMesh");
-            ghost.transform.position = _spawnedVRIK.transform.position + (-gameObject.transform.forward * 0.5f);
+            ghost.transform.position = _spawnedVRIK.transform.position + (-gameObject.transform.forward * 0.2f);
             ghost.transform.rotation = _spawnedVRIK.transform.rotation;
             ghost.transform.localScale = _spawnedVRIK.transform.localScale;
             

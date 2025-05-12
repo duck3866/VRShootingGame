@@ -28,9 +28,14 @@ public class GameManager : MonoBehaviour
    private AudioClip bgmClip;
    private AudioSource _bgmSource;
    [SerializeField] private float audioVolume;
-   
+   public bool GameOver { get; private set; }
+   [Header("GameOver Sound")]
+   public AudioClip gameOverBGM;
+   public event Action GameOverEvent;
    public event Action TimeStopStartEvent;
    public event Action TimeStopEndEvent;
+
+   public GameInfo GameInfo;
    public void Awake()
    {
       if (Instance == null)
@@ -38,7 +43,15 @@ public class GameManager : MonoBehaviour
          Instance = this;
       }
       InitializeManagers();
+      GameInfo = new GameInfo();
    }
+
+   // public void OnEnable()
+   // {
+   //    InitializeManagers();
+   //    GameInfo = new GameInfo();
+   // }
+
    /// <summary>
    /// 매니저들 초기화 함수
    /// </summary>
@@ -60,6 +73,7 @@ public class GameManager : MonoBehaviour
    public void BossClear()
    {
       Debug.Log("BossClear");
+      EnemyManager.DieEnemy(true);
       StartCoroutine(UIManager.Instance.BossUIAppears(false,3f));
       bossSpawned = false;
       bossTurn += 5;
@@ -71,50 +85,56 @@ public class GameManager : MonoBehaviour
    }
    public void Update()
    {
-      if (!bossSpawned)
+      if (!GameOver)
       {
-         if (_currentTime >= createTime)
+         if (!bossSpawned)
          {
-            if (turn < bossTurn)
+            if (_currentTime >= createTime)
             {
-               GameObject SpawnPoint = SpawnPoints[Random.Range(0, SpawnPoints.Length)];
-               EnemyManager.SpawnEnemy(SpawnPoint);
-               turn += 1;
-               _currentTime = 0f;
+               if (turn < bossTurn)
+               {
+                  GameObject SpawnPoint = SpawnPoints[Random.Range(0, SpawnPoints.Length)];
+                  EnemyManager.SpawnEnemy(SpawnPoint);
+                  turn += 1;
+                  _currentTime = 0f;
+               }
+               else
+               {
+                  EnemyManager.SpawnBoss(bossSpawnPoint);
+                  StartCoroutine(UIManager.Instance.BossUIAppears(true, 0f));
+                  bossSpawned = true;
+                  _currentTime = 0f;
+               }
+
             }
             else
             {
-               EnemyManager.SpawnBoss(bossSpawnPoint);
-               StartCoroutine(UIManager.Instance.BossUIAppears(true,0f));
-               bossSpawned = true;
-               _currentTime = 0f;
+               _currentTime += Time.deltaTime;
             }
-         
-         }
-         else
-         {
-            _currentTime += Time.deltaTime;
          }
       }
    }
 
    public void TimeStop(bool timeValue)
    {
-      if (timeValue)
+      if (!GameOver)
       {
-         Time.timeScale = 0.1f;
-         timeStop = true;
-         TimeStopStartEvent?.Invoke();
-         UIManager.Instance.EffectUIUpdate(true,false);
-         AudioManager.SetBGMPitch(0.5f);
-      }
-      else
-      {
-         Time.timeScale = 1f;
-         timeStop = false;
-         TimeStopEndEvent?.Invoke();
-         UIManager.Instance.EffectUIUpdate(false,false);
-         AudioManager.SetBGMPitch(1f);
+         if (timeValue)
+         {
+            Time.timeScale = 0.1f;
+            timeStop = true;
+            TimeStopStartEvent?.Invoke();
+            UIManager.Instance.EffectUIUpdate(true, false);
+            AudioManager.SetBGMPitch(0.5f);
+         }
+         else
+         {
+            Time.timeScale = 1f;
+            timeStop = false;
+            TimeStopEndEvent?.Invoke();
+            UIManager.Instance.EffectUIUpdate(false, false);
+            AudioManager.SetBGMPitch(1f);
+         }
       }
    }
 
@@ -130,4 +150,40 @@ public class GameManager : MonoBehaviour
       }
       
    }
+
+   public void PlayerGameOver()
+   {
+      GameOver = true;
+      GameOverEvent?.Invoke();
+      StartCoroutine(UIManager.Instance.BossUIAppears(false, 0));
+      AudioManager.SetBGMState(true);
+      AudioManager.PlaySoundEffect(gameOverBGM,transform.position,2.5f);
+      GameObject[] enemyObjects = GameObject.FindGameObjectsWithTag("Enemy");
+      foreach (GameObject enemy in enemyObjects)
+      {
+         Destroy(enemy);
+      }
+   }
+
+   public GameInfo ReturnGamePoint()
+   {
+      if (GameInfo != null)
+      {
+         GameInfo.EnemyCount = EnemyManager.enemyCount;
+         GameInfo.BossCount = EnemyManager.bossCount;
+         GameInfo.GamePoint = this.GamePoint;
+      }
+      else
+      {
+         GameInfo = new GameInfo();
+      }
+      return GameInfo;
+   }
+}
+
+public class GameInfo
+{
+   public float GamePoint;
+   public float EnemyCount;
+   public float BossCount;
 }

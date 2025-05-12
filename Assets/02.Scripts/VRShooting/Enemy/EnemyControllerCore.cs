@@ -303,6 +303,7 @@ public class EnemyControllerCore : MonoBehaviour, IDamagable
         isDie = true;
         _enemyAnimationSoundEventHandler.DieSoundPlay();
         UIManager.Instance.AddPointText($"+적 처치 {(int)enemyAbility.Type * 100f}");
+        GameManager.EnemyManager.DieEnemy(false);
         GameManager.Instance.AddPoint((int)enemyAbility.Type * 100f);
         if (CanInteractablePoint.fixedJoint != null) CanInteractablePoint.fixedJoint.connectedBody = null;
         // CanInteractablePoint.ExitGrabbing();
