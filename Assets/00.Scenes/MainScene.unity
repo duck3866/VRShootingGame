@@ -19005,6 +19005,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grenade
       objectReference: {fileID: 0}
+    - target: {fileID: 8554028560277660610, guid: 7a216a42ebb15494c87a7fb9df417c9f, type: 3}
+      propertyPath: throwPower
+      value: 1500
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

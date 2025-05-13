@@ -102,7 +102,7 @@ public class UIManager : MonoBehaviour
         Transform player = GameObject.FindGameObjectWithTag("Player").transform;
         gameOverUI.transform.position = new Vector3(player.position.x,3f, player.position.z);
         GameInfo gameInfo = GameManager.Instance.ReturnGamePoint();
-        gameOverText.text = $"Game Over \n게임 점수: {gameInfo.GamePoint}\n처치한 적의 수: {gameInfo.EnemyCount}\n 처치한 보스의 수: {gameInfo.BossCount}"; 
+        gameOverText.text = $"Game Over \n게임 점수: {gameInfo.GamePoint}\n처치한 적의 수: {gameInfo.EnemyCount}\n처치한 보스의 수: {gameInfo.BossCount}"; 
     }
     
     /// <summary>

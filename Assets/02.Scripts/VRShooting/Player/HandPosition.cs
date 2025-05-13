@@ -10,7 +10,7 @@ public class HandPosition : MonoBehaviour
     // [SerializeField] private Vector3 offset; 
     [SerializeField] private bool grabbingObject = false; // 잡고 있는지 여부
     [SerializeField] private GameObject grabObject; // 잡은 오브젝트
-
+    // private bool isTryGabbing = false;
     private float maxTimeStopValue = 3f;
     private float TimeStopValue = 0f;
     private Animator animator;

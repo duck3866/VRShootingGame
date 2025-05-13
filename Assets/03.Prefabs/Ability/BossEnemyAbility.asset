@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MoveSpeed: 4
   MaxHp: 30
-  AttackDistance: 2.5
+  AttackDistance: 8
   Type: 2
