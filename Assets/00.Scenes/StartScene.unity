@@ -2408,6 +2408,16 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 10, y: 2.220446e-16, z: 10}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!198 &960835384 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 19800002, guid: 54dd9cb5740188a488b8baebbf19207c, type: 3}
+  m_PrefabInstance: {fileID: 345142423}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &960835385 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400002, guid: 54dd9cb5740188a488b8baebbf19207c, type: 3}
+  m_PrefabInstance: {fileID: 345142423}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &999694684
 GameObject:
   m_ObjectHideFlags: 0
@@ -3374,9 +3384,21 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4116458462382022186, guid: ab74a7d23809912479086bfc815d08a5, type: 3}
+      propertyPath: bulletEffect
+      value: 
+      objectReference: {fileID: 960835384}
+    - target: {fileID: 4116458462382022186, guid: ab74a7d23809912479086bfc815d08a5, type: 3}
       propertyPath: bulletDistance
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 4116458462382022186, guid: ab74a7d23809912479086bfc815d08a5, type: 3}
+      propertyPath: layerMask.m_Bits
+      value: 65
+      objectReference: {fileID: 0}
+    - target: {fileID: 4116458462382022186, guid: ab74a7d23809912479086bfc815d08a5, type: 3}
+      propertyPath: bulletEffectPosition
+      value: 
+      objectReference: {fileID: 960835385}
     - target: {fileID: 5379214880225644692, guid: ab74a7d23809912479086bfc815d08a5, type: 3}
       propertyPath: m_LocalPosition.x
       value: -17.08

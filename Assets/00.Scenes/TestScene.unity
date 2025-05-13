@@ -559,6 +559,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player_Test
       objectReference: {fileID: 0}
+    - target: {fileID: 1333827828516884919, guid: b0d1f0a0ab9ffc0458bcefe1aac34f69, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1333827828516884919, guid: b0d1f0a0ab9ffc0458bcefe1aac34f69, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4442759549745768716, guid: b0d1f0a0ab9ffc0458bcefe1aac34f69, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.58

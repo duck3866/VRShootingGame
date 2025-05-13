@@ -651,7 +651,7 @@ MonoBehaviour:
   bulletEffectPosition: {fileID: 0}
   layerMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 65
   attackPower: 5
   parentObjectIsRight: 0
   fireSound: {fileID: 8300000, guid: cee1c2e016d9e904dbad3746bd22928f, type: 3}
@@ -660,6 +660,7 @@ MonoBehaviour:
   fireSoundVolume: 0.5
   misFireSoundVolume: 0.5
   reloadSoundVolume: 0.5
+  isReloading: 0
 --- !u!135 &5963557140198099140
 SphereCollider:
   m_ObjectHideFlags: 0
