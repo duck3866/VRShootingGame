@@ -32,7 +32,7 @@ public class Pistol : GunItem
             bulletEffect.Play();
             bulletEffectPosition.position = hitInfo.point;
             bulletEffectPosition.forward = hitInfo.normal;
-            // Debug.Log(hitInfo.collider.gameObject.name);
+            // Debug.Log($"wow {hitInfo.collider.gameObject.name}");
         }
         GameManager.AudioManager.PlaySoundEffect(fireSound, firePosition.transform.position, fireSoundVolume);
         currentBullet--;

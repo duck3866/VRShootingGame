@@ -72,6 +72,7 @@ public class PlayerControllerCore : MonoBehaviour
         // VRIK 생성
         _spawnedVRIK = Instantiate(VRIKObject, transform);
         _spawnedVRIK.transform.localPosition = new Vector3(0f, -1f, -0.3f);
+        _spawnedVRIK.transform.forward = transform.forward;
         animator = _spawnedVRIK.GetComponent<Animator>();
         
         SkinnedMeshRenderer[] skinnedMeshRenderers = _spawnedVRIK.GetComponentsInChildren<SkinnedMeshRenderer>();

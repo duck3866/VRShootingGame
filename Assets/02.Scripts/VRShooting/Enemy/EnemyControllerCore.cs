@@ -214,28 +214,31 @@ public class EnemyControllerCore : MonoBehaviour, IDamagable
     /// <param name="hitPoint">위치 좌표</param>
     public void HitPoint(Vector3 hitPoint)
     {
-        // Debug.Log("에ㅔㅔ");
-        foreach (var colliderInfo in _colliderInfos)
+        if (!isDie)
         {
-            if (colliderInfo.collider.bounds.Contains(hitPoint))
+            foreach (var colliderInfo in _colliderInfos)
             {
-                if (colliderInfo.name == "Head")
+                if (colliderInfo.collider.bounds.Contains(hitPoint))
                 {
-                    _enemyAnimationSoundEventHandler.DamageSoundPlay(0);
+                    if (colliderInfo.name == "Head")
+                    {
+                        _enemyAnimationSoundEventHandler.DamageSoundPlay(0);
+                    }
+                    else if (colliderInfo.name == "Spine")
+                    {
+                        _enemyAnimationSoundEventHandler.DamageSoundPlay(1);
+                    }
+                    else
+                    {
+                        _enemyAnimationSoundEventHandler.DamageSoundPlay(2);
+                    }
+
+                    Debug.Log($"맞은 부위: {colliderInfo.collider.name}, {PowerDamage * colliderInfo.weightDamage}");
+                    PowerDamage *= colliderInfo.weightDamage;
+                    // int point = (int)enemyAbility.Type;
+                    UIManager.Instance.AddPointText($"+적 {colliderInfo.name} 공격 " + 50f * colliderInfo.weightDamage);
+                    GameManager.Instance.AddPoint(50f * colliderInfo.weightDamage);
                 }
-                else if (colliderInfo.name == "Spine")
-                {
-                    _enemyAnimationSoundEventHandler.DamageSoundPlay(1);
-                }
-                else
-                {
-                    _enemyAnimationSoundEventHandler.DamageSoundPlay(2);
-                }
-                Debug.Log($"맞은 부위: {colliderInfo.collider.name}, {PowerDamage * colliderInfo.weightDamage}");
-                PowerDamage *= colliderInfo.weightDamage;
-                // int point = (int)enemyAbility.Type;
-                UIManager.Instance.AddPointText($"+적 {colliderInfo.name} 공격 "+ 50f* colliderInfo.weightDamage);
-                GameManager.Instance.AddPoint(50f* colliderInfo.weightDamage);
             }
         }
     }

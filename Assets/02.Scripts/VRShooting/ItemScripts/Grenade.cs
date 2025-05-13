@@ -70,14 +70,30 @@ public class Grenade : MonoBehaviour, IHandleObject
 
     private IEnumerator ExitGrabbingAction()
     {
-        _rigidbody.useGravity = true;
         _rigidbody.isKinematic = false;
-        
-        Vector3 throwDirection = (ARAVRInput.RHandPosition - prevPos);
-        Quaternion deltaRotation = ARAVRInput.RHand.rotation * Quaternion.Inverse(prevRot);
-        
-        _rigidbody.AddForce(throwDirection * throwPower, ForceMode.Force);
+        _rigidbody.useGravity = true;
 
+        Vector3 throwDirection = new Vector3();
+        if (parentObjectIsRight)
+        {
+            throwDirection = ARAVRInput.RHandPosition - prevPos;
+        }
+        else
+        {
+            throwDirection = ARAVRInput.LHandPosition - prevPos;
+        }
+
+        Quaternion deltaRotation = new Quaternion();
+        if (parentObjectIsRight)
+        {
+            deltaRotation = ARAVRInput.RHand.rotation * Quaternion.Inverse(prevRot);
+        }
+        else
+        {
+            deltaRotation = ARAVRInput.LHand.rotation * Quaternion.Inverse(prevRot);
+        }
+        _rigidbody.AddForce(throwDirection * throwPower, ForceMode.Force);
+  
         float angle;
         Vector3 axis;
         deltaRotation.ToAngleAxis(out angle, out axis);

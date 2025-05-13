@@ -89,8 +89,14 @@ public class CanInteractablePoint : MonoBehaviour, IHandleObject
     {
         if (fixedJoint != null) fixedJoint.connectedBody = null;
         // if (parentJoint != null) parentJoint.connectedBody = null;
-
-        StartCoroutine(ExitGrabbingAction((ARAVRInput.RHandPosition - prevPos)));
+        if (parentObjectIsRight)
+        {
+            StartCoroutine(ExitGrabbingAction((ARAVRInput.RHandPosition - prevPos)));
+        }
+        else
+        {
+            StartCoroutine(ExitGrabbingAction((ARAVRInput.LHandPosition - prevPos)));
+        }
     }
 
     public IEnumerator ExitGrabbingAction(Vector3 throwDirection)
@@ -117,8 +123,15 @@ public class CanInteractablePoint : MonoBehaviour, IHandleObject
             rigidbody.useGravity = true;
             
             // Vector3 throwDirection = (ARAVRInput.RHandPosition - prevPos);
-            Quaternion deltaRotation = ARAVRInput.RHand.rotation * Quaternion.Inverse(prevRot);
-
+            Quaternion deltaRotation = new Quaternion();
+            if (parentObjectIsRight)
+            {
+                deltaRotation = ARAVRInput.RHand.rotation * Quaternion.Inverse(prevRot);
+            }
+            else
+            {
+                deltaRotation = ARAVRInput.LHand.rotation * Quaternion.Inverse(prevRot);
+            }
             rigidbody.AddForce(throwDirection * throwPower, ForceMode.Force);
 
             float angle;
