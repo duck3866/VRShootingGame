@@ -658,8 +658,8 @@ MonoBehaviour:
   misFireSound: {fileID: 8300000, guid: 2f88185fe58c1a147bda009839415637, type: 3}
   reloadSound: {fileID: 8300000, guid: cbbfc5618cd4eb041901536bd70beae8, type: 3}
   fireSoundVolume: 0.5
-  misFireSoundVolume: 0.5
-  reloadSoundVolume: 0.5
+  misFireSoundVolume: 1
+  reloadSoundVolume: 1
   isReloading: 0
 --- !u!135 &5963557140198099140
 SphereCollider:

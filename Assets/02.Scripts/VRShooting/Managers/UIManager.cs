@@ -31,10 +31,11 @@ public class UIManager : MonoBehaviour
     public GameObject pointText;
    
     public Queue<GameObject> pointQueue = new Queue<GameObject>();
-    
+
     [Header("이펙트UI")]
     // public GameObject EffectSlider;
     // public Slider EffectSliderBar;
+    public Image playerImage;
     public Image effectUI;
     public Color timeStopColor;
     public Color hitColor;
@@ -75,7 +76,7 @@ public class UIManager : MonoBehaviour
         UIGameObject.transform.localPosition = new Vector3(0, 0, 0.3f); // -0.3f
         bossNameText.transform.localPosition = new Vector3(0, 1.6f, 0.3f);
         effectUI.transform.localPosition = new Vector3(0, 0, 0.3f);
-        
+        playerImage.transform.localPosition = new Vector3(0, -0.04f, 0.15f);
         effectUI.gameObject.SetActive(false);
         gameOverUI.gameObject.SetActive(false);
        
