@@ -7,7 +7,8 @@ using UnityEngine.SceneManagement;
 
 public class GameOverUI : MonoBehaviour, IDamagable
 {
-    [SerializeField] private Collider[] colliders;
+    [SerializeField] private Collider[] colliders = new Collider[2];
+    [SerializeField] private Material[] materials =  new Material[2];
 
     public void TakeDamage(float damage)
     {
@@ -29,18 +30,26 @@ public class GameOverUI : MonoBehaviour, IDamagable
                 {
                     EndGame();
                 }
+
+                ChangeColor(collider.gameObject);
             }
         }
     }
 
-    public void ReStartGame()
+    private void ReStartGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(1);
     }
 
     public void EndGame()
     {
-        Debug.Log("종료");
         Application.Quit();
+    }
+    private IEnumerator ChangeColor(GameObject button)
+    {
+        Material Material = button.GetComponent<Renderer>().material;
+        Material.color = materials[0].color;
+        yield return new WaitForSecondsRealtime(0.5f);
+        Material.color = materials[1].color;
     }
 }   

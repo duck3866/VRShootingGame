@@ -81,7 +81,7 @@ public class UIManager : MonoBehaviour
        
         pointQueue.Clear();
         bossStats.SetActive(false);
-        timeValueSlider.transform.localPosition = new Vector3(-0.05f, -0.2f, 0.3f);
+        timeValueSlider.transform.localPosition = new Vector3(-0.05f, -0.16f, 0.3f);
         
         GameManager.Instance.GameOverEvent += GameOverUIUpdate;
     }

@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
    public event Action TimeStopStartEvent;
    public event Action TimeStopEndEvent;
 
+   [Header("테스트 씬")] public bool isTest;
    public GameInfo GameInfo;
    public void Awake()
    {
@@ -44,14 +45,7 @@ public class GameManager : MonoBehaviour
       }
       InitializeManagers();
       GameInfo = new GameInfo();
-   }
-
-   // public void OnEnable()
-   // {
-   //    InitializeManagers();
-   //    GameInfo = new GameInfo();
-   // }
-
+   } 
    /// <summary>
    /// 매니저들 초기화 함수
    /// </summary>
@@ -85,31 +79,33 @@ public class GameManager : MonoBehaviour
    }
    public void Update()
    {
-      if (!GameOver)
+      if (!isTest)
       {
-         if (!bossSpawned)
+         if (!GameOver)
          {
-            if (_currentTime >= createTime)
+            if (!bossSpawned)
             {
-               if (turn < bossTurn)
+               if (_currentTime >= createTime)
                {
-                  GameObject SpawnPoint = SpawnPoints[Random.Range(0, SpawnPoints.Length)];
-                  EnemyManager.SpawnEnemy(SpawnPoint);
-                  turn += 1;
-                  _currentTime = 0f;
+                  if (turn < bossTurn)
+                  {
+                     GameObject SpawnPoint = SpawnPoints[Random.Range(0, SpawnPoints.Length)];
+                     EnemyManager.SpawnEnemy(SpawnPoint);
+                     turn += 1;
+                     _currentTime = 0f;
+                  }
+                  else
+                  {
+                     EnemyManager.SpawnBoss(bossSpawnPoint);
+                     StartCoroutine(UIManager.Instance.BossUIAppears(true, 0f));
+                     bossSpawned = true;
+                     _currentTime = 0f;
+                  }
                }
                else
                {
-                  EnemyManager.SpawnBoss(bossSpawnPoint);
-                  StartCoroutine(UIManager.Instance.BossUIAppears(true, 0f));
-                  bossSpawned = true;
-                  _currentTime = 0f;
+                  _currentTime += Time.deltaTime;
                }
-
-            }
-            else
-            {
-               _currentTime += Time.deltaTime;
             }
          }
       }

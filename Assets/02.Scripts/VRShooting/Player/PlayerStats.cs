@@ -16,6 +16,10 @@ public class PlayerStats : MonoBehaviour, IDamagable
     {
         Debug.Log("TakeDamage");
         PlayerHp -= damage;
+        if (PlayerHp <= 0)
+        {
+            GameManager.Instance.PlayerGameOver();
+        }
         UIManager.Instance.PlayerHPUpdate(PlayerHp, maxHp);
         UIManager.Instance.EffectUIUpdate(true,true);
         StartCoroutine(WaitForDamage());

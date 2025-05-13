@@ -10981,6 +10981,9 @@ MonoBehaviour:
   colliders:
   - {fileID: 1534352165}
   - {fileID: 842012315}
+  materials:
+  - {fileID: 2100000, guid: a1d887998cd3d3d48b74d08de8fe899a, type: 2}
+  - {fileID: 2100000, guid: 8f5a330cb43b40345b36aa8b24c0a7c4, type: 2}
 --- !u!65 &981933181
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17471,7 +17474,7 @@ Transform:
   m_GameObject: {fileID: 1125575901}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -22.8, y: 0, z: -35.1}
+  m_LocalPosition: {x: -80.9, y: 0, z: -53.2}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -20762,11 +20765,11 @@ PrefabInstance:
       objectReference: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
     - target: {fileID: 1132282297134417991, guid: adb59f87fe1ddbe43b5e8d8e3b5bba43, type: 3}
       propertyPath: bossTurn
-      value: 3
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1132282297134417991, guid: adb59f87fe1ddbe43b5e8d8e3b5bba43, type: 3}
       propertyPath: createTime
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1132282297134417991, guid: adb59f87fe1ddbe43b5e8d8e3b5bba43, type: 3}
       propertyPath: SpawnPoints.Array.size
@@ -20835,6 +20838,14 @@ PrefabInstance:
     - target: {fileID: 5283746388305121480, guid: adb59f87fe1ddbe43b5e8d8e3b5bba43, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5746597843783505174, guid: adb59f87fe1ddbe43b5e8d8e3b5bba43, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -75.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5746597843783505174, guid: adb59f87fe1ddbe43b5e8d8e3b5bba43, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -36.7
       objectReference: {fileID: 0}
     - target: {fileID: 7714818469921151444, guid: adb59f87fe1ddbe43b5e8d8e3b5bba43, type: 3}
       propertyPath: m_Icon
