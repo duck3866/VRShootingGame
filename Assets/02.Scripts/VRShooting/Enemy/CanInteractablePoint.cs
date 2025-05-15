@@ -18,7 +18,8 @@ public class CanInteractablePoint : MonoBehaviour, IHandleObject
     
     private Vector3 prevPos; // 처음 잡혔을때 위치
     private Quaternion prevRot; // 처음 잡혔을때 각도
-    
+
+    [field : SerializeField]
     public bool Grabbed { get; set; }
 
     // public event Action OnInteractableStart;
