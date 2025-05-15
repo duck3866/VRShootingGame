@@ -24,7 +24,8 @@ public class GunItem : MonoBehaviour, IHandleObject
     
     public LayerMask layerMask;
     public float attackPower;
-    [HideInInspector] public bool parentObjectIsRight; // 부모가 오른손인지 여부
+    // [HideInInspector]
+    public bool parentObjectIsRight { get; set; } // 부모가 오른손인지 여부
     [Header("총기 사운드")]
     [SerializeField] protected AudioClip fireSound;
     [SerializeField] protected AudioClip misFireSound;
@@ -37,6 +38,8 @@ public class GunItem : MonoBehaviour, IHandleObject
     [SerializeField] protected bool isReloading = false;
     protected Animator Animator; // animator
     protected LineRenderer LaserSite; // lineRenderer
+    
+    [field : SerializeField]
     public bool Grabbed { get; set; } // 잡혔는지 여부
 
     private void Start()
@@ -56,17 +59,33 @@ public class GunItem : MonoBehaviour, IHandleObject
     public void EnterGrabbing(GameObject grabbingTransform)
     {
         Debug.Log("잡힘 초기화");
+        Grabbed = true;
         // isShooting = false;
         isReloading = false;
         transform.SetParent(grabbingTransform.transform);
         // grabbingTransform.transform.SetParent(this.transform);
-        Grabbed = true;
         LaserSite.enabled = true;
         // if (transform.parent.CompareTag("Right")) parentObjectIsRight = true;
-        if (grabbingTransform.gameObject.CompareTag("Right")) parentObjectIsRight = true;
-        else parentObjectIsRight = false;
+        if (grabbingTransform.gameObject.CompareTag("Right"))
+        {
+            parentObjectIsRight = true;
+        }
+        else
+        {
+            parentObjectIsRight = false;
+        }
         transform.localPosition = new Vector3(0,0,1);
         transform.localRotation = Quaternion.identity;
+        if (magazine != null)
+        {
+            if (parentObjectIsRight) UIManager.Instance.RightHandInfoUpdate(gameObject.name,$"BUlLET: {currentBullet}/{magazineBullet}");
+            else UIManager.Instance.LeftHandInfoUpdate(gameObject.name,$"BUlLET: {currentBullet}/{magazineBullet}");
+        }
+        else
+        {
+            if (parentObjectIsRight) UIManager.Instance.RightHandInfoUpdate(gameObject.name, "");
+            else UIManager.Instance.LeftHandInfoUpdate(gameObject.name, "");
+        }
     }
 
     public virtual void ExitGrabbing()
@@ -133,8 +152,14 @@ public class GunItem : MonoBehaviour, IHandleObject
         magazineBullet -= maxBullet;
         if (Grabbed)
         {
-            if (parentObjectIsRight) UIManager.Instance.RightHandInfoUpdate(gameObject.name,$"BUlLET: {currentBullet}/{magazineBullet}");
-            else UIManager.Instance.LeftHandInfoUpdate(gameObject.name,$"BUlLET: {currentBullet}/{magazineBullet}");
+            if (parentObjectIsRight)
+            {
+                UIManager.Instance.RightHandInfoUpdate(gameObject.name,$"BUlLET: {currentBullet}/{magazineBullet}");
+            }
+            else
+            {
+                UIManager.Instance.LeftHandInfoUpdate(gameObject.name,$"BUlLET: {currentBullet}/{magazineBullet}");
+            }
         }
         isReloading = false;
     }

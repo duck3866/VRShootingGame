@@ -80,8 +80,8 @@ public class HandPosition : MonoBehaviour
                     // grabObject.transform.SetParent(transform);
                     grabbingObject = true;
                     hand.EnterGrabbing(gameObject);
-                    if (isRightHand) UIManager.Instance.RightHandInfoUpdate(other.gameObject.name, "");
-                    else UIManager.Instance.LeftHandInfoUpdate(other.gameObject.name, "");
+                    // if (isRightHand) UIManager.Instance.RightHandInfoUpdate(other.gameObject.name, "",gameObject.name);
+                    // else UIManager.Instance.LeftHandInfoUpdate(other.gameObject.name, "");
                 }
             }
         }
@@ -99,8 +99,14 @@ public class HandPosition : MonoBehaviour
                     // ThrowAwayObject(isRightHand);
                     grabbingObject = false;
                     grabObject = null;
-                    if (isRightHand) UIManager.Instance.RightHandInfoUpdate("Null", "");
-                    else UIManager.Instance.LeftHandInfoUpdate("Null", "");
+                    if (isRightHand)
+                    {
+                        UIManager.Instance.RightHandInfoUpdate("Null", "");
+                    }
+                    else
+                    {
+                        UIManager.Instance.LeftHandInfoUpdate("Null", "");
+                    }
                     hand.ExitGrabbing();
                 }
             }

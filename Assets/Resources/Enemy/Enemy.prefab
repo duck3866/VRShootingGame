@@ -355,7 +355,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   attackPower: 5
-  parentObjectIsRight: 0
   fireSound: {fileID: 8300000, guid: cee1c2e016d9e904dbad3746bd22928f, type: 3}
   misFireSound: {fileID: 8300000, guid: 2f88185fe58c1a147bda009839415637, type: 3}
   reloadSound: {fileID: 8300000, guid: cbbfc5618cd4eb041901536bd70beae8, type: 3}
@@ -363,6 +362,7 @@ MonoBehaviour:
   misFireSoundVolume: 0.5
   reloadSoundVolume: 0.5
   isReloading: 0
+  <Grabbed>k__BackingField: 0
 --- !u!135 &7455899974004292001
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2618,7 +2618,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   throwPower: 40000
   fixedJoint: {fileID: 0}
-  parentObjectIsRight: 0
 --- !u!138 &656009292864216763
 FixedJoint:
   m_ObjectHideFlags: 0
@@ -3692,7 +3691,7 @@ Transform:
   m_GameObject: {fileID: 5908039312857469038}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.7363355, y: 0.082, z: -48.325253}
+  m_LocalPosition: {x: -79.913666, y: 0.082, z: -53.03525}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

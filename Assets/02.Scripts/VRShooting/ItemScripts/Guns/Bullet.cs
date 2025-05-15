@@ -12,9 +12,10 @@ public class Bullet : MonoBehaviour, IHandleObject
     
     private Vector3 prevPos; // 처음 잡혔을때 위치
     private Quaternion prevRot; // 처음 잡혔을때 각도
-
-    private bool _parentObjectIsRight;
+    
     public bool Grabbed { get; set; }
+    public bool parentObjectIsRight { get; set; }
+
     private void OnEnable()
     {
         _currentTime = 0;
@@ -53,9 +54,9 @@ public class Bullet : MonoBehaviour, IHandleObject
     public void EnterGrabbing(GameObject grabbingTransform)
     {
         transform.SetParent(grabbingTransform.transform);
-        _parentObjectIsRight = grabbingTransform.CompareTag("Right");
+        parentObjectIsRight = grabbingTransform.gameObject.CompareTag("Right");
         Grabbed = true;
-        if (_parentObjectIsRight)
+        if (parentObjectIsRight)
         {
             prevPos = ARAVRInput.RHandPosition;
             prevRot = ARAVRInput.RHand.rotation;
@@ -65,6 +66,8 @@ public class Bullet : MonoBehaviour, IHandleObject
             prevPos = ARAVRInput.LHandPosition;
             prevRot = ARAVRInput.LHand.rotation;
         }
+        if (parentObjectIsRight) UIManager.Instance.RightHandInfoUpdate(gameObject.name, "");
+        else UIManager.Instance.LeftHandInfoUpdate(gameObject.name, "");
     }
 
     public void ExitGrabbing()
@@ -77,7 +80,7 @@ public class Bullet : MonoBehaviour, IHandleObject
     private IEnumerator WaitForExit()
     {
         Vector3 throwDirection = new Vector3();
-        if (_parentObjectIsRight)
+        if (parentObjectIsRight)
         {
             throwDirection = ARAVRInput.RHandPosition - prevPos;
         }

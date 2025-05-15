@@ -12,10 +12,15 @@ public class HealPackItem : MonoBehaviour, IHandleObject
     }
 
     public bool Grabbed { get; set; }
+    public bool parentObjectIsRight { get; set; }
+
     public void EnterGrabbing(GameObject grabbingTransform)
     {
+        parentObjectIsRight = grabbingTransform.gameObject.CompareTag("Right");
         transform.SetParent(grabbingTransform.transform);
         Grabbed = true;
+        if (parentObjectIsRight) UIManager.Instance.RightHandInfoUpdate(gameObject.name, "");
+        else UIManager.Instance.LeftHandInfoUpdate(gameObject.name, "");
     }
 
     public void ExitGrabbing()

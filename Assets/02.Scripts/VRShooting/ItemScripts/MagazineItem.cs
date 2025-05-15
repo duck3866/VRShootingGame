@@ -4,17 +4,24 @@ using UnityEngine;
 
 public class MagazineItem : MonoBehaviour, IHandleObject
 {
+    [field : SerializeField]
+    public bool Grabbed { get; set; }
+
+    public bool parentObjectIsRight { get; set; }
     private bool _isEquipped = false;
     private void Start()
     {
         _isEquipped = false;
         Grabbed = false;
     }
-    public bool Grabbed { get; set; }
+   
     public void EnterGrabbing(GameObject grabbingTransform)
     {
         transform.SetParent(grabbingTransform.transform);
+        parentObjectIsRight = grabbingTransform.gameObject.CompareTag("Right");
         Grabbed = true;
+        if (parentObjectIsRight) UIManager.Instance.RightHandInfoUpdate(gameObject.name, "");
+        else UIManager.Instance.LeftHandInfoUpdate(gameObject.name, "");
     }
 
     public void ExitGrabbing()

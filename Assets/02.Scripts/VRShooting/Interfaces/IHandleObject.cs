@@ -5,6 +5,7 @@ using UnityEngine;
 public interface IHandleObject
 {
     public bool Grabbed { get; set; }
+    public bool parentObjectIsRight { get; set; }
     public void EnterGrabbing(GameObject grabbingTransform);
     public void ExitGrabbing();
     public void ItemUse();

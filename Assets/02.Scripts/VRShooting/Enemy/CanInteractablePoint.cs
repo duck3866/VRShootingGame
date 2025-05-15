@@ -13,7 +13,7 @@ public class CanInteractablePoint : MonoBehaviour, IHandleObject
     [Header("위치 고정용 FixedJoint")]
     public FixedJoint fixedJoint;
     // public FixedJoint parentJoint;
-    [HideInInspector] public bool parentObjectIsRight; // 부모가 어느 손인지 확인하기 위함
+    public bool parentObjectIsRight { get; set; } // 부모가 어느 손인지 확인하기 위함
     private EnemyControllerCore _controllerCore; // 적의 콘트롤러 클래스
     
     private Vector3 prevPos; // 처음 잡혔을때 위치
@@ -44,15 +44,8 @@ public class CanInteractablePoint : MonoBehaviour, IHandleObject
             if (grabbingTransform.gameObject.CompareTag("Right")) parentObjectIsRight = true;
             else parentObjectIsRight = false;
             _controllerCore.ChangeState(EnemyControllerCore.EnemyState.Grabbing);
-            // if (!parentObject.TryGetComponent(out FixedJoint pJoint))
-            // {
-            //     parentObject.AddComponent<FixedJoint>();
-            //     parentJoint = pJoint;
-            //     parentJoint.connectedBody = transform.GetComponent<Rigidbody>();
-            //     fixedJoint.breakForce = Mathf.Infinity; // 원하는 힘으로 설정
-            //     fixedJoint.breakTorque = Mathf.Infinity;
-            // }
-            //
+            if (parentObjectIsRight) UIManager.Instance.RightHandInfoUpdate(gameObject.name, "");
+            else UIManager.Instance.LeftHandInfoUpdate(gameObject.name, "");
             if (!transform.TryGetComponent(out FixedJoint fJoint))
             {
                 fixedJoint = transform.AddComponent<FixedJoint>();
@@ -61,14 +54,8 @@ public class CanInteractablePoint : MonoBehaviour, IHandleObject
             Grabbed = true;
             _controllerCore.OnCharacterJoint();
             fixedJoint.connectedBody = grabbingTransform.GetComponent<Rigidbody>();
-            // fixedJoint.connectedBody = _controllerCore.transform.parent.GetComponent<Rigidbody>();
             fixedJoint.breakForce = Mathf.Infinity; // 원하는 힘으로 설정
             fixedJoint.breakTorque = Mathf.Infinity;
-
-            // parentJoint.connectedBody = grabbingTransform.GetComponent<Rigidbody>();
-            // // parentJoint.connectedBody = transform.GetComponent<Rigidbody>();
-            // parentJoint.breakForce = Mathf.Infinity; // 원하는 힘으로 설정
-            // parentJoint.breakTorque = Mathf.Infinity;
             if (parentObjectIsRight)
             {
                 prevPos = ARAVRInput.RHandPosition;

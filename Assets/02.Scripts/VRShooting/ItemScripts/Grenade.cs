@@ -7,9 +7,9 @@ public class Grenade : MonoBehaviour, IHandleObject
 {
    
     public float throwPower = 1000f;
-    [HideInInspector] public bool parentObjectIsRight;
     public bool Grabbed { get; set; }
-    
+    public bool parentObjectIsRight { get; set; }
+
     [SerializeField] private Material bombMaterial;
     [SerializeField] private float detonationTime;
     [SerializeField] private float detonationRadius;
@@ -41,9 +41,15 @@ public class Grenade : MonoBehaviour, IHandleObject
     {
         _rigidbody.isKinematic = true;
         _rigidbody.useGravity = false;
-        
-        if (grabbingTransform.gameObject.CompareTag("Right")) parentObjectIsRight = true;
-        else parentObjectIsRight = false;
+
+        if (grabbingTransform.gameObject.CompareTag("Right"))
+        {
+            parentObjectIsRight = true;
+        }
+        else
+        {
+            parentObjectIsRight = false;
+        }
         transform.SetParent(grabbingTransform.transform);
         
         Grabbed = true;
@@ -57,6 +63,8 @@ public class Grenade : MonoBehaviour, IHandleObject
             prevPos = ARAVRInput.LHandPosition;
             prevRot = ARAVRInput.LHand.rotation;
         }
+        if (parentObjectIsRight) UIManager.Instance.RightHandInfoUpdate(gameObject.name, "");
+        else UIManager.Instance.LeftHandInfoUpdate(gameObject.name, "");
     }
 
     public void ExitGrabbing()
