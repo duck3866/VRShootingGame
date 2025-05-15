@@ -8,11 +8,11 @@ public class AttackState : IState<EnemyControllerCore>
     protected float CurrentTime = 0f;
     protected bool IsAttacking = false;
     protected float CurrentBullet = 0f;
-    protected float MaxBullet = 5f;
+    protected readonly float MaxBullet = 5f;
     protected bool IsReloading = false;
     
     public EnemyControllerCore controllerCore;
-    public void Init(EnemyControllerCore controller)
+    public virtual void Init(EnemyControllerCore controller)
     {
         AttackTime = 5f;
         CurrentTime = 0f;
@@ -20,7 +20,7 @@ public class AttackState : IState<EnemyControllerCore>
         controllerCore = controller;
     }
 
-    public void OperateEnter()
+    public virtual void OperateEnter()
     {
         if (controllerCore.agent.enabled)
         {
@@ -37,7 +37,7 @@ public class AttackState : IState<EnemyControllerCore>
         }
     }
 
-    public void OperateUpdate()
+    public virtual void OperateUpdate()
     {
         IsAttacking = controllerCore.enemyAnimationEventHandler.isAttacking;
         IsReloading = controllerCore.enemyAnimationEventHandler.isReloading;
@@ -93,18 +93,18 @@ public class AttackState : IState<EnemyControllerCore>
         }
     }
 
-    public void OperateExit()
+    public virtual void OperateExit()
     {
         controllerCore.enemyAnimationEventHandler.InitParameter();
     }
 
-    private void Aiming()
+    protected void Aiming()
     {
         Vector3 targetPosition = controllerCore.player.transform.position - controllerCore.transform.position;
         Quaternion rotation = Quaternion.LookRotation(targetPosition);
         controllerCore.transform.rotation = Quaternion.Slerp(controllerCore.transform.rotation, rotation, Time.deltaTime * 5f);
     }
-    private IEnumerator AttackAction()
+    protected virtual IEnumerator AttackAction()
     {
         Debug.Log("공격 액션 실행");
         controllerCore.animator.SetTrigger("toAttack");
@@ -113,7 +113,7 @@ public class AttackState : IState<EnemyControllerCore>
         // controllerCore.animator.SetTrigger("toIdle");
         // IsAttacking = false;
     }
-    private IEnumerator ShootAction()
+    protected virtual IEnumerator ShootAction()
     {
         controllerCore.animator.SetTrigger("toShoot");
         // IsAttacking = true;
@@ -124,7 +124,7 @@ public class AttackState : IState<EnemyControllerCore>
         // IsAttacking = false;
     }
 
-    private IEnumerator Reloading()
+    protected virtual IEnumerator Reloading()
     {
         controllerCore.animator.SetTrigger("toReload");
         // IsReloading = true;

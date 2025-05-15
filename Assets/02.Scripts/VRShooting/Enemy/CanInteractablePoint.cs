@@ -18,7 +18,8 @@ public class CanInteractablePoint : MonoBehaviour, IHandleObject
     
     private Vector3 prevPos; // 처음 잡혔을때 위치
     private Quaternion prevRot; // 처음 잡혔을때 각도
-
+    [Header("보스 여부")]
+    [SerializeField] private bool isBoss = false;
     [field : SerializeField]
     public bool Grabbed { get; set; }
 
@@ -157,7 +158,7 @@ public class CanInteractablePoint : MonoBehaviour, IHandleObject
     /// <returns>현재 잡혀있으면 false 아니면 true</returns>
     public bool IsCanGrab()
     {
-        if (_controllerCore.isDie || Grabbed)
+        if (_controllerCore.isDie || Grabbed || isBoss)
         {
             return false;
         }

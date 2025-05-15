@@ -58,7 +58,7 @@ public class EnemyControllerCore : MonoBehaviour, IDamagable
     
     [Header("데미지 가중치 리스트"),SerializeField] private EnemyColliderInfo[] _colliderInfos = new EnemyColliderInfo[10]; // 데미지 가중치 리스트 
     // public event Action OnInteractable;
-    private Dictionary<EnemyState, IState<EnemyControllerCore>> _states =
+    protected Dictionary<EnemyState, IState<EnemyControllerCore>> _states =
         new Dictionary<EnemyState, IState<EnemyControllerCore>>(); // 적의 상태를 담을 딕셔너리
 
     private EnemyUI _enemyUI;

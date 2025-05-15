@@ -89,6 +89,10 @@ PrefabInstance:
       value: Boss Variant
       objectReference: {fileID: 0}
     - target: {fileID: 6379345180826219138, guid: 1fb843aefa2e8694b8ddf29f0eb4d437, type: 3}
+      propertyPath: isBoss
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6379345180826219138, guid: 1fb843aefa2e8694b8ddf29f0eb4d437, type: 3}
       propertyPath: throwPower
       value: 1000
       objectReference: {fileID: 0}
@@ -205,6 +209,7 @@ MonoBehaviour:
   - name: Head
     collider: {fileID: 5360639679799443238}
     weightDamage: 2
+  lineRenderer: {fileID: 0}
 --- !u!136 &7182111519152842751 stripped
 CapsuleCollider:
   m_CorrespondingSourceObject: {fileID: 7800393884632373767, guid: 1fb843aefa2e8694b8ddf29f0eb4d437, type: 3}

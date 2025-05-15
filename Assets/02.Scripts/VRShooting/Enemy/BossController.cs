@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class BossController : EnemyControllerCore
 {
+   public LineRenderer lineRenderer;
    public override void Start()
    {
       IsTharwing = false;
+      lineRenderer = GetComponentInChildren<LineRenderer>();
       _enemyAnimationSoundEventHandler = GetComponent<EnemyAnimationSoundEventHandler>();
       OriginalMaterials = skinnedMeshRenderer.materials;
       enemyAnimationEventHandler = GetComponent<EnemyAnimationEventHandler>();
@@ -30,6 +32,32 @@ public class BossController : EnemyControllerCore
          point.Init(this);
       }
       UIManager.Instance.BossHpUpdate(EnemyHp,EnemyHp,enemyAbility.MaxHp);
+   }
+   public override void Initialized(EnemyAbility ability)
+   {
+      enemyAbility = ability;
+      EnemyHp = ability.MaxHp;
+      agent.speed = ability.MoveSpeed;
+      this.AttackDistance = ability.AttackDistance;
+      player = GameObject.FindWithTag("Player");
+
+      IState<EnemyControllerCore> chase = new ChaseState();
+      IState<EnemyControllerCore> attack = new BossAttackState();
+      IState<EnemyControllerCore> damaged = new DamagedState();
+      IState<EnemyControllerCore> die = new DieState();
+      IState<EnemyControllerCore> grabbing = new GrabbingState();
+
+      _states.Add(EnemyState.Chase, chase);
+      _states.Add(EnemyState.Attack, attack);
+      _states.Add(EnemyState.Damaged, damaged);
+      _states.Add(EnemyState.Die, die);
+      _states.Add(EnemyState.Grabbing, grabbing);
+      foreach (var state in _states.Values)
+      {
+         state.Init(this);
+      }
+
+      ChangeState(EnemyState.Chase);
    }
    public override void TakeDamage(float damage)
    {
