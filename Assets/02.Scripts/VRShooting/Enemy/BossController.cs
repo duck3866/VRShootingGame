@@ -5,8 +5,10 @@ using UnityEngine;
 public class BossController : EnemyControllerCore
 {
    public LineRenderer lineRenderer;
+   public bool isDashing = false;
    public override void Start()
    {
+      isDashing = false;
       IsTharwing = false;
       lineRenderer = GetComponentInChildren<LineRenderer>();
       _enemyAnimationSoundEventHandler = GetComponent<EnemyAnimationSoundEventHandler>();
@@ -80,7 +82,7 @@ public class BossController : EnemyControllerCore
    }
    public override void OnTriggerEnter(Collider other)
        {
-           // Debug.Log($"뭔가 닿았는데 이거 뭐임: {other.gameObject.name}");
+           Debug.Log($"뭔가 닿았는데 이거 뭐임: {other.gameObject.name}");
            if (IsTharwing)
            {
                // Debug.Log("바닥");
@@ -98,6 +100,15 @@ public class BossController : EnemyControllerCore
                    _enemyAnimationSoundEventHandler.ThrowingSoundPlay();
                    TakeDamage(5f);
                }
+           }
+           else if (isDashing)
+           {
+              IDamagable damagable = other.GetComponentInChildren<IDamagable>();
+              if (damagable != null)
+              {
+                 Debug.Log("?????");
+                 damagable.TakeDamage(10f);
+              }
            }
        }
 }

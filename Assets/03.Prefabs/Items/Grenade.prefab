@@ -148,13 +148,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   throwPower: 1000
-  parentObjectIsRight: 0
   bombMaterial: {fileID: 0}
   detonationTime: 5
   detonationRadius: 5
   layerMask:
     serializedVersion: 2
-    m_Bits: 192
+    m_Bits: 2240
   bombCountSound: {fileID: 8300000, guid: afbcab54470656a47b38c344a04d74e1, type: 3}
   bombCountSoundVolume: 1
   bombEffectSound: {fileID: 8300000, guid: f6a7ce765736c88488f22add304690e5, type: 3}
