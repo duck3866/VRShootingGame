@@ -104,6 +104,14 @@ public class AttackState : IState<EnemyControllerCore>
         Quaternion rotation = Quaternion.LookRotation(targetPosition);
         controllerCore.transform.rotation = Quaternion.Slerp(controllerCore.transform.rotation, rotation, Time.deltaTime * 5f);
     }
+
+    protected void AimingNow()
+    {
+        Vector3 targetPosition = (controllerCore.player.transform.position - controllerCore.transform.position).normalized;
+        Vector3 direction = new Vector3(targetPosition.x, 0, targetPosition.z);
+        Quaternion rotation = Quaternion.LookRotation(direction);
+        controllerCore.transform.rotation = rotation;
+    }
     protected virtual IEnumerator AttackAction()
     {
         Debug.Log("공격 액션 실행");

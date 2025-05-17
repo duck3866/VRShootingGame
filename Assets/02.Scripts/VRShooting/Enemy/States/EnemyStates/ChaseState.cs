@@ -24,13 +24,13 @@ public class ChaseState : IState<EnemyControllerCore>
     {
         if (_controllerCore.agent != null)
         {
-            if (Vector3.Distance(_controllerCore.transform.position, _controllerCore.player.transform.position) > _controllerCore.AttackDistance)
+            if (Vector3.Distance(_controllerCore.transform.position, _controllerCore.player.transform.position) >= _controllerCore.AttackDistance)
             {
                 if (_controllerCore.agent != null && _controllerCore.agent.enabled)
                 {
                     _controllerCore.agent.SetDestination(_controllerCore.player.transform.position);   
                 }
-                // Debug.Log("적 움직이는 중");
+                // Debug.Log($"뭔데 시발{Vector3.Distance(_controllerCore.transform.position, _controllerCore.player.transform.position)},{_controllerCore.AttackDistance}");
             }
             else if (Vector3.Distance(_controllerCore.transform.position, _controllerCore.player.transform.position) < _controllerCore.AttackDistance)
             {
