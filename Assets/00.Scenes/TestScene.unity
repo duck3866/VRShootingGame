@@ -2400,7 +2400,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1132282297134417991, guid: adb59f87fe1ddbe43b5e8d8e3b5bba43, type: 3}
       propertyPath: isTest
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1132282297134417991, guid: adb59f87fe1ddbe43b5e8d8e3b5bba43, type: 3}
       propertyPath: bossTurn

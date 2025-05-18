@@ -5888,10 +5888,6 @@ PrefabInstance:
       propertyPath: gameOverText
       value: 
       objectReference: {fileID: 1341768670}
-    - target: {fileID: 4318670667711357606, guid: b0d1f0a0ab9ffc0458bcefe1aac34f69, type: 3}
-      propertyPath: maxHp
-      value: 10000000
-      objectReference: {fileID: 0}
     - target: {fileID: 4442759549745768716, guid: b0d1f0a0ab9ffc0458bcefe1aac34f69, type: 3}
       propertyPath: m_LocalPosition.x
       value: -155.22
@@ -28540,6 +28536,8 @@ MonoBehaviour:
   bgmClip: {fileID: 8300000, guid: 5698f1d04efa4410c9ad2d42fbaa4725, type: 3}
   audioVolume: 15
   gameOverBGM: {fileID: 0}
+  itemSpawnSFX: {fileID: 0}
+  itemSpawnSFXVolume: 0
   isTest: 0
 --- !u!4 &1147448157748031673
 Transform:

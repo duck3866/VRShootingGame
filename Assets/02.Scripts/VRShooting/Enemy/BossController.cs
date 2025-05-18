@@ -76,6 +76,7 @@ public class BossController : EnemyControllerCore
          else
          {
             GameManager.Instance.BossClear();
+            GameManager.Instance.SpawnItem("Items/Machinegun",this.gameObject);
             ChangeState(EnemyState.Die);
          }  
       }
