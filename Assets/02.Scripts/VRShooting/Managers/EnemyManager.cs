@@ -41,18 +41,18 @@ public class EnemyManager : IManagable
     }
     public void SpawnEnemy(GameObject spawnPoint)
     {
-        // enemyCount += 1;
-        GameObject enemy = _enemyObjects[Random.Range(0, _enemyObjects.Length)];
-        GameObject.Instantiate(enemy);
-        enemy.transform.position = spawnPoint.transform.position;
+        GameObject enemyPrefab = _enemyObjects[Random.Range(0, _enemyObjects.Length)];
+        GameObject enemyInstance = GameObject.Instantiate(enemyPrefab);
+        enemyInstance.transform.position = spawnPoint.transform.position;
     }
+
 
     public void SpawnBoss(GameObject spawnPoint)
     {
-        // bossCount += 1;
+        Debug.Log(spawnPoint.transform.position + " 시발!");
         GameObject boss = _bossObjects[Random.Range(0, _bossObjects.Length)];
         UIManager.Instance.BossNameUpdate(boss.name);
-        GameObject.Instantiate(boss);
-        boss.transform.position = spawnPoint.transform.position;
+        GameObject bossInstance = GameObject.Instantiate(boss);
+        bossInstance.transform.position = spawnPoint.transform.position;
     }
 }

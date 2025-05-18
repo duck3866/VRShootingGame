@@ -45,16 +45,16 @@ public class BossAttackState : AttackState
         {
             _bossController.agent.isStopped = true;
         }
-
-        if (!_bossController.iHaveGun)
-        {
-            _bossController.AttackDistance = 2.5f;
-            _bossController.animator.SetTrigger("toIdle");
-        }
-        else
-        {
+        //
+        // if (!_bossController.iHaveGun)
+        // {
+        //     _bossController.AttackDistance = 2.5f;
+        //     _bossController.animator.SetTrigger("toIdle");
+        // }
+        // else
+        // {
             _bossController.animator.SetTrigger("toShootingIdle");
-        }
+        //}
     }
 
     public override void OperateUpdate()
@@ -84,14 +84,14 @@ public class BossAttackState : AttackState
     {
         _patternRunning = true;
         _bossController.agent.isStopped = true;
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0.3f);
         Debug.Log("Fire");
         int bulletCount = 0;
         while (bulletCount < 8)
         {
             _bossController.InstancePrefab();
             bulletCount++;
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(0.5f);
         }
         yield return new WaitForSeconds(5f);
 
@@ -104,6 +104,8 @@ public class BossAttackState : AttackState
     private IEnumerator RecallEnemy()
     {
         _patternRunning = true;
+        controllerCore.animator.SetTrigger("toSpwan");
+        yield return new WaitForSeconds(1f);
         Debug.Log("Recall Enemy");
         GameManager.EnemyManager.SpawnEnemy(_bossController.gameObject);
         yield return new WaitForSeconds(3f);
@@ -117,6 +119,7 @@ public class BossAttackState : AttackState
     private IEnumerator Rush()
     {
         _patternRunning = true;
+        _bossController.animator.SetTrigger("toDashing");
         _bossController.isDashing = true; // 이거 왜 안됨
         // Debug.Log("거울 공격");
 
@@ -136,6 +139,7 @@ public class BossAttackState : AttackState
         EnterCooldown(BossPattern.Dash, 10f); // 예시로 쿨타임 15초
         _patternRunning = false;
         _bossController.isDashing = false; 
+        _bossController.animator.SetTrigger("toShootingIdle");
         yield return null;
     }
 

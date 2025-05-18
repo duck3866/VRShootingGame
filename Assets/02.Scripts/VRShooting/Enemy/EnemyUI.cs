@@ -39,9 +39,12 @@ public class EnemyUI : MonoBehaviour
     }
     private void Aiming()
     {
-        Vector3 targetPosition = (enemyControllerCore.player.transform.position - enemyControllerCore.transform.position);
-        // Vector3 direction = new Vector3(targetPosition.y, 0, 0);
-        Quaternion rotation = Quaternion.LookRotation(targetPosition.normalized);
-        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 5f);
+        if (enemyControllerCore.player != null)
+        {
+            Vector3 targetPosition = (enemyControllerCore.player.transform.position - enemyControllerCore.transform.position);
+            // Vector3 direction = new Vector3(targetPosition.y, 0, 0);
+            Quaternion rotation = Quaternion.LookRotation(targetPosition.normalized);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 5f);
+        }
     }
 }

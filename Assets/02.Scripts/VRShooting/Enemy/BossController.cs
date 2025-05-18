@@ -82,7 +82,7 @@ public class BossController : EnemyControllerCore
    }
    public override void OnTriggerEnter(Collider other)
        {
-           Debug.Log($"뭔가 닿았는데 이거 뭐임: {other.gameObject.name}");
+           // Debug.Log($"뭔가 닿았는데 이거 뭐임: {other.gameObject.name}");
            if (IsTharwing)
            {
                // Debug.Log("바닥");
@@ -106,7 +106,7 @@ public class BossController : EnemyControllerCore
               IDamagable damagable = other.GetComponentInChildren<IDamagable>();
               if (damagable != null)
               {
-                 Debug.Log("?????");
+                 Debug.Log("어깨빵~");
                  damagable.TakeDamage(10f);
               }
            }
