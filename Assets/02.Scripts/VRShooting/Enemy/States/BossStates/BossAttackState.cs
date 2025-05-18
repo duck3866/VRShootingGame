@@ -33,7 +33,6 @@ public class BossAttackState : AttackState
         // 초기화 (쿨타임이 아님 = false)
         foreach (BossPattern pattern in System.Enum.GetValues(typeof(BossPattern)))
         {
-            Debug.Log(pattern+" ???");
             _patternCooldown[pattern] = false;
         }
     }
