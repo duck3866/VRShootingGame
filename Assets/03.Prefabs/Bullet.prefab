@@ -243,6 +243,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d90f84cb69b84b41871ac06f773cfcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LayerMask:
+    serializedVersion: 2
+    m_Bits: 192
+  fireSound: {fileID: 8300000, guid: 0addcc409a57b4a43b86a3d2310ac5b4, type: 3}
+  fireVolume: 1
   moveSpeed: 5
   aliveTime: 10
 --- !u!54 &3988140946317868232

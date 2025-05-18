@@ -34,7 +34,9 @@ public class GameManager : MonoBehaviour
    public event Action GameOverEvent;
    public event Action TimeStopStartEvent;
    public event Action TimeStopEndEvent;
-
+   public AudioClip itemSpawnSFX;
+   [Range(0,1)]
+   public float itemSpawnSFXVolume;
    [Header("테스트 씬")] public bool isTest;
    public GameInfo GameInfo;
    public void Awake()
@@ -144,9 +146,15 @@ public class GameManager : MonoBehaviour
       {
          TimeStopEndEvent += eventArgs;
       }
-      
    }
 
+   public void SpawnItem(string path, GameObject spawnPoint)
+   {
+      GameObject itemPrefab = Resources.Load<GameObject>(path);
+      GameObject item = Instantiate(itemPrefab);
+      AudioManager.PlaySoundEffect(itemSpawnSFX,spawnPoint.transform.position,itemSpawnSFXVolume);
+      item.transform.position = spawnPoint.transform.position;
+   }
    public void PlayerGameOver()
    {
       GameOver = true;
@@ -175,6 +183,7 @@ public class GameManager : MonoBehaviour
       }
       return GameInfo;
    }
+ 
 }
 
 public class GameInfo

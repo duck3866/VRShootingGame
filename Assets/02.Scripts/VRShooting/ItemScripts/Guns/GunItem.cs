@@ -42,7 +42,7 @@ public class GunItem : MonoBehaviour, IHandleObject
     [field : SerializeField]
     public bool Grabbed { get; set; } // 잡혔는지 여부
 
-    private void Start()
+    protected virtual void Start()
     {
         Grabbed = false;
         LaserSite = GetComponent<LineRenderer>();
@@ -56,7 +56,7 @@ public class GunItem : MonoBehaviour, IHandleObject
         }
     }
     
-    public void EnterGrabbing(GameObject grabbingTransform)
+    public virtual void EnterGrabbing(GameObject grabbingTransform)
     {
         Debug.Log("잡힘 초기화");
         Grabbed = true;
@@ -169,42 +169,14 @@ public class GunItem : MonoBehaviour, IHandleObject
         magazine.transform.parent = null;
         magazine = null;
     }
-
-    public void OnTriggerEnter(Collider other)
-    {
-        if (magazine == null)
-        {
-            if (other.CompareTag("Magazine"))
-            {
-                if (other.TryGetComponent<IHandleObject>(out IHandleObject hand))
-                {
-                    Debug.Log("탄창 장착");
-                    magazine = other.gameObject;
-                    hand.InputButtonEvent();
-                    hand.Grabbed = true;
-                    magazine.transform.SetParent(magazinePosition.transform);
-                    magazine.transform.localPosition = Vector3.zero;
-                    magazine.transform.localRotation = Quaternion.identity;
-                    magazine.transform.localScale = new Vector3(1, 1, 1);
-                    magazineBullet = 30f;
-                    currentBullet = maxBullet; // 최대탄창 초기화
-                    GameManager.AudioManager.PlaySoundEffect(reloadSound, transform.position, reloadSoundVolume);
-                    if (gameObject.transform.root.CompareTag("Player"))
-                    {
-                        if (parentObjectIsRight) UIManager.Instance.RightHandInfoUpdate(gameObject.name, $"BUlLET: {currentBullet}/{magazineBullet}");
-                        else UIManager.Instance.LeftHandInfoUpdate(gameObject.name, $"BUlLET: {currentBullet}/{magazineBullet}");
-                    }
-                }
-            }
-        }
-    }
+    
     public void DrawLine()
     {
         LaserSite.SetPosition(0,firePosition.transform.position);
         LaserSite.SetPosition(1,DrawRay());
     }
 
-    public Vector3 DrawRay()
+    public virtual Vector3 DrawRay()
     {
         Ray ray = new Ray(firePosition.transform.position, -firePosition.transform.up);
         if (Physics.Raycast(ray,out RaycastHit hitInfo, bulletDistance))

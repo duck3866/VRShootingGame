@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: BossEnemyAbility
   m_EditorClassIdentifier: 
   MoveSpeed: 4
-  MaxHp: 30
+  MaxHp: 50
   AttackDistance: 8
   Type: 2

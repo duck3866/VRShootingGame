@@ -90,7 +90,7 @@ public class BossAttackState : AttackState
         {
             _bossController.InstancePrefab();
             bulletCount++;
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.1f);
         }
         yield return new WaitForSeconds(5f);
 

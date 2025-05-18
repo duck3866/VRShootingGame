@@ -6,6 +6,10 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour, IHandleObject
 {
+    public LayerMask LayerMask;
+    public AudioClip fireSound;
+    [Range(0f, 1f)]
+    public float fireVolume;
     public float moveSpeed = 5f;
     public float aliveTime;
     private float _currentTime;
@@ -20,6 +24,7 @@ public class Bullet : MonoBehaviour, IHandleObject
     {
         _currentTime = 0;
         Grabbed = false;
+        GameManager.AudioManager.PlaySoundEffect(fireSound, transform.position, fireVolume);
     }
 
     private void Update()
@@ -45,7 +50,10 @@ public class Bullet : MonoBehaviour, IHandleObject
         {
             if (other.TryGetComponent(out IDamagable damagable))
             {
-                damagable.TakeDamage(5f);
+                if (((1 << other.gameObject.layer) & LayerMask) != 0)
+                {
+                    damagable.TakeDamage(5f);
+                }
             }  
         }
         
@@ -56,6 +64,7 @@ public class Bullet : MonoBehaviour, IHandleObject
         transform.SetParent(grabbingTransform.transform);
         parentObjectIsRight = grabbingTransform.gameObject.CompareTag("Right");
         Grabbed = true;
+        LayerMask = LayerMask.GetMask("Enemy","Boss");
         if (parentObjectIsRight)
         {
             prevPos = ARAVRInput.RHandPosition;

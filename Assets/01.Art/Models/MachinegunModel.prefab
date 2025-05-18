@@ -933,7 +933,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8161806919923717147}
   m_Layer: 0
-  m_Name: Machinegun
+  m_Name: MachinegunModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

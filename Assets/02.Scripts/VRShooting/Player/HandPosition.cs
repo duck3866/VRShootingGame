@@ -173,11 +173,35 @@ public class HandPosition : MonoBehaviour
                     Debug.Log("IHandleObject not found");
                 }
             }
+            else if (ARAVRInput.Get(ARAVRInput.Button.IndexTrigger, ARAVRInput.Controller.RTouch))
+            {
+                if (grabObject.TryGetComponent<IHandleObject>(out IHandleObject hand))
+                {
+                    hand.ItemUse();
+                    ARAVRInput.PlayVibration(ARAVRInput.Controller.RTouch);
+                }
+                else
+                {
+                    Debug.Log("IHandleObject not found");
+                }
+            }
         }
         else if (!isRightHand)
         {
             if (grabObject == null) return;
             if (ARAVRInput.GetDown(ARAVRInput.Button.IndexTrigger, ARAVRInput.Controller.LTouch))
+            {
+                if (grabObject.TryGetComponent<IHandleObject>(out IHandleObject hand))
+                {
+                    hand.ItemUse();
+                    ARAVRInput.PlayVibration(ARAVRInput.Controller.LTouch);
+                }
+                else
+                {
+                    Debug.Log("IHandleObject not found");
+                }
+            }
+            else if (ARAVRInput.Get(ARAVRInput.Button.IndexTrigger, ARAVRInput.Controller.LTouch))
             {
                 if (grabObject.TryGetComponent<IHandleObject>(out IHandleObject hand))
                 {

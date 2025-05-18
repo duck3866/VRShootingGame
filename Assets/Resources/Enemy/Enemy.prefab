@@ -353,7 +353,7 @@ MonoBehaviour:
   bulletEffectPosition: {fileID: 0}
   layerMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 2112
   attackPower: 5
   fireSound: {fileID: 8300000, guid: cee1c2e016d9e904dbad3746bd22928f, type: 3}
   misFireSound: {fileID: 8300000, guid: 2f88185fe58c1a147bda009839415637, type: 3}
@@ -3896,7 +3896,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootingSound: {fileID: 8300000, guid: cee1c2e016d9e904dbad3746bd22928f, type: 3}
-  shootingVolume: 0.5
+  shootingVolume: 0.4
   attackSound: {fileID: 8300000, guid: 216f976c3f4b9774f9cecd43af5a382c, type: 3}
   attackVolume: 0
   footstepSound: {fileID: 8300000, guid: 40bed6e30acd5c0429360f337b0f0aba, type: 3}
