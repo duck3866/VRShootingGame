@@ -35,7 +35,7 @@ public class PlayerControllerCore : MonoBehaviour
     private void Start()
     {
         StartCoroutine(SpawnVRIK());
-        lookCube.transform.localPosition = new Vector3(0, -0.3f, 0.3f);
+        // lookCube.transform.localPosition = new Vector3(0, -0.3f, 0.3f);
     }
 
     private void Update()
