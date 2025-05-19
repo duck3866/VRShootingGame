@@ -68,12 +68,12 @@ public class PlayerControllerCore : MonoBehaviour
 
     private IEnumerator SpawnVRIK()
     {
-        yield return new WaitForSecondsRealtime(2f);
+        yield return new WaitForSecondsRealtime(3f);
         
         // VRIK 생성
         _spawnedVRIK = Instantiate(VRIKObject, transform);
         _spawnedVRIK.transform.localRotation = Quaternion.Euler(0, 0, 0);
-        _spawnedVRIK.transform.localPosition = new Vector3(0f, -1.6f, -0.12f);
+        _spawnedVRIK.transform.localPosition = new Vector3(0f, -1.6f, -0.1f);
         // _spawnedVRIK.transform.forward = transform.forward;
         Animator[] animators = _spawnedVRIK.GetComponentsInChildren<Animator>();
         animator = animators[0];
@@ -90,10 +90,10 @@ public class PlayerControllerCore : MonoBehaviour
         PlayerVRIK playerVRIK = _spawnedVRIK.GetComponentInChildren<PlayerVRIK>();
         // GameObject UIManagerObject = GetComponentInChildren<UIManager>().gameObject;
         playerVRIK.Initialized();
-        if (lookCube != null)
-        {
-            playerVRIK.LookTarget = lookCube.transform;
-        }
+        // if (lookCube != null)
+        // {
+        //     playerVRIK.LookTarget = lookCube.transform;
+        // }
        
     }
 

@@ -30,6 +30,7 @@ public class PlayerVRIK : MonoBehaviour
         var vector3 = transform.localPosition;
         vector3.y = new Vector3(0, 1, 0).y;
         transform.localPosition = vector3;
+        transform.localRotation = Quaternion.Euler(0, 30, 0);
     }
 
     private void LateUpdate()
