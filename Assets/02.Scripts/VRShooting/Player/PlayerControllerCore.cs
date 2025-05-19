@@ -9,7 +9,7 @@ public class PlayerControllerCore : MonoBehaviour
     [SerializeField] private GameObject VRIKObject;
     [SerializeField] private GameObject RightHand;
     [SerializeField] private GameObject LeftHand;
-
+    [SerializeField] private GameObject lookCube;
     [Header("Trail Settings")]
     public float trailDuration = 2.0f; // 잔상 효과가 지속되는 시간
     public bool trailActive = true;    // 잔상 효과 활성화 여부
@@ -28,13 +28,14 @@ public class PlayerControllerCore : MonoBehaviour
     private bool _isVRIKReady = false;
     
     private Animator animator;
+    private Animator IKAnimator;
     
     private bool isInitialized = false;
 
     private void Start()
     {
-        
         StartCoroutine(SpawnVRIK());
+        lookCube.transform.localPosition = new Vector3(0, -0.3f, 0.3f);
     }
 
     private void Update()
@@ -71,44 +72,28 @@ public class PlayerControllerCore : MonoBehaviour
         
         // VRIK 생성
         _spawnedVRIK = Instantiate(VRIKObject, transform);
-        _spawnedVRIK.transform.localPosition = new Vector3(0f, -1f, -0.3f);
+        _spawnedVRIK.transform.localPosition = new Vector3(0f, -1.6f, -0.1f);
         _spawnedVRIK.transform.forward = transform.forward;
-        animator = _spawnedVRIK.GetComponent<Animator>();
+        Animator[] animators = _spawnedVRIK.GetComponentsInChildren<Animator>();
+        animator = animators[0];
+        // Debug.Log(animator+ "????/");
+        IKAnimator = animators[1];
         
         SkinnedMeshRenderer[] skinnedMeshRenderers = _spawnedVRIK.GetComponentsInChildren<SkinnedMeshRenderer>();
-        _skinnedRenderer = skinnedMeshRenderers[1];
+        _skinnedRenderer = skinnedMeshRenderers[3];
         Renderer[] materials = _spawnedVRIK.GetComponentsInChildren<Renderer>();
         mat = materials[1].material;
         GameManager.Instance.AddEvent(StartTimeStop,true);
         GameManager.Instance.AddEvent(EndTimeStop,false);
-        //
-        // // VRIK 컴포넌트 가져오기
-        // _vrHandIK = _spawnedVRIK.GetComponent<VRHandIK>();
-        // if (_vrHandIK == null)
-        // {
-        //     Debug.LogError("VRHandIK 컴포넌트를 찾을 수 없습니다!");
-        //     yield break;
-        // }
-        //
-        // // 타겟 설정
-        // _vrHandIK.leftHandTarget = LeftHand.transform;
-        // _vrHandIK.rightHandTarget = RightHand.transform;
 
-        // SkinnedMeshRenderer 찾기 - VRIK 오브젝트에서 찾아야 함
-        // if (_skinnedRenderer == null)
-        // {
-        //     Debug.LogError("SkinnedMeshRenderer를 찾을 수 없습니다!");
-        //     yield break;
-        // }
-        //
-        // Debug.Log("VRIK 초기화 완료: " + _skinnedRenderer.name);
-        // _isVRIKReady = true;
-        //
-        // // 잔상 효과 시작
-        // if (trailActive)
-        // {
-        //     StartCoroutine(CreateTrailEffect());
-        // }
+        PlayerVRIK playerVRIK = _spawnedVRIK.GetComponentInChildren<PlayerVRIK>();
+        // GameObject UIManagerObject = GetComponentInChildren<UIManager>().gameObject;
+        playerVRIK.Initialized();
+        if (lookCube != null)
+        {
+            playerVRIK.LookTarget = lookCube.transform;
+        }
+       
     }
 
     public void StartTimeStop()
@@ -137,7 +122,7 @@ public class PlayerControllerCore : MonoBehaviour
         {
             // 고스트 메시 생성
             GameObject ghost = new GameObject("GhostMesh");
-            ghost.transform.position = _spawnedVRIK.transform.position + (-gameObject.transform.forward * 0.2f);
+            ghost.transform.position = _spawnedVRIK.transform.position + (-gameObject.transform.forward * 0.2f) + new Vector3(0,1f,0);
             ghost.transform.rotation = _spawnedVRIK.transform.rotation;
             ghost.transform.localScale = _spawnedVRIK.transform.localScale;
             
