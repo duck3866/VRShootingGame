@@ -72,8 +72,9 @@ public class PlayerControllerCore : MonoBehaviour
         
         // VRIK 생성
         _spawnedVRIK = Instantiate(VRIKObject, transform);
-        _spawnedVRIK.transform.localPosition = new Vector3(0f, -1.6f, -0.1f);
-        _spawnedVRIK.transform.forward = transform.forward;
+        _spawnedVRIK.transform.localRotation = Quaternion.Euler(0, 0, 0);
+        _spawnedVRIK.transform.localPosition = new Vector3(0f, -1.6f, -0.12f);
+        // _spawnedVRIK.transform.forward = transform.forward;
         Animator[] animators = _spawnedVRIK.GetComponentsInChildren<Animator>();
         animator = animators[0];
         // Debug.Log(animator+ "????/");
@@ -122,7 +123,8 @@ public class PlayerControllerCore : MonoBehaviour
         {
             // 고스트 메시 생성
             GameObject ghost = new GameObject("GhostMesh");
-            ghost.transform.position = _spawnedVRIK.transform.position + (-gameObject.transform.forward * 0.2f) + new Vector3(0,1f,0);
+            // ghost.transform.position = _spawnedVRIK.transform.position + (-gameObject.transform.forward * 0.2f) + new Vector3(0,1f,0);
+            ghost.transform.position = _spawnedVRIK.transform.position + new Vector3(0,1f,0);
             ghost.transform.rotation = _spawnedVRIK.transform.rotation;
             ghost.transform.localScale = _spawnedVRIK.transform.localScale;
             

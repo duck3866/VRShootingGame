@@ -109,7 +109,7 @@ MonoBehaviour:
   VRIKObject: {fileID: 9026359089478036548, guid: e519e5450569d1e4795dd49578f9c3aa, type: 3}
   RightHand: {fileID: 6239777459769339220}
   LeftHand: {fileID: 6940237623236814843}
-  lookCube: {fileID: 296085836142578534}
+  lookCube: {fileID: 0}
   trailDuration: 2
   trailActive: 1
   meshRefreshRate: 0.1
@@ -126,7 +126,6 @@ GameObject:
   - component: {fileID: 7752590114547796232}
   - component: {fileID: 94797956118771658}
   - component: {fileID: 9075197175824961216}
-  - component: {fileID: 4371581999537754322}
   m_Layer: 7
   m_Name: lookCube
   m_TagString: Untagged
@@ -199,27 +198,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &4371581999537754322
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 296085836142578534}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &762621451619174937
 GameObject:
   m_ObjectHideFlags: 0
@@ -3772,7 +3750,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 15f5dc86080ba8b4eba1476813ec3a67, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 15f5dc86080ba8b4eba1476813ec3a67, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3780,7 +3758,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 15f5dc86080ba8b4eba1476813ec3a67, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 15f5dc86080ba8b4eba1476813ec3a67, type: 3}
       propertyPath: m_LocalRotation.w
