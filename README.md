@@ -59,7 +59,9 @@ VR 슈팅 게임 입니다.
 
 ---
 ### Notion 
-- https://www.notion.so/14b9dfc52f178026b95cf9ace5814eb0?pvs=74
+- [https://www.notion.so/14b9dfc52f178026b95cf9ace5814eb0?pvs=74](https://buly.kr/BeKLB2M)
+### 참고 영상
+- https://buly.kr/DEZA0Ok
 ---
 
 ## 라이선스 (License)
