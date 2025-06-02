@@ -1,8 +1,10 @@
 # VRShootingGame
 ![Image](https://github.com/user-attachments/assets/9cb24873-8933-4e80-a637-1cecc1cc5c7a)
 </br>
-**Tank-Trun-Game**은 Unity 3D에서 제작된 X-COM 장르 게임입니다. **CSV/JSON**을 활용해 맵 구조와 적을 배치하였으며, **확장성 높은 FSM**을 통해 적 AI를 구현하였습니다. PC와 Mac 환경에서 플레이 가능하며, 메뉴 화면에서 **Start** 옵션으로 게임을 시작할 수 있습니다.
-VR 슈팅 게임 입니다.
+몰려오는 로봇들을 다양한 방법으로 파괴하여
+마을을 지켜주세요!<br>
+<br>
+**VR SHOOTIN GAME**은 VR 기반 1인칭 슈팅 게임으로, 다양한 무기를 활용하여 적을 처치하고, 처치 방식에 따라 점수를 획득하여 최고 점수를 기록하는 것을 목표로 하는 게임입니다.
 ---
 
 ## 주요 기능 (Key Features)
@@ -39,17 +41,20 @@ VR 슈팅 게임 입니다.
 ## IK 기능을 사용한 자유로운 VR 캐릭터 조종 및 다양한 상호작용 구현  
 
 ### 플레이어 이동, VR IK 적용
-<img width="919" alt="Image" src="https://github.com/user-attachments/assets/8d89f448-a108-4be2-8484-810bf3a6b6d4" />
-<img width="943" alt="Image" src="https://github.com/user-attachments/assets/ad6ba180-417f-492b-9492-678636cc14f7" />
+<img width="175" alt="Image" src="https://github.com/user-attachments/assets/96433834-cfeb-49b0-b91a-fa385a1acdcb" />
+<br>
 - VR 컨트롤러의 위치와 회전을 기반으로 캐릭터 양손이 자연스럽게 따라가도록 구현.
 - 손에 **IK**를 적용하여 플레이어의 몰입감을 극대화함.
   
 ### 다양한 상호작용 오브젝트
-<img width="1010" alt="Image" src="https://github.com/user-attachments/assets/65f794c3-8f48-4527-9538-e4d5802aadfd" />
+<img width="359" alt="Image" src="https://github.com/user-attachments/assets/76918879-b2ba-407c-abe2-4439b9cbe119" />
+<br>
 - 인터페이스를 사용하여 효율적인 상호작용 기능을 구현했으며 장착 시 Grab Pose를 사용, 장착 중 사용 기능, 장착 해제 시 던지는 기능 등을 구현하였고 각 오브젝트 별로 다르도록 구현하였습니다.
 
 ### Ragdoll 적용 및 적 AI 구현
-<img width="1010" alt="Image" src="https://github.com/user-attachments/assets/65f794c3-8f48-4527-9538-e4d5802aadfd" />
+<img width="494" alt="Image" src="https://github.com/user-attachments/assets/f5610d3a-f7d4-49fd-a8f7-f5bcc5474491" /><br>
+<img width="323" alt="Image" src="https://github.com/user-attachments/assets/546b4b32-c908-42cf-9d44-3053961d66e5" />
+<br>
 - 적의 공격, 이동 상태를 분리하기 위해 FSM을 사용했습니다 적의 상태(예: 무기 보유 여부)에 따라 다른 행동을 수행하도록 구현하였습니다. 
 - 기존에 사용하던 enum 방식의 FSM이 아닌 클래스를 만들어 딕셔너리 형태로 저장하는 FSM을 사용하여 더욱 확장성을 높일 수 있었습니다.
 - 적에게 래그돌을 적용하여 던지거나 휘두를 때 자연스럽게 관절이 날아감.
