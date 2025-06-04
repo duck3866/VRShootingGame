@@ -115,6 +115,7 @@ MonoBehaviour:
   meshRefreshRate: 0.1
   meshDestroyDelay: 1
   mat: {fileID: 2100000, guid: c9a021a5f5ced244eaf8f86b457c204a, type: 2}
+  PlayerUI: {fileID: 7749410941182745621}
 --- !u!1 &296085836142578534
 GameObject:
   m_ObjectHideFlags: 0

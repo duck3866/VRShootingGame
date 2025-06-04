@@ -21,6 +21,7 @@ public class PlayerControllerCore : MonoBehaviour
     [Header("Shader Related")] 
     public Material mat;
 
+    public GameObject PlayerUI;
     private Queue<GameObject> ghostGameObjects = new Queue<GameObject>();
     private SkinnedMeshRenderer _skinnedRenderer;
     private GameObject _spawnedVRIK;
@@ -31,10 +32,12 @@ public class PlayerControllerCore : MonoBehaviour
     private Animator IKAnimator;
     
     private bool isInitialized = false;
-
+    private GameObject _player;
     private void Start()
     {
         StartCoroutine(SpawnVRIK());
+        // ------- 촬영용 ------
+        // PlayerUI.transform.localPosition = new Vector3(-0.09f, 0.02f, 0f);
         // lookCube.transform.localPosition = new Vector3(0, -0.3f, 0.3f);
     }
 
@@ -71,9 +74,10 @@ public class PlayerControllerCore : MonoBehaviour
         yield return new WaitForSecondsRealtime(3f);
         
         // VRIK 생성
-        _spawnedVRIK = Instantiate(VRIKObject, transform);
+        _spawnedVRIK = Instantiate(VRIKObject, PlayerUI.transform);
+        _player = _spawnedVRIK;
         _spawnedVRIK.transform.localRotation = Quaternion.Euler(0, 0, 0);
-        _spawnedVRIK.transform.localPosition = new Vector3(0f, -1.6f, -0.1f);
+        _spawnedVRIK.transform.localPosition = new Vector3(0f, -1.6f, 0f);
         // _spawnedVRIK.transform.forward = transform.forward;
         Animator[] animators = _spawnedVRIK.GetComponentsInChildren<Animator>();
         animator = animators[0];
