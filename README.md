@@ -37,7 +37,7 @@
 ## 참고 자료
 
 - **Notion**
-  - https://www.notion.so/14b9dfc52f178026b95cf9ace5814eb0?pvs=74
+  - [https://www.notion.so/14b9dfc52f178026b95cf9ace5814eb0?pvs=74](https://root-xylocarp-b3c.notion.site/VR-SHOORING-GAME-1ff9dfc52f1780388d94e6f3745b54cf?pvs=74)
 
 - **참고 영상**
   - https://buly.kr/DEZA0Ok
