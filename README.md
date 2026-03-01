@@ -44,7 +44,7 @@
 <img width="175" alt="Image" src="https://github.com/user-attachments/assets/96433834-cfeb-49b0-b91a-fa385a1acdcb" />
 <br>
 - VR 컨트롤러의 위치와 회전을 기반으로 캐릭터 양손이 자연스럽게 따라가도록 구현.
-- 손에 **IK**를 적용하여 플레이어의 몰입감을 극대화함.
+- 손에 IK를 적용하여 플레이어의 몰입감을 극대화함.
   
 ### 다양한 상호작용 오브젝트
 <img width="359" alt="Image" src="https://github.com/user-attachments/assets/76918879-b2ba-407c-abe2-4439b9cbe119" />
