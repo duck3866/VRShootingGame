@@ -117,6 +117,23 @@
 ---
 
 ## 라이선스 (License)
+본 프로젝트는 단순 학습의 비상업적 용도로 제작되었습니다.
 
-이 프로젝트는 **MIT 라이선스** 하에 배포됩니다.  
-자세한 내용은 `LICENSE` 파일을 참조하세요.
+본 프로젝트는 **MIT 라이선스** 하에 배포됩니다.  
+본 프로젝트는 **Meta XR SDK**를 사용하여 Meta Quest 플랫폼용 VR 기능을 구현하였습니다.
+
+### UnityStore
+| 에셋명 | 링크 | 종류 |
+|----|----|----|
+| CyberpunkSunset | [링크](https://assetstore.unity.com/packages/2d/environments/cyberpunksunset-316348) | 배경 이미지  |
+| 3D Scifi Kit Starter Kit | [링크](https://assetstore.unity.com/packages/audio/music/electronic/cyberware-game-music-pack-216764) | 음악 |
+| Low Poly Sci-Fi Weapons Lite | [링크](https://assetstore.unity.com/packages/3d/props/guns/low-poly-sci-fi-weapons-lite-296460) | FBX |
+| War FX | [링크](https://assetstore.unity.com/packages/vfx/particles/war-fx-5669) | FX |
+
+### Sketchfab 에셋
+| 모델명 | 링크 | 종류 | 
+|----|----|----|  
+| Hand for the robot | [링크](https://sketchfab.com/3d-models/hand-for-the-robot-10871b7b2a314f52b36351281ff9903c) | FBX |
+| Robotic Hand | [링크](https://sketchfab.com/3d-models/robotic-hand-a1a352baccb243009687ad22a3e4364a) | FBX |
+| Cure and Poison | [링크](https://sketchfab.com/3d-models/cure-and-poison-15483f0186f548c39755e8e3f8346036) | FBX |
+| RPD Hand Machinegun | [링크](https://sketchfab.com/3d-models/rpd-hand-machinegun-6e6b6f55c3544bb6a817b51b82a42a76) | FBX |
