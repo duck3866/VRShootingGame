@@ -30,7 +30,7 @@ public class ChaseState : IState<EnemyControllerCore>
                 {
                     _controllerCore.agent.SetDestination(_controllerCore.player.transform.position);   
                 }
-                // Debug.Log($"뭔데 시{Vector3.Distance(_controllerCore.transform.position, _controllerCore.player.transform.position)},{_controllerCore.AttackDistance}");
+              
             }
             else //if (Vector3.Distance(_controllerCore.transform.position, _controllerCore.player.transform.position) < _controllerCore.AttackDistance)
             {

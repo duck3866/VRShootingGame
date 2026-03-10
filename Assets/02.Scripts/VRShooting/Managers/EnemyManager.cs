@@ -49,7 +49,6 @@ public class EnemyManager : IManagable
 
     public void SpawnBoss(GameObject spawnPoint)
     {
-        Debug.Log(spawnPoint.transform.position + " 시발!");
         GameObject boss = _bossObjects[Random.Range(0, _bossObjects.Length)];
         UIManager.Instance.BossNameUpdate(boss.name);
         GameObject bossInstance = GameObject.Instantiate(boss);
